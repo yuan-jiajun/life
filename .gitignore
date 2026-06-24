@@ -1,0 +1,11 @@
+# Mac OS
+.DS_Store
+
+# 编辑器
+.idea/
+.vscode/
+.obsidian/
+
+# 临时文件
+*.tmp
+~$*
