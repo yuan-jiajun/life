@@ -33,9 +33,54 @@
   .small-table th { background:var(--bg-soft); color:var(--ink); }
   .pkg b { color:var(--accent); }
   .routemap { margin:1.2em 0; padding:12px; border:1px solid var(--line); border-radius:8px; background:var(--bg-soft); }
-  .routemap svg { display:block; width:100%; height:auto; }
+  .routemap > svg { display:block; width:100%; height:auto; }
+  #realmap svg { width:auto; height:auto; max-width:none; }
   .map-cap { margin-top:.5em; font-size:.82rem; color:var(--muted); text-align:center; }
+  .map-legend { text-align:left; line-height:1.85; max-width:880px; margin:.6em auto 0;
+    padding:10px 14px; background:var(--bg-soft); border:1px solid var(--line); border-radius:8px; }
+  .map-legend b { color:var(--accent); margin-right:.2em; }
+  #realmap { width:100%; height:560px; border:1px solid var(--line); border-radius:8px; }
+  /* 地点标签：白底 + 彩色边框（绿=当前过夜点，黄=原方案点），带指向箭头 */
+  .lf-stay, .lf-old { font-size:11px; font-weight:600; background:#fff; border-radius:4px;
+    padding:0 4px; white-space:nowrap; box-shadow:0 1px 2px rgba(0,0,0,.18); }
+  .lf-stay { color:#0a7d52; border:1px solid #1a7f5a; }
+  .lf-old  { color:#b97c00; border:1px solid #e8a200; }
+  .leaflet-tooltip-top.lf-stay::before, .leaflet-tooltip-top.lf-old::before { border-top-color:#fff; }
+  .leaflet-tooltip-bottom.lf-stay::before, .leaflet-tooltip-bottom.lf-old::before { border-bottom-color:#fff; }
+  .leaflet-tooltip-left.lf-stay::before, .leaflet-tooltip-left.lf-old::before { border-left-color:#fff; }
+  .leaflet-tooltip-right.lf-stay::before, .leaflet-tooltip-right.lf-old::before { border-right-color:#fff; }
+  /* 途经景点标签：白底细绿框（比过夜点轻），带指向箭头 */
+  .lf-via { font-size:10.5px; font-weight:500; background:#fff; color:#1a7f5a;
+    border:1px solid #8fc4b0; border-radius:4px; padding:0 3px; white-space:nowrap; box-shadow:0 1px 2px rgba(0,0,0,.12); }
+  .leaflet-tooltip-top.lf-via::before { border-top-color:#fff; }
+  .leaflet-tooltip-bottom.lf-via::before { border-bottom-color:#fff; }
+  .leaflet-tooltip-left.lf-via::before { border-left-color:#fff; }
+  .leaflet-tooltip-right.lf-via::before { border-right-color:#fff; }
+  /* 公路标签：蓝灰底，与地点明显区分；贴在路段上不带箭头 */
+  .lf-road { font-size:11px; font-style:italic; font-weight:700; color:#16508f;
+    background:#cfe1f7; border:1px solid #5a92d6; border-radius:4px; padding:0 4px; white-space:nowrap; }
+  .leaflet-tooltip.lf-road::before { display:none; }
+  /* 相邻点行程里程/车程标签：绿色胶囊，贴在路段上 */
+  .lf-dist { font-size:10.5px; font-weight:700; color:#fff; background:#0a7d52;
+    border:1px solid #0a7d52; border-radius:10px; padding:0 6px; white-space:nowrap; box-shadow:0 1px 2px rgba(0,0,0,.25); }
+  .leaflet-tooltip.lf-dist::before { display:none; }
+  .lf-distold { background:#e8a200; border-color:#cf9000; }
+  /* 按天分段标签 */
+  .lf-day { background:transparent; border:0; box-shadow:none; padding:0; }
+  .lf-day span { color:#fff; font-size:10px; font-weight:700; padding:1px 5px; border-radius:8px;
+    white-space:nowrap; box-shadow:0 1px 2px rgba(0,0,0,.3); }
+  .leaflet-tooltip.lf-day::before { display:none; }
+  /* 显隐切换按钮 */
+  .map-toggles { display:flex; flex-direction:column; gap:4px; }
+  .lbl-toggle { font-size:12px; line-height:1.2; padding:5px 9px; background:#fff; color:#333;
+    border:1px solid #b6c4d2; border-radius:4px; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,.2); }
+  #realmap.labels-off .leaflet-tooltip:not(.lf-dist):not(.lf-day) { display:none !important; }
+  #realmap.dist-off .lf-dist { display:none !important; }
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
 <div class="wrap">
@@ -183,6 +228,261 @@
 </svg>
 <figcaption class="map-cap">伊犁环线示意图（按城市真实相对方位绘制，非精确比例）；详细里程车程见下方「三、每日行程」。</figcaption>
 </figure>
+
+<figure class="routemap">
+<div id="realmap"></div>
+<figcaption class="map-cap map-legend">
+  <b>真实经纬度地图</b>　可缩放/拖动，OpenStreetMap 底图（需联网加载）。<br>
+  <b>线条</b>：绿实线＝当前主环线；绿虚线＝可选绕行（喀拉峻/那拉提）；黄实线＝原方案路线（含阿勒泰/禾木/喀纳斯北线，作对比）；彩色分段＝当前主环线按天（见 Day 标签）。<br>
+  <b>圆点</b>：绿实心＝过夜/核心点；绿空心＝当前途经景点；黄空心＝原方案途径点（阿勒泰、禾木、喀纳斯、克拉玛依）。<br>
+  <b>路名</b>：绿色斜体＝主要公路（S101 国防公路、果子沟 G30、伊昭公路、唐布拉 S315、独库北段 G217）。<br>
+  <b>里程</b>：绿胶囊＝当前各段里程/车程（取自行程表，以实际导航为准）；黄胶囊＝原方案各段（行程表无，按真实道路估算，“约”示估值）。<br>
+  <b>操作</b>：右上角按钮可分别隐藏「地名 / 里程 / 分天」。<br>
+  <b>说明</b>：坐标为景区/城镇近似位置，连线为示意走向（非道路实测里程），仅供判断相对方位与距离。
+</figcaption>
+</figure>
+
+<script>
+(function () {
+  if (typeof L === 'undefined') { return; }
+  // 过夜/核心点：[纬度, 经度]
+  var stays = [
+    { n:'乌鲁木齐',     d:'Day 1/11/12 · 起终点', c:[43.825, 87.616], dir:'right'  },
+    { n:'乌苏 / 奎屯',  d:'Day 2 宿',            c:[44.434, 84.677], dir:'top'    },
+    { n:'赛里木湖',     d:'Day 3–4 宿 · ★核心',  c:[44.583, 81.183], dir:'top'    },
+    { n:'伊宁',         d:'Day 5 宿',            c:[43.913, 81.320], dir:'left'   },
+    { n:'昭苏',         d:'Day 6 宿',            c:[43.151, 81.130], dir:'left'   },
+    { n:'夏塔 ★',       d:'核心日',              c:[42.950, 80.830], dir:'bottom' },
+    { n:'特克斯八卦城', d:'Day 7 宿',            c:[43.214, 81.840], dir:'bottom' },
+    { n:'新源',         d:'Day 8–9 宿',          c:[43.430, 83.260], dir:'bottom' },
+    { n:'独山子 / 奎屯',d:'Day 10 宿',           c:[44.327, 84.851], dir:'top'    }
+  ];
+  // 途经 / 支线景点
+  var vias = [
+    { n:'安集海大峡谷',     c:[44.040, 85.620], dir:'bottom' },
+    { n:'果子沟大桥',       c:[44.450, 80.860], dir:'left'   },
+    { n:'库尔德宁 / 恰西',  c:[43.180, 82.900], dir:'bottom' },
+    { n:'唐布拉百里画廊',   c:[43.580, 84.250], dir:'top'    },
+    { n:'乔尔玛',           c:[43.660, 84.400], dir:'right'  },
+    { n:'喀拉峻（支）',     c:[43.180, 82.100], dir:'right'  },
+    { n:'那拉提（支）',     c:[43.300, 84.020], dir:'bottom' }
+  ];
+  // 主环线（自驾顺序，含按主要公路走向补的途经城镇，使连线贴着实际道路）
+  var route = [
+    [43.825,87.616],  // 乌鲁木齐
+    [44.010,87.300],  // 昌吉
+    [44.300,86.080],  // 石河子
+    [44.040,85.620],  // 安集海大峡谷
+    [44.434,84.677],  // 乌苏
+    [44.610,82.890],  // 精河（G30）
+    [44.583,81.183],  // 赛里木湖
+    [44.450,80.860],  // 果子沟大桥
+    [43.913,81.320],  // 伊宁
+    [43.151,81.130],  // 昭苏（伊昭公路）
+    [42.950,80.830],  // 夏塔
+    [43.214,81.840],  // 特克斯
+    [43.180,82.900],  // 库尔德宁
+    [43.430,83.260],  // 新源
+    [43.580,84.250],  // 唐布拉（S315）
+    [43.660,84.400],  // 乔尔玛
+    [44.327,84.851],  // 独山子（独库北段）
+    [44.420,84.900],  // 奎屯
+    [44.300,86.080],  // 石河子
+    [43.825,87.616]   // 乌鲁木齐（回程 G30）
+  ];
+  // 可选绕行（二选一、抢不到则不去），绿虚线
+  var spurs = [
+    [[43.214,81.840],[43.180,82.100]],   // 特克斯 → 喀拉峻
+    [[43.430,83.260],[43.300,84.020]]    // 新源 → 那拉提
+  ];
+  // 原方案路线（含阿勒泰 / 禾木 / 喀纳斯 北线，后调整为深度伊犁版），黄色标记作对比
+  var oldRoute = [
+    [43.825,87.616],  // 乌鲁木齐（起）
+    [44.900,88.500],  // 北上 G216
+    [46.990,89.520],  // 富蕴
+    [47.850,88.130],  // 阿勒泰
+    [48.580,87.500],  // 禾木
+    [48.720,87.020],  // 喀纳斯
+    [47.700,86.870],  // 布尔津
+    [46.320,85.700],  // 乌尔禾
+    [45.580,84.890],  // 克拉玛依
+    [44.610,82.890],  // 精河
+    [44.583,81.183],  // 赛里木湖
+    [43.913,81.320],  // 伊宁
+    [43.320,84.020],  // 那拉提
+    [43.300,86.000],  // 东返 G218/G216
+    [43.825,87.616]   // 乌鲁木齐（终）
+  ];
+  // 原方案途径点（独有的，黄色标记；赛里木湖/伊宁/那拉提与当前路线重合已有绿点）
+  var oldPts = [
+    { n:'阿勒泰',   c:[47.850,88.130], dir:'right'  },
+    { n:'禾木',     c:[48.580,87.500], dir:'top'    },
+    { n:'喀纳斯',   c:[48.720,87.020], dir:'left'   },
+    { n:'克拉玛依', c:[45.580,84.890], dir:'left'   }
+  ];
+
+  // 相邻过夜点之间的行程里程/车程（取自「三、每日行程」表，以实际导航为准）
+  var segs = [
+    { t:'550km · 7h',   c:[44.150, 85.950] },  // 乌鲁木齐–乌苏
+    { t:'350km · 3h',   c:[44.560, 82.900] },  // 乌苏–赛里木湖
+    { t:'200km · 4h',   c:[44.230, 81.200] },  // 赛里木湖–伊宁
+    { t:'280km · 4.5h', c:[43.560, 81.360] },  // 伊宁–昭苏/夏塔（伊昭公路）
+    { t:'160km · 3h',   c:[43.080, 81.360] },  // 夏塔–特克斯
+    { t:'250km · 4h',   c:[43.320, 82.560] },  // 特克斯–库尔德宁–新源
+    { t:'350km · 7h',   c:[43.960, 84.220] },  // 新源–唐布拉–独库–独山子
+    { t:'250km · 3h',   c:[44.060, 86.350] }   // 独山子–乌鲁木齐
+  ];
+  // 原方案分段里程/车程（行程表无，按真实道路距离估算，黄色胶囊，"约"示估值）
+  var segsOld = [
+    { t:'约650km · 8h',   c:[46.000, 88.950] },  // 乌鲁木齐–阿勒泰
+    { t:'约180km · 4h',   c:[48.220, 87.800] },  // 阿勒泰–禾木
+    { t:'约70km · 2h',    c:[48.660, 87.260] },  // 禾木–喀纳斯
+    { t:'约470km · 6h',   c:[46.950, 86.200] },  // 喀纳斯–布尔津–克拉玛依
+    { t:'约430km · 5h',   c:[45.020, 83.250] },  // 克拉玛依–精河–赛里木湖
+    { t:'约130km · 2.5h', c:[44.400, 81.520] },  // 赛里木湖–伊宁
+    { t:'约280km · 4.5h', c:[43.620, 82.670] },  // 伊宁–那拉提
+    { t:'约600km · 8h',   c:[43.450, 85.600] }   // 那拉提–乌鲁木齐
+  ];
+
+  // 主要公路名（贴在对应路段上）
+  var roads = [
+    { n:'S101 国防公路', c:[44.150,85.900] },
+    { n:'G30 · 果子沟',  c:[44.520,80.980] },
+    { n:'伊昭公路 S237', c:[43.560,81.030] },
+    { n:'唐布拉 S315',   c:[43.500,83.800] },
+    { n:'独库北段 G217', c:[44.060,84.640] }
+  ];
+
+  var map = L.map('realmap', { scrollWheelZoom:false });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 17,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  // 原方案路线（黄色，画在底层作对比）
+  L.polyline(oldRoute, { color:'#ffffff', weight:6, opacity:.7 }).addTo(map);
+  L.polyline(oldRoute, { color:'#e8a200', weight:3.5, opacity:.95 }).addTo(map);
+
+  // 当前主环线：白色描边打底 + 绿线在上，保证在底图上清晰可见
+  L.polyline(route, { color:'#ffffff', weight:5, opacity:.9 }).addTo(map);
+  L.polyline(route, { color:'#0a7d52', weight:2.6, opacity:1 }).addTo(map);
+  spurs.forEach(function (s) {
+    L.polyline(s, { color:'#ffffff', weight:4.5, opacity:.85 }).addTo(map);
+    L.polyline(s, { color:'#0a7d52', weight:2.2, opacity:1, dashArray:'8 6' }).addTo(map);
+  });
+
+  // 按天分段着色（route 下标区间；覆盖在主环线上，可隐藏）
+  var dayLegs = [
+    { day:'Day 2',  color:'#e6194B', a:0,  b:4  },   // 乌鲁木齐→乌苏
+    { day:'Day 3',  color:'#f58231', a:4,  b:6  },   // 乌苏→赛里木湖
+    { day:'Day 5',  color:'#911eb4', a:6,  b:8  },   // 赛里木湖→伊宁
+    { day:'Day 6',  color:'#42d4f4', a:8,  b:10 },   // 伊宁→昭苏→夏塔
+    { day:'Day 7',  color:'#f032e6', a:10, b:11 },   // 夏塔→特克斯
+    { day:'Day 8',  color:'#9A6324', a:11, b:13 },   // 特克斯→库尔德宁→新源
+    { day:'Day 10', color:'#000075', a:13, b:16 },   // 新源→唐布拉→独库→独山子
+    { day:'Day 11', color:'#808000', a:16, b:19 }    // 独山子→乌鲁木齐
+  ];
+  var dayLayer = L.layerGroup();
+  dayLegs.forEach(function (leg) {
+    var seg = route.slice(leg.a, leg.b + 1);
+    L.polyline(seg, { color:leg.color, weight:4, opacity:.95 }).addTo(dayLayer);
+    var lat = 0, lng = 0;
+    seg.forEach(function (c) { lat += c[0]; lng += c[1]; });
+    L.tooltip({ permanent:true, direction:'center', className:'lf-day', interactive:false })
+      .setLatLng([lat / seg.length, lng / seg.length])
+      .setContent('<span style="background:' + leg.color + '">' + leg.day + '</span>')
+      .addTo(dayLayer);
+  });
+  dayLayer.addTo(map);
+
+  vias.forEach(function (p) {
+    L.circleMarker(p.c, { radius:5, color:'#1a7f5a', weight:2, fillColor:'#fff', fillOpacity:1 })
+      .addTo(map)
+      .bindTooltip(p.n, { permanent:true, direction:p.dir, className:'lf-via' });
+  });
+
+  var bounds = [];
+  stays.forEach(function (p) {
+    L.circleMarker(p.c, { radius:7, color:'#fff', weight:2, fillColor:'#1a7f5a', fillOpacity:1 })
+      .addTo(map)
+      .bindTooltip(p.n, { permanent:true, direction:p.dir, className:'lf-stay' })
+      .bindPopup('<b>' + p.n + '</b><br>' + p.d);
+    bounds.push(p.c);
+  });
+
+  roads.forEach(function (r) {
+    L.tooltip({ permanent:true, direction:'center', className:'lf-road', interactive:false })
+      .setLatLng(r.c).setContent(r.n).addTo(map);
+  });
+
+  segs.forEach(function (s) {
+    L.tooltip({ permanent:true, direction:'center', className:'lf-dist', interactive:false })
+      .setLatLng(s.c).setContent(s.t).addTo(map);
+  });
+
+  segsOld.forEach(function (s) {
+    L.tooltip({ permanent:true, direction:'center', className:'lf-dist lf-distold', interactive:false })
+      .setLatLng(s.c).setContent(s.t).addTo(map);
+  });
+
+  oldPts.forEach(function (p) {
+    L.circleMarker(p.c, { radius:5, color:'#e8a200', weight:2, fillColor:'#fff', fillOpacity:1 })
+      .addTo(map)
+      .bindTooltip(p.n, { permanent:true, direction:p.dir, className:'lf-old' });
+  });
+  oldRoute.forEach(function (c) { bounds.push(c); });
+
+  // 图例
+  var legend = L.control({ position:'bottomright' });
+  legend.onAdd = function () {
+    var d = L.DomUtil.create('div');
+    d.style.cssText = 'background:rgba(255,255,255,.92);padding:6px 9px;border:1px solid #ccc;border-radius:5px;font-size:12px;line-height:1.7;color:#333';
+    d.innerHTML =
+      '<span style="display:inline-block;width:20px;border-top:3px solid #0a7d52;vertical-align:middle"></span> 当前主环线<br>' +
+      '<span style="display:inline-block;width:20px;border-top:2px dashed #0a7d52;vertical-align:middle"></span> 可选绕行（喀拉峻/那拉提）<br>' +
+      '<span style="display:inline-block;width:20px;border-top:3px solid #e8a200;vertical-align:middle"></span> 原方案路线 / 途径点<br>' +
+      '<span style="display:inline-block;width:20px;border-top:3px solid #e6194B;vertical-align:middle"></span> 主环线按天分段（见 Day 标签）';
+    L.DomEvent.disableClickPropagation(d);
+    return d;
+  };
+  legend.addTo(map);
+
+  // 显隐切换按钮：地名、里程各自独立
+  function makeToggle(box, label, cls) {
+    var btn = L.DomUtil.create('button', 'lbl-toggle', box);
+    btn.type = 'button';
+    btn.textContent = '隐藏' + label;
+    L.DomEvent.on(btn, 'click', function () {
+      var c = map.getContainer();
+      if (L.DomUtil.hasClass(c, cls)) { L.DomUtil.removeClass(c, cls); btn.textContent = '隐藏' + label; }
+      else { L.DomUtil.addClass(c, cls); btn.textContent = '显示' + label; }
+    });
+  }
+  function makeLayerToggle(box, label, layer) {
+    var btn = L.DomUtil.create('button', 'lbl-toggle', box);
+    btn.type = 'button';
+    btn.textContent = '隐藏' + label;
+    L.DomEvent.on(btn, 'click', function () {
+      if (map.hasLayer(layer)) { map.removeLayer(layer); btn.textContent = '显示' + label; }
+      else { map.addLayer(layer); btn.textContent = '隐藏' + label; }
+    });
+  }
+  var Panel = L.Control.extend({
+    options: { position:'topright' },
+    onAdd: function () {
+      var box = L.DomUtil.create('div', 'map-toggles');
+      L.DomEvent.disableClickPropagation(box);
+      makeToggle(box, '地名', 'labels-off');
+      makeToggle(box, '里程', 'dist-off');
+      makeLayerToggle(box, '分天', dayLayer);
+      return box;
+    }
+  });
+  map.addControl(new Panel());
+
+  map.fitBounds(bounds, { padding:[40,40] });
+})();
+</script>
 
 <pre>乌鲁木齐 → S101/安集海 → 乌苏 → 赛里木湖（核心，住 2 晚）
         → 伊宁（补给）→ 伊昭公路 → 昭苏 / 夏塔
