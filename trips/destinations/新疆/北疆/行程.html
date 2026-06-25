@@ -32,6 +32,9 @@
   .small-table { min-width:0; }
   .small-table th { background:var(--bg-soft); color:var(--ink); }
   .pkg b { color:var(--accent); }
+  .routemap { margin:1.2em 0; padding:12px; border:1px solid var(--line); border-radius:8px; background:var(--bg-soft); }
+  .routemap svg { display:block; width:100%; height:auto; }
+  .map-cap { margin-top:.5em; font-size:.82rem; color:var(--muted); text-align:center; }
 </style>
 </head>
 <body>
@@ -67,6 +70,120 @@
 </ul>
 
 <h2>二、路线总览</h2>
+
+<figure class="routemap">
+<svg viewBox="0 20 1170 460" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="北疆伊犁环线路线示意图"
+     style="font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#1a7f5a"/>
+    </marker>
+    <style>
+      .rt-main { fill:none; stroke:#1a7f5a; stroke-width:3.4; stroke-linejoin:round; stroke-linecap:round; }
+      .rt-spur { fill:none; stroke:#1a7f5a; stroke-width:1.8; stroke-dasharray:6 5; opacity:.65; }
+      .rt-tick { fill:none; stroke:#9ab; stroke-width:1.2; }
+      .pt-stay { fill:#1a7f5a; stroke:#fff; stroke-width:1.6; }
+      .pt-via  { fill:#fff; stroke:#1a7f5a; stroke-width:2; }
+      .lbl     { font-size:16px; font-weight:600; fill:#222; }
+      .lbl-day { font-size:11.5px; font-weight:500; fill:#1a7f5a; }
+      .lbl-via { font-size:13px; fill:#555; }
+      .lbl-seg { font-size:12.5px; font-style:italic; fill:#8a8a8a; }
+      .lbl-cap { font-size:12.5px; fill:#777; }
+    </style>
+  </defs>
+
+  <!-- 指北针 -->
+  <g transform="translate(46,52)">
+    <line x1="0" y1="14" x2="0" y2="-10" stroke="#888" stroke-width="1.4"/>
+    <path d="M0,-15 L4,-6 L-4,-6 Z" fill="#888"/>
+    <text x="0" y="30" text-anchor="middle" class="lbl-cap">N</text>
+  </g>
+
+  <!-- 主环线（顺时针，箭头示方向） -->
+  <path class="rt-main" marker-mid="url(#arr)"
+        d="M1108,260 L688,140 L180,100 L195,240 L166,390 L130,420 L275,380 L478,330 L528,276 L620,265 L717,160 L1108,260"/>
+
+  <!-- 支线 / 可选绕行（虚线） -->
+  <path class="rt-spur" d="M275,380 L325,408"/>
+  <path class="rt-spur" d="M478,330 L586,360"/>
+
+  <!-- 途经景点连接短线 -->
+  <line class="rt-tick" x1="818" y1="178" x2="818" y2="214"/>
+  <line class="rt-tick" x1="180" y1="150" x2="150" y2="150"/>
+  <line class="rt-tick" x1="435" y1="341" x2="435" y2="373"/>
+
+  <!-- 路段名 -->
+  <text x="900" y="192" text-anchor="middle" class="lbl-seg">S101 国防公路</text>
+  <text x="150" y="320" text-anchor="middle" class="lbl-seg" transform="rotate(-78 150 320)">伊昭公路</text>
+  <text x="676" y="206" text-anchor="middle" class="lbl-seg" transform="rotate(-34 676 206)">独库北段</text>
+
+  <!-- 途经 / 支线点（空心） -->
+  <circle class="pt-via" cx="818" cy="220" r="5"/>
+  <text x="818" y="240" text-anchor="middle" class="lbl-via">安集海大峡谷</text>
+  <circle class="pt-via" cx="144" cy="150" r="5"/>
+  <text x="134" y="154" text-anchor="end" class="lbl-via">果子沟大桥</text>
+  <circle class="pt-via" cx="435" cy="378" r="5"/>
+  <text x="435" y="398" text-anchor="middle" class="lbl-via">库尔德宁 / 恰西</text>
+  <circle class="pt-via" cx="528" cy="276" r="5"/>
+  <text x="528" y="262" text-anchor="middle" class="lbl-via">唐布拉百里画廊</text>
+  <circle class="pt-via" cx="620" cy="265" r="5"/>
+  <text x="632" y="263" text-anchor="start" class="lbl-via">乔尔玛</text>
+  <circle class="pt-via" cx="325" cy="408" r="5"/>
+  <text x="325" y="426" text-anchor="middle" class="lbl-via">喀拉峻（支）</text>
+  <circle class="pt-via" cx="586" cy="360" r="5"/>
+  <text x="586" y="378" text-anchor="middle" class="lbl-via">那拉提（支）</text>
+
+  <!-- 过夜 / 核心点（实心） -->
+  <circle class="pt-stay" cx="1108" cy="260" r="6.5"/>
+  <text x="1098" y="256" text-anchor="end" class="lbl">乌鲁木齐</text>
+  <text x="1098" y="273" text-anchor="end" class="lbl-day">Day 1 / 11 / 12 · 起终点</text>
+
+  <circle class="pt-stay" cx="688" cy="140" r="6.5"/>
+  <text x="688" y="118" text-anchor="middle" class="lbl">乌苏 / 奎屯</text>
+  <text x="688" y="103" text-anchor="middle" class="lbl-day">Day 2 宿</text>
+
+  <circle class="pt-stay" cx="180" cy="100" r="6.5"/>
+  <text x="180" y="82" text-anchor="middle" class="lbl">赛里木湖</text>
+  <text x="180" y="67" text-anchor="middle" class="lbl-day">Day 3–4 宿 · ★核心</text>
+
+  <circle class="pt-stay" cx="195" cy="240" r="6.5"/>
+  <text x="207" y="238" text-anchor="start" class="lbl">伊宁</text>
+  <text x="207" y="254" text-anchor="start" class="lbl-day">Day 5 宿</text>
+
+  <circle class="pt-stay" cx="166" cy="390" r="6.5"/>
+  <text x="156" y="388" text-anchor="end" class="lbl">昭苏</text>
+  <text x="156" y="404" text-anchor="end" class="lbl-day">Day 6 宿</text>
+
+  <circle class="pt-stay" cx="130" cy="420" r="6.5"/>
+  <text x="120" y="424" text-anchor="end" class="lbl">夏塔 ★</text>
+
+  <circle class="pt-stay" cx="275" cy="380" r="6.5"/>
+  <text x="275" y="362" text-anchor="middle" class="lbl">特克斯八卦城</text>
+  <text x="275" y="347" text-anchor="middle" class="lbl-day">Day 7 宿</text>
+
+  <circle class="pt-stay" cx="478" cy="330" r="6.5"/>
+  <text x="478" y="312" text-anchor="middle" class="lbl">新源</text>
+  <text x="478" y="297" text-anchor="middle" class="lbl-day">Day 8–9 宿</text>
+
+  <circle class="pt-stay" cx="717" cy="160" r="6.5"/>
+  <text x="717" y="142" text-anchor="middle" class="lbl">独山子 / 奎屯</text>
+  <text x="717" y="127" text-anchor="middle" class="lbl-day">Day 10 宿</text>
+
+  <!-- 图例 -->
+  <g transform="translate(40,452)">
+    <circle class="pt-stay" cx="6" cy="-4" r="6"/>
+    <text x="18" y="0" class="lbl-cap">过夜 / 核心点</text>
+    <circle class="pt-via" cx="150" cy="-4" r="5"/>
+    <text x="162" y="0" class="lbl-cap">途经景点</text>
+    <line class="rt-spur" x1="270" y1="-4" x2="300" y2="-4"/>
+    <text x="306" y="0" class="lbl-cap">可选绕行（支）</text>
+    <text x="470" y="0" class="lbl-cap">　示意图 · 非按比例 · 顺时针环线</text>
+  </g>
+</svg>
+<figcaption class="map-cap">伊犁环线示意图（按城市真实相对方位绘制，非精确比例）；详细里程车程见下方「三、每日行程」。</figcaption>
+</figure>
+
 <pre>乌鲁木齐 → S101/安集海 → 乌苏 → 赛里木湖（核心，住 2 晚）
         → 伊宁（补给）→ 伊昭公路 → 昭苏 / 夏塔
         → 特克斯八卦城 → 库尔德宁 / 恰西 → 新源（草原慢玩）
