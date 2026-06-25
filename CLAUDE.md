@@ -11,6 +11,7 @@
 
 ```
 trips/        旅行板块：行程攻略与花费记录；约定见 trips/CLAUDE.md
+marriage/     婚前商议板块：结婚前需和对象谈拢的事（房产/父母/还贷/传家宝等）；约定见 marriage/CLAUDE.md
 .claude/skills/plan-trip/   旅行攻略整理工作流 skill（仓库级，服务 trips/）
 ```
 
