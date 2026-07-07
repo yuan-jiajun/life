@@ -22,10 +22,15 @@
       --warn: #8a5a00;
       --warn-soft: #fff7df;
       --code: #f3f5f7;
+      --sticky-top: 0px;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -37,60 +42,118 @@
       line-height: 1.58;
     }
 
-    header {
-      position: sticky;
-      top: 0;
+    .side-nav {
+      position: fixed;
+      top: 18px;
+      left: 0;
+      width: 230px;
+      max-height: calc(100vh - 36px);
+      overflow: auto;
       z-index: 20;
-      border-bottom: 1px solid var(--line);
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
       background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
       backdrop-filter: blur(10px);
-    }
-
-    .topbar {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 14px 24px;
+      flex-direction: column;
+      gap: 7px;
+      transform: translateX(calc(-100% + 34px));
+      transition: transform 180ms ease, box-shadow 180ms ease;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      line-height: 1.2;
+    .side-nav:hover,
+    .side-nav:focus-within {
+      transform: translateX(18px);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+    }
+
+    .side-nav::after {
+      content: "目录";
+      position: absolute;
+      top: 14px;
+      right: 7px;
+      writing-mode: vertical-rl;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+      pointer-events: none;
+    }
+
+    .side-nav:hover::after,
+    .side-nav:focus-within::after {
+      opacity: 0;
+    }
+
+    .side-nav-title {
+      margin: 0 0 4px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 800;
       letter-spacing: 0;
     }
 
-    .subtitle {
-      margin-top: 4px;
+    .side-nav-note {
+      margin: 0 0 6px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
+      line-height: 1.45;
     }
 
-    nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    nav a {
+    .side-nav a {
       color: var(--accent);
       background: var(--accent-soft);
       border: 1px solid #c9ddff;
       border-radius: 6px;
-      padding: 6px 10px;
+      padding: 7px 9px;
       text-decoration: none;
       font-size: 13px;
-      white-space: nowrap;
+      line-height: 1.35;
+    }
+
+    .side-nav-group {
+      margin-top: 6px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+
+    .side-nav-label {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .side-nav-projects {
+      display: grid;
+      gap: 8px;
+    }
+
+    .side-nav a.project-link {
+      background: #fff;
+      border-color: #d7dee9;
+      color: #26364d;
+      font-size: 12px;
+    }
+
+    .nav-company {
+      display: grid;
+      gap: 5px;
+    }
+
+    .nav-company-title {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
     }
 
     main {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 22px 24px 56px;
+      max-width: none;
+      margin: 0;
+      padding: 22px 24px 56px 58px;
     }
 
     section {
@@ -98,7 +161,7 @@
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 8px;
-      overflow: hidden;
+      overflow: visible;
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
     }
 
@@ -120,14 +183,25 @@
     }
 
     .table-wrap {
-      overflow-x: auto;
+      overflow-x: visible;
       overflow-y: visible;
+      cursor: grab;
+      touch-action: pan-y;
+    }
+
+    .table-wrap.dragging {
+      cursor: grabbing;
+    }
+
+    body.table-dragging {
+      user-select: none;
+      cursor: grabbing;
+      scroll-behavior: auto;
     }
 
     table {
-      border-collapse: separate;
-      border-spacing: 0;
-      min-width: 2200px;
+      border-collapse: collapse;
+      min-width: 2600px;
       width: 100%;
     }
 
@@ -142,26 +216,85 @@
 
     th {
       position: sticky;
-      top: 78px;
-      z-index: 4;
+      top: var(--sticky-top);
+      z-index: 8;
       background: var(--head);
+      box-shadow: 0 1px 0 var(--line);
       font-weight: 700;
       white-space: nowrap;
     }
 
-    td:first-child,
-    th:first-child {
+    td:first-child {
       position: sticky;
       left: 0;
-      z-index: 5;
-      background: var(--head-strong);
+      z-index: 2;
+      background: #f4f8fc;
       font-weight: 700;
       min-width: 180px;
       max-width: 220px;
     }
 
-    td:first-child {
-      background: #f4f8fc;
+    th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      background: var(--head-strong);
+      min-width: 180px;
+      max-width: 220px;
+    }
+
+    #project tbody tr[id] {
+      scroll-margin-top: 48px;
+    }
+
+    #project tbody tr.group-start td {
+      border-top: 3px solid #a8bdd7;
+    }
+
+    .project-cell {
+      display: grid;
+      gap: 8px;
+    }
+
+    .company-line,
+    .project-line {
+      display: block;
+    }
+
+    .company-line {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .project-line {
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .company-code,
+    .project-code {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 30px;
+      margin-right: 6px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      border: 1px solid #cbd7e6;
+      background: #ffffff;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .project-code {
+      border-color: #b8d2ff;
+      background: var(--accent-soft);
+      color: #174ea6;
     }
 
     tr:last-child td {
@@ -268,6 +401,89 @@
       color: #253044;
     }
 
+    .qa-column {
+      min-width: 560px;
+    }
+
+    .qa-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .qa-list details {
+      border: 1px solid #ccd6e3;
+      border-radius: 8px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .qa-list summary {
+      cursor: pointer;
+      padding: 10px 12px;
+      background: #f3f7fb;
+      color: #142033;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .qa-list details[open] summary {
+      border-bottom: 1px solid #d9e2ec;
+      background: #eaf2ff;
+      color: #174ea6;
+    }
+
+    .qa-answer {
+      padding: 11px 12px;
+      color: #26364d;
+      background: #ffffff;
+    }
+
+    .qa-kind {
+      display: inline-flex;
+      margin-right: 6px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      border: 1px solid #c9ddff;
+      background: var(--accent-soft);
+      color: #174ea6;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .qa-kind.deep {
+      border-color: #bfe4c8;
+      background: var(--good-soft);
+      color: var(--good);
+    }
+
+    .qa-kind.pressure {
+      border-color: #efd78c;
+      background: var(--warn-soft);
+      color: var(--warn);
+    }
+
+    .resume-cell,
+    .signal-score {
+      display: grid;
+      gap: 8px;
+    }
+
+    .info-block {
+      border: 1px solid #d7dee9;
+      border-radius: 7px;
+      padding: 8px 10px;
+      background: #f8fafc;
+    }
+
+    .info-label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
     .score-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -325,17 +541,27 @@
     }
 
     @media (max-width: 900px) {
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
+      .side-nav {
+        position: static;
+        width: auto;
+        margin: 14px 14px 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        transform: none;
       }
 
-      nav {
-        justify-content: flex-start;
+      .side-nav::after {
+        display: none;
       }
 
-      th {
-        top: 122px;
+      .side-nav-note {
+        display: none;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 14px 14px 40px;
       }
 
       .quick,
@@ -345,11 +571,7 @@
     }
 
     @media print {
-      header {
-        position: static;
-      }
-
-      nav {
+      .side-nav {
         display: none;
       }
 
@@ -374,23 +596,20 @@
         position: static;
       }
     }
-  </style>
+</style>
 </head>
 <body>
-  <header>
-    <div class="topbar">
-      <div>
-        <h1>邓均面试总指南 - HTML 宽表版</h1>
-        <div class="subtitle">按公司和项目两个维度整理，面试时横向扫表使用。来源：简历结构化整理、一面技术题、面试官准备清单。</div>
-      </div>
-      <nav aria-label="页面导航">
-        <a href="#quick">快速打法</a>
-        <a href="#company">公司维度</a>
-        <a href="#project">项目维度</a>
-        <a href="#score">评分结论</a>
-      </nav>
+  <aside class="side-nav" aria-label="页面目录">
+    <div class="side-nav-title">目录</div>
+    <p class="side-nav-note">按面试使用顺序快速跳转</p>
+    <a href="#quick">快速打法</a>
+    <a href="#project">公司-项目合并表</a>
+    <div class="side-nav-group">
+      <p class="side-nav-label">项目定位</p>
+      <div id="project-nav" class="side-nav-projects"></div>
     </div>
-  </header>
+    <a href="#score">评分结论</a>
+  </aside>
 
   <main>
     <section id="quick">
@@ -921,11 +1140,11 @@
 
     <section id="project">
       <div class="section-head">
-        <h2>项目维度宽表</h2>
-        <p class="section-note">按项目逐条整理，适合深挖时直接定位主问题、参考回答、压力测试和评分信号。</p>
+        <h2>公司-项目合并宽表</h2>
+        <p class="section-note">按公司归属和项目逐条合并整理。每行同时包含公司背景、项目内容、问题解答、信号和评分，左侧目录可直达每个项目。</p>
       </div>
       <div class="table-wrap">
-        <table aria-label="项目维度宽表">
+        <table aria-label="公司-项目合并宽表">
           <thead>
             <tr>
               <th>项目</th>
@@ -1066,25 +1285,32 @@
                   <li>入口打标、上下文透传、灰度污染。</li>
                 </ul>
               </td>
-              <td>全链路灰度具体怎么做？灰度请求经过 HTTP、RPC、MQ 时，如何保证后续链路都走灰度环境？</td>
+              <td>你在货拉拉做的全链路灰度具体解决什么问题？请从一次请求进入网关开始，讲清楚它经过 HTTP、RPC、MQ、缓存、数据库这些链路时，灰度标识是怎么传递、路由和回滚的。</td>
               <td>
                 <div class="answer-box">
-                  网关按用户、租户、版本、请求头命中规则并写入上下文；RPC 框架自动透传；服务发现或负载均衡按标识选灰度实例；MQ 写 message header；监控灰度污染；支持动态规则、一键回滚、审计和 SDK 兼容。
+                  满意回答应覆盖：入口网关按用户、城市、租户、版本、请求头、白名单、百分比等规则打标；灰度标识写入 header、trace context 或 RPC context；RPC 框架自动透传，服务发现或负载均衡按实例元数据选择灰度实例；MQ 生产者把灰度标识写入 message header，消费者按标识进入灰度逻辑或灰度实例；缓存 key、数据写入、配置和模型要考虑灰度隔离；通过链路追踪、日志和 metric 检测灰度污染；支持规则动态关闭、实例摘除、流量切回、配置回滚和老 SDK 兼容。
                 </div>
               </td>
               <td>
                 <ul>
-                  <li>框架核心抽象是什么？</li>
-                  <li>灰度规则冲突怎么处理？</li>
-                  <li>服务发现缓存失效怎么办？</li>
-                  <li>限流是单机还是分布式？</li>
+                  <li>灰度规则是怎么配置和命中的？如果同时命中用户白名单、城市灰度、版本灰度、百分比灰度，优先级怎么处理？</li>
+                  <li>灰度标识在 HTTP 和 RPC 里怎么传递？业务代码需要自己手动传吗？</li>
+                  <li>服务发现和负载均衡怎么根据灰度标识选择实例？如果灰度实例不足或者不可用怎么办？</li>
+                  <li>如果灰度请求里发送了一条 MQ 消息，消费者怎么知道这是灰度流量？消息被延迟消费时还算灰度吗？</li>
+                  <li>什么是灰度污染？你们怎么发现和阻断灰度污染？</li>
+                  <li>灰度链路里缓存和数据库怎么处理？缓存 key 要不要带灰度标识？</li>
+                  <li>全链路灰度上线时，你会怎么设计发布流程？如何做到一键回滚？</li>
                 </ul>
               </td>
               <td>
                 <ul>
-                  <li>MQ 丢灰度标识怎么办？</li>
-                  <li>灰度流量进入普通实例怎么发现？</li>
-                  <li>核心客户被误限流，5 分钟怎么恢复？</li>
+                  <li>如果灰度规则配置错了，把核心城市 100% 流量打到灰度版本，线上开始报错，你怎么止血？</li>
+                  <li>如果一个服务忘记透传灰度 header，导致后续链路走了普通实例，你怎么发现？</li>
+                  <li>灰度服务 A 调用下游 B，但 B 没有灰度实例。你会让它调用普通 B 吗？</li>
+                  <li>MQ 消息丢了灰度标识，消费者按普通流量处理，导致数据写入普通链路，你怎么处理？</li>
+                  <li>如果灰度版本写入的数据结构和普通版本不兼容，但灰度流量误写进了普通库，怎么办？</li>
+                  <li>灰度用户请求把新逻辑结果写进了缓存，普通用户命中这个缓存，看到异常结果，怎么处理？</li>
+                  <li>灰度发布 10% 后，技术指标都正常，但业务转化下降 8%，你怎么判断是否回滚？</li>
                 </ul>
               </td>
               <td><div class="good-box">能讲入口、透传、路由、MQ、污染检测、回滚、SDK 治理。</div></td>
@@ -1549,5 +1775,461 @@
       </div>
     </section>
   </main>
+  <script>
+    (function () {
+      function updateStickyTop() {
+        document.documentElement.style.setProperty("--sticky-top", "0px");
+      }
+
+      const guidance = {
+        "流量策略 & 推荐算法": {
+          deep: [
+            "满意回答应能拆出多路召回、粗排、精排、重排的职责边界，并说明各层输入、输出、延迟预算和降级策略。",
+            "应说明离线样本和特征如何训练模型，实时行为如何进入在线特征服务，在线推理如何和缓存、规则兜底衔接。",
+            "应覆盖新用户用热门、类目、地域、来源等规则兜底，新商品用内容特征、商家权重、探索流量解决冷启动。",
+            "应给出 P99 延迟预算、超时阈值、缓存推荐、热门商品、规则推荐等兜底策略，并说明监控指标。"
+          ],
+          pressure: [
+            "先分离数据问题、特征问题、模型问题和线上策略问题；对比实验组/对照组漏斗，检查埋点、样本分布、特征延迟、排序规则和业务干预。",
+            "先止血，降级到缓存推荐、热门商品或规则兜底；再扩容或隔离模型服务；最后复盘容量、限流、预热和压测。",
+            "应把商业目标和用户体验分开看，用实验验证强插比例上限，并设置多样性、转化、留存和投诉等约束。"
+          ]
+        },
+        "多模态图文匹配 RAG Agent": {
+          deep: [
+            "应说明模型选型依据，例如图文同空间能力、中文效果、延迟、成本、可微调性和线上评估结果。",
+            "应覆盖增量写入、删除标记、定期重建、双索引切换、版本管理和查询期间的一致性处理。",
+            "应说明人工标注、点击/转化反馈、同款/相似商品关系、难负样本构建和训练/评估集隔离。",
+            "应明确 Dify 是负责应用编排、工具调用、知识库接入，还是只是原型验证；生产核心链路是否自研。"
+          ],
+          pressure: [
+            "按数据质量、embedding 模型、索引构建、query 表达、rerank 和业务规则逐层排查，并用标注集定位召回还是排序问题。",
+            "可以减少候选数、异步 rerank、缓存高频 query、使用轻量 reranker，或分层返回先快后准的结果。",
+            "需要引用来源、置信度阈值、低置信拒答、规则校验和人工审核闭环，避免模型凭空生成。"
+          ]
+        },
+        "框架工具 / 全链路灰度": {
+          deep: [
+            "规则维度通常包括用户、司机、租户、城市、业务线、App 版本、请求头、渠道和百分比。满意回答要讲优先级，例如强制白名单/黑名单 > 租户或城市规则 > 版本规则 > 百分比规则 > 默认规则；规则要支持动态刷新、审计、回滚；规则中心不可用时使用本地缓存或默认稳定版本兜底。",
+            "HTTP 通常通过 header 传，例如 x-gray-tag、x-env、x-traffic-tag；RPC 通过框架 context、metadata、attachment 传。最好由框架层自动透传，不依赖业务代码手写；同时把灰度标识放入 trace span、日志 MDC，老 SDK 或未升级服务默认稳定或由代理层注入。",
+            "实例注册时带 version/env/lane 等元数据，调用方根据灰度上下文筛选实例。灰度实例不足时要区分严格隔离和弱隔离：核心写链路不应回退普通实例，读链路或兼容链路可以配置回退但要记录污染。发布前应做依赖检查，确认关键下游具备灰度版本。",
+            "MQ 是区分真全链路和入口灰度的关键。生产者要把灰度标识写入 message header；消费者读取 header 后路由到灰度消费者、灰度逻辑或灰度 topic；延迟消息、重试、死信都要保留灰度标识。若灰度版本已经下线，延迟消息要有版本兼容或兜底策略。",
+            "灰度污染包括灰度请求调用普通实例、普通请求调用灰度实例、灰度消息被普通消费者消费、灰度数据写入普通数据域、缓存 key 未隔离导致普通用户读到灰度结果。发现方式包括 trace 每跳记录 grayTag/serviceVersion、metric 统计污染次数、日志按 traceId 检索、发布前自动化链路巡检。阻断方式包括严格路由、MQ header 校验、缓存 key 加版本、数据写入校验和异常自动切回。",
+            "如果灰度只改代码逻辑且数据结构兼容，可以共用数据库；如果结果不同，缓存 key 应增加版本、泳道或实验桶维度；如果涉及 schema 或写入格式变化，必须前向兼容。数据库通常不轻易物理隔离，但写操作灰度要比读操作更谨慎，缓存污染要重点监控。",
+            "发布流程应包括灰度规则配置、灰度实例注册、依赖服务检查、白名单/小流量验证、指标观察、逐步扩大、全量发布、清理灰度规则。回滚能力包括关闭规则、摘除灰度实例、回滚配置或版本、清理污染缓存、对已写数据补偿。监控要看成功率、错误率、P99、熔断限流次数、灰度污染次数、业务核心指标、MQ lag 和消费失败率。"
+          ],
+          pressure: [
+            "先关闭灰度规则或一键切回稳定版本；如果规则中心不可用，使用本地兜底配置或网关强制覆盖；同时摘除异常灰度实例，观察错误率、P99 和核心业务指标。复盘时要增加规则审批、预检查、影响面评估和自动回滚阈值。",
+            "通过链路追踪记录每一跳 grayTag 和实例版本，建立灰度污染检测规则；日志打印 traceId、grayTag、serviceVersion；网关或 sidecar 做校验；关键链路做自动化测试，验证灰度标识不会丢。发现后先切断错误链路或回滚对应服务。",
+            "取决于业务风险。若 B 是读服务、无副作用、协议兼容，可以允许回退普通实例但标记污染；若 B 有写操作、状态变更或版本不兼容，不能回退，应降级或阻断。最好发布前做依赖检查，回退策略必须可配置。",
+            "先停止相关灰度流量或暂停消费者；通过 traceId、业务 id、发送时间窗口定位受影响消息；若发生数据污染，做补偿或回滚。后续修复包括生产端强制写灰度 header、消费端缺失标识时保守处理、消息 header 校验、监控灰度标识丢失率。",
+            "立即停灰度写流量，定位污染范围：时间窗口、业务 id、traceId、操作类型；如果有备份或 binlog，按污染记录回滚或修复；不能回滚时写兼容修复脚本。后续要求 schema 前向兼容、写路径强校验、发布前数据兼容审查。",
+            "立即清理受影响缓存 key 或整体降级，切回普通逻辑；排查缓存 key 是否缺少灰度维度。后续改成灰度结果独立缓存、缓存 value 带版本校验、普通请求读取时校验版本，灰度结束后再合并缓存策略。",
+            "先确认实验分桶和指标口径，排除流量结构、活动、外部因素；看下降是否显著，是否集中在城市、版本、渠道。若影响核心业务，先暂停扩大，必要时回滚；保留实验数据，定位是代码、策略、配置还是用户体验问题。不能只看技术指标，业务指标也是回滚依据。"
+          ]
+        },
+        "飞书 eLearning": {
+          deep: [
+            "应包含待发送、发送中、已发送、失败、死信、取消等状态，并说明状态流转、重试次数和人工处理入口。",
+            "如果基于内存延时，必须说明持久化兜底或重启恢复机制；否则要承认这是风险并给补偿扫描方案。",
+            "应结合网络、对象存储限制、并发数、内存占用、失败重试成本和校验成本确定分片大小。",
+            "应说明每段 IV 或派生方式、元数据保存、解密顺序、完整性校验，以及 CBC 分段的安全边界。",
+            "应结合任务最长执行时间、心跳周期、故障检测时间和误判成本设置租约，并配合 fencing token。"
+          ],
+          pressure: [
+            "业务写入可继续落本地事务消息表，发送器暂停或重试；监控积压，恢复后按节流补发，消费端幂等。",
+            "服务端记录 uploadId、分片状态和 hash，恢复后查询已完成分片，只补传缺失部分。",
+            "用补偿任务扫描对象存储和数据库状态，按 uploadId 或文件 hash 补写元数据或回滚对象，保证状态最终一致。",
+            "统一存 UTC 和用户时区，使用可靠时间库处理不存在或重复的本地时间，并定义业务规则。"
+          ]
+        },
+        "企业测评": {
+          deep: [
+            "应按业务领域、数据所有权、变更频率、团队边界和依赖方向确定拆分，而不是按技术层拆分。",
+            "应说明双写状态、异步校验、对账任务、差异修复、切流前验收和回滚路径。",
+            "应定义数据无丢失、用户流程不中断、结果一致、性能不下降，并用监控和对账验证。",
+            "应讲迭代计划、每日同步、风险清单、阻塞升级机制和跨团队验收。"
+          ],
+          pressure: [
+            "先暂停扩大流量，回滚或保持双写；对比新老结果定位字段、逻辑或数据问题，修复后重新灰度。",
+            "重新拆批次和优先级，先迁核心路径；增加校验和断点续跑，必要时调整上线窗口。",
+            "用风险清单和回滚成本沟通，争取灰度切换；如果必须全量，要准备回滚、监控和现场值守。"
+          ]
+        },
+        "Pipeline Solution": {
+          deep: [
+            "应说明 source connector、sink connector、配置化数据同步适合 Kafka Connect，自定义复杂业务逻辑适合自写 consumer。",
+            "应覆盖限速、批处理、暂停消费、隔离慢下游、队列缓冲和生产端限流。",
+            "应限制 tag 白名单、采样、聚合、租户配额、基数监控，并拒绝无限制用户自定义标签。",
+            "应讲租户维度 topic/key/schema/权限/配额/存储隔离，以及查询和告警隔离。"
+          ],
+          pressure: [
+            "先看 key 是否倾斜或该分区有慢消息；可调整 key、拆 topic、隔离慢租户或临时跳过坏消息。",
+            "按租户配额限流或隔离队列，避免共享 consumer 和下游被单一租户打满。",
+            "从时间范围、tag 基数、预聚合、索引、降采样、冷热数据和查询缓存优化。"
+          ]
+        },
+        "财务对账系统": {
+          deep: [
+            "应说明流水表、对账结果表、差异表、任务表，主键和唯一键围绕业务流水号、渠道、日期设计。",
+            "批大小要结合事务时间、锁竞争、redo/binlog 压力、内存和失败重试成本压测确定。",
+            "应设置延迟窗口、多轮复核和补偿任务，避免把未到数据误判成差异。",
+            "应使用业务唯一键和任务版本号，结果可覆盖或幂等 upsert，避免重复写差异。"
+          ],
+          pressure: [
+            "读多写少可加索引，写入高峰要减少非必要索引；也可用汇总表、异步索引或冷热拆分平衡。",
+            "按业务日期和到达日期区分，触发历史窗口重算，保证幂等并保留修复审计。",
+            "先降低误报，补充延迟窗口和差异等级；提供原始流水追溯和自动修复闭环，重建信任。"
+          ]
+        },
+        "ECE": {
+          deep: [
+            "应先说明是单机还是集群、压测还是线上、请求模型和资源维度，再讨论容量可信度。",
+            "要讲主从切换窗口、Lua 原子性只在单主有效、故障期间可能的超发风险和补偿/限流策略。",
+            "应说明主备、同步延迟、冲突解决、故障切换和恢复后的数据校验。",
+            "应包含记录级校验、总量校验、抽样校验、版本标记、失败重试和回滚方案。"
+          ],
+          pressure: [
+            "需要明确写入归属和冲突规则；如果两边都写，恢复后按版本、时间戳或业务规则合并，并审计异常。",
+            "保留旧版本数据和可回滚快照；导入分批、可断点续跑，失败时切回旧数据源。",
+            "先白名单或调高配额止血，再排查规则维度、客户识别和流量突增，最后修复规则发布流程。"
+          ]
+        },
+        "PCO": {
+          deep: [
+            "应能解释 INVITE、ACK、BYE 等事务和会话状态，路由头、Record-Route、重传和超时处理。",
+            "需要配置校验、灰度发布、回滚、热加载隔离和运行时监控。",
+            "应说明超时、重试、降级、告警，以及信令状态和媒体状态的一致性处理。"
+          ],
+          pressure: [
+            "通过适配层处理非标准字段和状态码，加入运营商维度配置、兼容测试和回归用例。",
+            "从信令协商、SDP、媒体板、网络路径、端口、防火墙和 RTP 收发统计逐层定位。",
+            "配置变更要有版本和回滚，错误配置应自动校验拦截或快速切回上一版本。"
+          ]
+        },
+        "福建电信号码百事通": {
+          deep: [
+            "应定义来源优先级、更新时间、业务可信度和冲突策略，必要时保留多版本并审计。",
+            "应有同步状态、重试、死信、重建索引、增量/全量切换和一致性校验。",
+            "规则应由业务和产品定义，技术侧实现可配置化、审计和回归测试。",
+            "应讲现场沟通、复现环境、分层排查、临时止血、问题升级和交付风险同步。"
+          ],
+          pressure: [
+            "标记数据新鲜度，延迟来源降权或冻结更新；报表提示数据延迟，并在补到后触发重算和重建索引。",
+            "用业务唯一键、幂等 upsert、重试状态表和去重校验避免重复入库。",
+            "先判断是否可降级上线；如果核心链路不达标，应给出风险、止血方案和延期依据。"
+          ]
+        }
+      };
+
+      const projectIds = {
+        "流量策略 & 推荐算法": "project-recommendation",
+        "多模态图文匹配 RAG Agent": "project-rag-agent",
+        "框架工具 / 全链路灰度": "project-gray-release",
+        "飞书 eLearning": "project-elearning",
+        "企业测评": "project-assessment",
+        "Pipeline Solution": "project-pipeline",
+        "财务对账系统": "project-reconciliation",
+        "ECE": "project-ece",
+        "PCO": "project-pco",
+        "福建电信号码百事通": "project-114"
+      };
+
+      const companyGroups = [
+        {
+          no: "1",
+          company: "广东搜款网科技有限公司",
+          projects: ["流量策略 & 推荐算法", "多模态图文匹配 RAG Agent"]
+        },
+        {
+          no: "2",
+          company: "广州依时货拉拉科技有限公司深圳分公司",
+          projects: ["框架工具 / 全链路灰度"]
+        },
+        {
+          no: "3",
+          company: "北京字节跳动科技有限公司",
+          projects: ["飞书 eLearning", "企业测评"]
+        },
+        {
+          no: "4",
+          company: "OrionHealth（新西兰）",
+          projects: ["Pipeline Solution"]
+        },
+        {
+          no: "5",
+          company: "ZHE800",
+          projects: ["财务对账系统"]
+        },
+        {
+          no: "6",
+          company: "叠拓信息技术（北京）有限公司成都分公司",
+          projects: ["ECE", "PCO"]
+        },
+        {
+          no: "7",
+          company: "福建邮科通信技术有限公司",
+          projects: ["福建电信号码百事通"]
+        }
+      ];
+
+      const projectMeta = {};
+      companyGroups.forEach((group) => {
+        group.projects.forEach((projectName, index) => {
+          projectMeta[projectName] = {
+            id: projectIds[projectName],
+            companyNo: group.no,
+            company: group.company,
+            projectNo: group.no + "." + (index + 1),
+            isGroupStart: index === 0
+          };
+        });
+      });
+
+      const companyContext = {
+        "流量策略 & 推荐算法": "<ul><li>公司：广东搜款网科技有限公司。</li><li>职位：高级技术经理 / 数据中台。</li><li>职责：大数据、算法、流量策略团队技术负责人，从 0 搭建成都技术团队，参与需求评审、过程管理、降本和团队成长。</li></ul>",
+        "多模态图文匹配 RAG Agent": "<ul><li>公司：广东搜款网科技有限公司。</li><li>职位：高级技术经理 / 数据中台。</li><li>职责：负责数据中台和 AI 工程化落地，建设多模态图文匹配 Agent，推动业务和算法结合。</li></ul>",
+        "框架工具 / 全链路灰度": "<ul><li>公司：广州依时货拉拉科技有限公司深圳分公司。</li><li>职位：Java 基础架构 / 基础设施。</li><li>职责：主导泛服务化调用框架，建设熔断、降级、限流、注册中心、高可用和灰度发布能力。</li></ul>",
+        "飞书 eLearning": "<ul><li>公司：北京字节跳动科技有限公司。</li><li>职位：项目 owner / 技术 Leader / EE。</li><li>职责：从 0 到 1 搭建 eLearning 平台，team size 约 20，负责重大技术选型、跨团队沟通和项目风险控制。</li></ul>",
+        "企业测评": "<ul><li>公司：北京字节跳动科技有限公司。</li><li>职位：模块负责人、Scrum Master。</li><li>职责：将内部 Python 单体测评系统迁移到飞书 SaaS Go 服务化系统，负责拆分、迁移、切流和协作推进。</li></ul>",
+        "Pipeline Solution": "<ul><li>公司：OrionHealth（新西兰）。</li><li>职位：高级工程师 / Global Support。</li><li>职责：整合 Metrics 套件，搭建多租户日志流式分析平台，发起 Pipeline Orchestrator，推进 Kafka 基础设施维护代码化。</li></ul>",
+        "财务对账系统": "<ul><li>公司：ZHE800。</li><li>职位：高级工程师、架构师 / 数据分析。</li><li>职责：主导财务对账平台架构、研发、测试和部署上线，同时参与分布式爬虫和快递系统设计。</li></ul>",
+        "ECE": "<ul><li>公司：叠拓信息技术（北京）有限公司成都分公司。</li><li>职位：软件架构师 / 网络解决方案。</li><li>职责：参与 Ericsson ECE 客户化需求分析、技术选型和详细设计，负责 AOG、Throttling、迁移工具等架构工作。</li></ul>",
+        "PCO": "<ul><li>公司：叠拓信息技术（北京）有限公司成都分公司。</li><li>职位：软件工程师 / Java 架构师。</li><li>职责：参与 SIP 协议栈维护和 TEVAL、TAS、B2BUA 等客户定制通信产品开发。</li></ul>",
+        "福建电信号码百事通": "<ul><li>公司：福建邮科通信技术有限公司。</li><li>职位：Java 开发工程师 / 电信业务部。</li><li>职责：参与号码百事通项目开发和 CRM、ODS 数据同步，担任北方 9 省号码百事通技术业务问题第一接口人。</li></ul>"
+      };
+
+      function textFromCell(cell) {
+        return cell ? cell.textContent.trim().replace(/\s+/g, " ") : "";
+      }
+
+      function listItems(cell) {
+        if (!cell) return [];
+        return Array.from(cell.querySelectorAll("li")).map((li) => li.textContent.trim()).filter(Boolean);
+      }
+
+      function appendQa(container, kind, title, html) {
+        if (!title) return;
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        const badge = document.createElement("span");
+        badge.className = "qa-kind" + (kind === "深挖" ? " deep" : kind === "压力" ? " pressure" : "");
+        badge.textContent = kind;
+        summary.appendChild(badge);
+        summary.appendChild(document.createTextNode(title));
+        const answer = document.createElement("div");
+        answer.className = "qa-answer";
+        answer.innerHTML = html;
+        details.appendChild(summary);
+        details.appendChild(answer);
+        container.appendChild(details);
+      }
+
+      function box(content, className) {
+        return '<div class="' + className + '">' + content + '</div>';
+      }
+
+      function transformProjectTable() {
+        const companySection = document.querySelector("#company");
+        if (companySection) {
+          companySection.remove();
+        }
+
+        const table = document.querySelector("#project table");
+        if (!table || table.dataset.qaTransformed === "true") return;
+        table.dataset.qaTransformed = "true";
+
+        const header = table.querySelector("thead tr");
+        if (header) {
+          header.children[0].textContent = "公司 / 项目";
+          const heads = Array.from(header.children);
+          heads[1].textContent = "简历原样信息（公司 / 时间 / 经历 / 角色）";
+          heads[1].className = "xwide";
+          heads[7].textContent = "问题与解答（点击展开）";
+          heads[7].classList.add("qa-column");
+          heads[11].textContent = "信号与打分";
+          heads[11].className = "wide";
+          [13, 12, 10, 9, 8, 2].forEach((index) => heads[index] && heads[index].remove());
+        }
+
+        const projectNav = document.querySelector("#project-nav");
+        if (projectNav) {
+          projectNav.innerHTML = "";
+          companyGroups.forEach((group) => {
+            const groupBox = document.createElement("div");
+            groupBox.className = "nav-company";
+
+            const title = document.createElement("div");
+            title.className = "nav-company-title";
+            title.textContent = group.no + " " + group.company;
+            groupBox.appendChild(title);
+
+            group.projects.forEach((projectName) => {
+              const meta = projectMeta[projectName];
+              if (!meta || !meta.id) return;
+              const link = document.createElement("a");
+              link.href = "#" + meta.id;
+              link.className = "project-link";
+              link.textContent = meta.projectNo + " " + projectName;
+              groupBox.appendChild(link);
+            });
+
+            projectNav.appendChild(groupBox);
+          });
+        }
+
+        table.querySelectorAll("tbody tr").forEach((row) => {
+          let cells = Array.from(row.children);
+          const projectName = textFromCell(cells[0]);
+          const meta = projectMeta[projectName] || {};
+          row.id = meta.id || "";
+          if (meta.isGroupStart) {
+            row.classList.add("group-start");
+          }
+          if (meta.projectNo) {
+            cells[0].innerHTML =
+              '<div class="project-cell">' +
+              '<span class="company-line"><span class="company-code">' + meta.companyNo + '</span>' + meta.company + '</span>' +
+              '<span class="project-line"><span class="project-code">' + meta.projectNo + '</span>' + projectName + '</span>' +
+              '</div>';
+          }
+
+          const companyTimeHtml = cells[1] ? cells[1].innerHTML : "";
+          const roleHtml = cells[2] ? cells[2].innerHTML : "";
+          const experienceHtml = companyContext[projectName] || "<span class=\"muted\">待补充公司经历。</span>";
+          const mainQuestion = textFromCell(cells[7]);
+          const mainAnswer = cells[8] ? cells[8].innerHTML : "";
+          const deepQuestions = listItems(cells[9]);
+          const pressureQuestions = listItems(cells[10]);
+          const goodHtml = cells[11] ? cells[11].innerHTML : "";
+          const riskHtml = cells[12] ? cells[12].innerHTML : "";
+          const scoreHtml = cells[13] ? cells[13].innerHTML : "";
+          const projectGuidance = guidance[projectName] || {};
+          const qaList = document.createElement("div");
+          qaList.className = "qa-list";
+
+          cells[1].innerHTML =
+            '<div class="resume-cell">' +
+            '<div class="info-block"><span class="info-label">公司 / 时间</span>' + companyTimeHtml + '</div>' +
+            '<div class="info-block"><span class="info-label">经历</span>' + experienceHtml + '</div>' +
+            '<div class="info-block"><span class="info-label">角色</span>' + roleHtml + '</div>' +
+            '</div>';
+
+          appendQa(qaList, "主问", mainQuestion, mainAnswer || box("要求候选人先讲业务目标、本人职责、核心方案、异常处理和结果指标。", "answer-box"));
+
+          deepQuestions.forEach((question, index) => {
+            const answer = projectGuidance.deep && projectGuidance.deep[index]
+              ? projectGuidance.deep[index]
+              : "参考回答方向：结合该项目讲清真实设计、关键取舍、边界条件、线上异常和本人贡献。";
+            appendQa(qaList, "深挖", question, box(answer, "good-box"));
+          });
+
+          pressureQuestions.forEach((question, index) => {
+            const answer = projectGuidance.pressure && projectGuidance.pressure[index]
+              ? projectGuidance.pressure[index]
+              : "参考回答方向：先讲止血，再讲定位路径，最后给长期修复、监控和防复发机制。";
+            appendQa(qaList, "压力", question, box(answer, "warn-box"));
+          });
+
+          cells[7].innerHTML = "";
+          cells[7].classList.add("qa-column");
+          cells[7].appendChild(qaList);
+
+          cells[11].innerHTML =
+            '<div class="signal-score">' +
+            '<div><span class="info-label">好信号</span>' + goodHtml + '</div>' +
+            '<div><span class="info-label">风险信号</span>' + riskHtml + '</div>' +
+            '<div><span class="info-label">打分建议</span>' + scoreHtml + '</div>' +
+            '</div>';
+
+          [13, 12, 10, 9, 8, 2].forEach((index) => cells[index] && cells[index].remove());
+        });
+      }
+
+      function enableHorizontalTableDrag() {
+        document.querySelectorAll(".table-wrap").forEach((wrap) => {
+          if (wrap.dataset.dragEnabled === "true") return;
+          wrap.dataset.dragEnabled = "true";
+
+          let startX = 0;
+          let startScrollX = 0;
+          let isPointerDown = false;
+          let didDrag = false;
+          let pendingLeft = 0;
+          let frameId = 0;
+
+          wrap.addEventListener("pointerdown", (event) => {
+            if (event.button !== 0) return;
+            if (event.target.closest("a, button, summary, details, input, textarea, select")) return;
+            isPointerDown = true;
+            didDrag = false;
+            startX = event.clientX;
+            startScrollX = document.scrollingElement.scrollLeft;
+            pendingLeft = startScrollX;
+            wrap.classList.add("dragging");
+            document.body.classList.add("table-dragging");
+            wrap.setPointerCapture(event.pointerId);
+          });
+
+          wrap.addEventListener("pointermove", (event) => {
+            if (!isPointerDown) return;
+            const deltaX = event.clientX - startX;
+            if (Math.abs(deltaX) > 4) {
+              didDrag = true;
+            }
+            if (didDrag) {
+              event.preventDefault();
+              pendingLeft = startScrollX - deltaX;
+              if (!frameId) {
+                frameId = requestAnimationFrame(() => {
+                  document.scrollingElement.scrollLeft = pendingLeft;
+                  frameId = 0;
+                });
+              }
+            }
+          });
+
+          function endDrag(event) {
+            if (!isPointerDown) return;
+            isPointerDown = false;
+            if (frameId) {
+              cancelAnimationFrame(frameId);
+              frameId = 0;
+            }
+            wrap.classList.remove("dragging");
+            document.body.classList.remove("table-dragging");
+            if (wrap.hasPointerCapture(event.pointerId)) {
+              wrap.releasePointerCapture(event.pointerId);
+            }
+          }
+
+          wrap.addEventListener("pointerup", endDrag);
+          wrap.addEventListener("pointercancel", endDrag);
+          wrap.addEventListener("lostpointercapture", () => {
+            isPointerDown = false;
+            if (frameId) {
+              cancelAnimationFrame(frameId);
+              frameId = 0;
+            }
+            wrap.classList.remove("dragging");
+            document.body.classList.remove("table-dragging");
+          });
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+          updateStickyTop();
+          transformProjectTable();
+          enableHorizontalTableDrag();
+        });
+      } else {
+        updateStickyTop();
+        transformProjectTable();
+        enableHorizontalTableDrag();
+      }
+      window.addEventListener("resize", updateStickyTop);
+    })();
+  </script>
 </body>
 </html>
