@@ -1,0 +1,1553 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>邓均面试总指南 - 宽表版</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6b7a;
+      --line: #d9dee8;
+      --head: #eef3f8;
+      --head-strong: #dbe7f3;
+      --accent: #1f6feb;
+      --accent-soft: #e8f1ff;
+      --risk: #a63232;
+      --risk-soft: #fff0f0;
+      --good: #236a3a;
+      --good-soft: #edf8f0;
+      --warn: #8a5a00;
+      --warn-soft: #fff7df;
+      --code: #f3f5f7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.58;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 14px 24px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid #c9ddff;
+      border-radius: 6px;
+      padding: 6px 10px;
+      text-decoration: none;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    main {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 22px 24px 56px;
+    }
+
+    section {
+      margin: 0 0 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-head {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      overflow-y: visible;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 2200px;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+      padding: 12px 14px;
+    }
+
+    th {
+      position: sticky;
+      top: 78px;
+      z-index: 4;
+      background: var(--head);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    td:first-child,
+    th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 5;
+      background: var(--head-strong);
+      font-weight: 700;
+      min-width: 180px;
+      max-width: 220px;
+    }
+
+    td:first-child {
+      background: #f4f8fc;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    .narrow {
+      min-width: 110px;
+    }
+
+    .medium {
+      min-width: 220px;
+    }
+
+    .wide {
+      min-width: 330px;
+    }
+
+    .xwide {
+      min-width: 430px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li + li {
+      margin-top: 4px;
+    }
+
+    .tagline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #cdd6e3;
+      background: #f8fafc;
+      color: #334155;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .tag.hot {
+      border-color: #b8d2ff;
+      background: var(--accent-soft);
+      color: #174ea6;
+    }
+
+    .tag.good {
+      border-color: #bfe4c8;
+      background: var(--good-soft);
+      color: var(--good);
+    }
+
+    .tag.risk {
+      border-color: #f2c3c3;
+      background: var(--risk-soft);
+      color: var(--risk);
+    }
+
+    .good-box,
+    .risk-box,
+    .warn-box,
+    .answer-box {
+      border-radius: 6px;
+      padding: 9px 10px;
+      margin: 0;
+    }
+
+    .good-box {
+      border: 1px solid #bee3c6;
+      background: var(--good-soft);
+      color: #174d2b;
+    }
+
+    .risk-box {
+      border: 1px solid #f0c1c1;
+      background: var(--risk-soft);
+      color: #6f1d1d;
+    }
+
+    .warn-box {
+      border: 1px solid #efd78c;
+      background: var(--warn-soft);
+      color: #674300;
+    }
+
+    .answer-box {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #253044;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 18px 20px 20px;
+    }
+
+    .score-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .score-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .score-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--code);
+      color: #26364d;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+    }
+
+    .quick {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      padding: 18px 20px 20px;
+    }
+
+    .quick-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .quick-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .quick-card ul {
+      color: #2f3b4d;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      th {
+        top: 122px;
+      }
+
+      .quick,
+      .score-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      header {
+        position: static;
+      }
+
+      nav {
+        display: none;
+      }
+
+      main {
+        max-width: none;
+        padding: 0;
+      }
+
+      section {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+
+      .table-wrap {
+        overflow: visible;
+      }
+
+      th,
+      td,
+      td:first-child,
+      th:first-child {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div>
+        <h1>邓均面试总指南 - HTML 宽表版</h1>
+        <div class="subtitle">按公司和项目两个维度整理，面试时横向扫表使用。来源：简历结构化整理、一面技术题、面试官准备清单。</div>
+      </div>
+      <nav aria-label="页面导航">
+        <a href="#quick">快速打法</a>
+        <a href="#company">公司维度</a>
+        <a href="#project">项目维度</a>
+        <a href="#score">评分结论</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="quick">
+      <div class="section-head">
+        <h2>快速打法</h2>
+        <p class="section-note">这位候选人履历跨度很大，面试不要平均铺开。先用最近 3 年项目验证真实性，再用 1 个架构题和 1 个工程落地题压深度。</p>
+      </div>
+      <div class="quick">
+        <div class="quick-card">
+          <h3>推荐主线</h3>
+          <ul>
+            <li>推荐系统收益：指标口径、A/B、归因。</li>
+            <li>全链路灰度：HTTP/RPC/MQ 透传和污染检测。</li>
+            <li>消息一致性：outbox、状态机、幂等、补偿。</li>
+            <li>滑动窗口限流：验证一线编码和边界条件。</li>
+          </ul>
+        </div>
+        <div class="quick-card">
+          <h3>必问开场</h3>
+          <ul>
+            <li>选择最近 3 年最熟悉的项目，讲业务目标、团队分工、本人职责、关键指标。</li>
+            <li>画核心架构图，标出自己负责的模块。</li>
+            <li>说一个线上事故，拆成止血、根因、长期修复。</li>
+          </ul>
+        </div>
+        <div class="quick-card">
+          <h3>风险假设</h3>
+          <ul>
+            <li>指标非常亮眼，必须验证分子分母和归因。</li>
+            <li>管理角色较多，必须验证是否仍掌握技术细节。</li>
+            <li>项目跨度极大，必须连续追问本人贡献边界。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="company">
+      <div class="section-head">
+        <h2>公司维度宽表</h2>
+        <p class="section-note">按工作经历从近到远整理。适合面试开场、简历真实性验证、项目归属关系梳理。</p>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="公司维度宽表">
+          <thead>
+            <tr>
+              <th>公司</th>
+              <th class="narrow">时间</th>
+              <th class="medium">职位 / 部门</th>
+              <th class="xwide">核心职责</th>
+              <th class="wide">代表项目</th>
+              <th class="wide">主要技术 / 领域</th>
+              <th class="xwide">面试考察点</th>
+              <th class="xwide">深挖问题</th>
+              <th class="xwide">压力测试</th>
+              <th class="wide">风险信号</th>
+              <th class="wide">评分关注</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>广东搜款网科技有限公司</td>
+              <td>2021.08-2026.05</td>
+              <td>高级技术经理 / 数据中台</td>
+              <td>
+                <ul>
+                  <li>大数据、算法、流量策略团队技术负责人。</li>
+                  <li>从 0 搭建成都技术团队。</li>
+                  <li>主导算法推荐架构云端迁移。</li>
+                  <li>建设基于 RAG 的多模态图文匹配 Agent。</li>
+                  <li>参与需求流入评审、技术落地、过程管理、降本和团队成长。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>流量策略 & 推荐算法。</li>
+                  <li>策略中台。</li>
+                  <li>多模态图文匹配 RAG Agent。</li>
+                </ul>
+              </td>
+              <td>
+                <div class="tagline">
+                  <span class="tag hot">推荐系统</span>
+                  <span class="tag hot">RAG</span>
+                  <span class="tag">用户画像</span>
+                  <span class="tag">埋点归因</span>
+                  <span class="tag">数据中台</span>
+                  <span class="tag">团队管理</span>
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>人均分发提升 200%+ 的指标定义。</li>
+                  <li>广告 ARPU 提升 50%+ 的归因方式。</li>
+                  <li>策略中台 SLA 99.99% 的线上边界。</li>
+                  <li>RAG 系统是否有检索、评估、反馈闭环。</li>
+                  <li>成都团队从 0 到 1 的管理动作。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>召回、粗排、精排、重排分别怎么做？</li>
+                  <li>用户行为埋点如何保证准确和完整？</li>
+                  <li>A/B 实验如何分桶、隔离和判断显著性？</li>
+                  <li>图片和文本如何映射到同一语义空间？</li>
+                  <li>你本人负责架构、策略、团队里的哪一块？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>模型离线效果好，线上转化变差，怎么排查？</li>
+                  <li>大促当天模型服务超时，怎么止血？</li>
+                  <li>ARPU 提升但留存下降，如何决策？</li>
+                  <li>向量召回 Top10 都不相关，怎么排查？</li>
+                </ul>
+              </td>
+              <td>
+                <div class="risk-box">
+                  只说模型升级或“大模型加知识库”，讲不清指标口径、实验设计、线上链路、检索评估和本人贡献。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>5 分：指标、实验、链路、降级、团队推进都清楚。</li>
+                  <li>3 分：能讲业务和大体方案，但工程细节一般。</li>
+                  <li>1-2 分：只有宏观成果和技术名词。</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>广州依时货拉拉科技有限公司深圳分公司</td>
+              <td>2020.08-2021.07</td>
+              <td>Java 基础架构 / 基础设施</td>
+              <td>
+                <ul>
+                  <li>主导并支持泛服务化调用框架。</li>
+                  <li>设计熔断、降级、限流能力。</li>
+                  <li>参与注册中心、高可用和灰度发布能力建设。</li>
+                  <li>主导集团服务化框架开发治理。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>SOA 框架。</li>
+                  <li>泛服务化调用。</li>
+                  <li>全链路灰度方案。</li>
+                </ul>
+              </td>
+              <td>
+                <div class="tagline">
+                  <span class="tag hot">服务治理</span>
+                  <span class="tag hot">全链路灰度</span>
+                  <span class="tag">注册中心</span>
+                  <span class="tag">熔断限流</span>
+                  <span class="tag">SDK 治理</span>
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>是否理解框架核心抽象，而不是只会组件名。</li>
+                  <li>灰度标识是否覆盖 HTTP、RPC、MQ。</li>
+                  <li>灰度污染检测、监控、回滚是否完整。</li>
+                  <li>老业务 SDK 版本治理和兼容策略。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>泛服务化调用框架的接口、路由、协议、序列化怎么设计？</li>
+                  <li>灰度规则冲突时优先级怎么处理？</li>
+                  <li>服务发现缓存失效怎么办？</li>
+                  <li>限流误伤核心客户，怎么快速恢复？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>MQ 消息丢失灰度标识，如何发现和修复？</li>
+                  <li>灰度请求调用普通实例，会发生什么？</li>
+                  <li>注册中心短暂不可用，新老实例如何处理？</li>
+                </ul>
+              </td>
+              <td>
+                <div class="risk-box">
+                  只说部署两套服务、网关切流量；不覆盖 MQ；不讲污染检测、规则刷新、回滚和 SDK 兼容。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>5 分：入口打标、上下文透传、路由隔离、MQ、污染检测、治理完整。</li>
+                  <li>3 分：只覆盖 HTTP/RPC，异步链路较弱。</li>
+                  <li>1-2 分：停留在网关灰度。</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>北京字节跳动科技有限公司</td>
+              <td>2018.11-2020.05</td>
+              <td>项目 owner / 技术 Leader / EE</td>
+              <td>
+                <ul>
+                  <li>企业级 360 测评系统重构到飞书 SaaS。</li>
+                  <li>Python 单体迁移到 Go 服务化架构。</li>
+                  <li>从 0 到 1 搭建 eLearning 学习平台，team size 约 20。</li>
+                  <li>负责重大技术选型、产品和业务方沟通、项目风险控制。</li>
+                  <li>担任面试官、mentor、Alpha team 成员。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>飞书 eLearning。</li>
+                  <li>企业测评 SaaS 迁移。</li>
+                </ul>
+              </td>
+              <td>
+                <div class="tagline">
+                  <span class="tag hot">项目 owner</span>
+                  <span class="tag hot">消息一致性</span>
+                  <span class="tag">Go 服务化</span>
+                  <span class="tag">大文件存储</span>
+                  <span class="tag">分布式 Timer</span>
+                  <span class="tag">团队协作</span>
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>owner 角色是否真实，不只是协调。</li>
+                  <li>消息可靠性、大文件网盘、分布式任务是否真实落地。</li>
+                  <li>20 人团队如何拆里程碑、控风险、保质量。</li>
+                  <li>单体迁移中的数据双写、流量切换、灾备。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>为什么不用 RocketMQ 原生事务消息？</li>
+                  <li>大于 10G 文件断点续传，分片、校验、权限、加密怎么设计？</li>
+                  <li>Active-Standby Timer 怎么避免脑裂？</li>
+                  <li>企业测评迁移如何做到用户无感知？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>MQ 不可用 30 分钟，业务还能不能写？</li>
+                  <li>对象存储合并成功但 DB 更新失败，如何补偿？</li>
+                  <li>主节点网络分区，备节点接管，如何避免重复执行？</li>
+                  <li>业务要求两周上线但架构风险高，怎么推进？</li>
+                </ul>
+              </td>
+              <td>
+                <div class="risk-box">
+                  管理表述强，但消息状态机、幂等、大文件元数据、任务租约、迁移回滚讲不清。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>5 分：能同时讲技术细节、项目拆解、风险控制和复盘。</li>
+                  <li>3 分：项目管理清楚，但关键技术细节一般。</li>
+                  <li>1-2 分：owner 边界模糊，技术点泛泛而谈。</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>OrionHealth（新西兰）</td>
+              <td>2016.11-2018.10</td>
+              <td>高级工程师 / Global Support</td>
+              <td>
+                <ul>
+                  <li>整合 Metrics 套件，打通度量收集 Pipeline。</li>
+                  <li>搭建多租户日志流式分析平台，对接告警平台。</li>
+                  <li>发起 Pipeline Orchestrator，一键构建租户流式平台。</li>
+                  <li>集成 AWS Docker Registry、Portainer、Kafka Connect、Grafana。</li>
+                  <li>推进 Kafka 基础设施维护代码化，编写 Ansible Playbook。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Metrics Pipeline。</li>
+                  <li>多租户日志流式分析平台。</li>
+                  <li>Pipeline Orchestrator。</li>
+                </ul>
+              </td>
+              <td>
+                <div class="tagline">
+                  <span class="tag hot">Kafka</span>
+                  <span class="tag hot">可观测性</span>
+                  <span class="tag">Kafka Streaming</span>
+                  <span class="tag">Grafana</span>
+                  <span class="tag">Ansible</span>
+                  <span class="tag">多租户</span>
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>Kafka 和流式平台是否真实使用深入。</li>
+                  <li>Metrics 数据模型、高基数 tag 治理。</li>
+                  <li>多租户隔离和配额。</li>
+                  <li>故障定位效率如何量化提升。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Kafka 消费延迟突然升高怎么排查？</li>
+                  <li>topic、partition、key 如何设计？</li>
+                  <li>Kafka Connect 和自写 consumer 的区别？</li>
+                  <li>高基数 tag 会带来什么问题？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>单个 partition lag 暴涨，怎么处理？</li>
+                  <li>消费者扩容后吞吐没有提升，为什么？</li>
+                  <li>某租户日志量暴涨，如何不拖垮其他租户？</li>
+                </ul>
+              </td>
+              <td>
+                <div class="risk-box">
+                  只说 Kafka 吞吐高；不懂 partition 限制并行度、rebalance、lag、反压和多租户隔离。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>5 分：Kafka 运行机制、数据模型、租户隔离、运维自动化都能讲深。</li>
+                  <li>3 分：能讲常见 Kafka 诊断，但平台抽象一般。</li>
+                  <li>1-2 分：只会泛讲消息队列。</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>ZHE800</td>
+              <td>2015.07-2016.06</td>
+              <td>高级工程师、架构师 / 数据分析</td>
+              <td>
+                <ul>
+                  <li>分布式网络爬虫开发与模块设计。</li>
+                  <li>商城后台快递系统设计，保障多开放平台数据低延迟同步。</li>
+                  <li>通过数据质量采集优化数据获取策略。</li>
+                  <li>主导财务对账平台架构、研发、测试、部署上线。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>财务对账系统。</li>
+                  <li>分布式爬虫。</li>
+                  <li>快递系统。</li>
+                </ul>
+              </td>
+              <td>
+                <div class="tagline">
+                  <span class="tag hot">MySQL 高吞吐</span>
+                  <span class="tag hot">财务对账</span>
+                  <span class="tag">最终一致性</span>
+                  <span class="tag">数据质量</span>
+                  <span class="tag">分布式爬虫</span>
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>日处理 2000 万和写入 20k/s 的口径。</li>
+                  <li>批量写入、索引成本、分库分表、幂等。</li>
+                  <li>财务金额精度、延迟窗口、差异闭环。</li>
+                  <li>数据质量如何转化为系统策略。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>表结构、主键、索引、唯一约束如何设计？</li>
+                  <li>对账差异如何识别？</li>
+                  <li>上下游数据延迟如何避免误报？</li>
+                  <li>历史重跑如何保证幂等？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>上游补发三天前的数据，怎么处理？</li>
+                  <li>对账任务跑一半失败，重跑会重复写吗？</li>
+                  <li>线上写入从 20k/s 掉到 5k/s，怎么排查？</li>
+                </ul>
+              </td>
+              <td>
+                <div class="risk-box">
+                  只说优化 SQL、加索引；没有吞吐口径、幂等、金额精度、延迟窗口和差异修复。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>5 分：吞吐口径、表设计、幂等、误报控制、闭环都清楚。</li>
+                  <li>3 分：能讲写入优化，但对账业务抽象一般。</li>
+                  <li>1-2 分：只有数字没有细节。</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>叠拓信息技术（北京）有限公司成都分公司</td>
+              <td>2010.08-2015.06</td>
+              <td>开发工程师、Java 架构师 / 网络解决方案</td>
+              <td>
+                <ul>
+                  <li>参与 SIP 协议栈开发与维护。</li>
+                  <li>开发 TEVAL、TAS、B2BUA 等客户定制产品。</li>
+                  <li>参与 Ericsson 客户需求沟通、澄清和挖掘。</li>
+                  <li>参与 ECE 客户化需求分析、技术选型和详细设计。</li>
+                  <li>担任 AOG 架构师，设计系统容量 &gt;5000 万，多数据中心地理容灾。</li>
+                  <li>担任 Throttling 模块 owner 和迁移工具架构师。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>ECE。</li>
+                  <li>PCO。</li>
+                  <li>AOG。</li>
+                  <li>Throttling。</li>
+                  <li>Migration Tool。</li>
+                </ul>
+              </td>
+              <td>
+                <div class="tagline">
+                  <span class="tag hot">Redis Lua</span>
+                  <span class="tag hot">多 site 容灾</span>
+                  <span class="tag">SIP</span>
+                  <span class="tag">B2BUA</span>
+                  <span class="tag">限流</span>
+                  <span class="tag">数据迁移</span>
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>ECE Quota、Redis Lua、多 site 容灾、10k+ TPS 的口径。</li>
+                  <li>AOG 5000 万容量如何估算、压测和容灾。</li>
+                  <li>Throttling 模块算法、热 key、误伤恢复。</li>
+                  <li>迁移工具如何保证备份、导入、校验、回滚。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Quota 的一致性和性能如何平衡？</li>
+                  <li>Redis Lua 如何保证原子性？</li>
+                  <li>多 site 冗余容灾如何处理主备和数据同步？</li>
+                  <li>B2BUA 和 Proxy 的区别是什么？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Redis 主从切换期间，Quota 是否可能超发？</li>
+                  <li>限流误伤大客户，如何恢复和补偿？</li>
+                  <li>迁移工具导入到一半失败，如何回滚？</li>
+                </ul>
+              </td>
+              <td>
+                <div class="risk-box">
+                  年代较早，不建议作为主线硬考；如果候选人讲不清口径也不一定一票否决，但若声称架构主导却无法解释容量和容灾，要降分。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>5 分：能讲容量、容灾、Redis Lua、限流和迁移边界。</li>
+                  <li>3 分：能讲部分设计，但协议细节淡化可接受。</li>
+                  <li>1-2 分：架构师经历无法支撑。</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>福建邮科通信技术有限公司</td>
+              <td>2007.07-2010.07</td>
+              <td>Java 开发工程师 / 电信业务部</td>
+              <td>
+                <ul>
+                  <li>参与福建电信号码百事通项目开发。</li>
+                  <li>实现基于 NGCC 规范的号码百事通系统。</li>
+                  <li>开发业务管理平台，实现 CRM、ODS 等遗留系统数据同步。</li>
+                  <li>参与接口设计、代码编写、调测。</li>
+                  <li>大流量测试下进行问题分解和定位。</li>
+                  <li>担任北方 9 省号码百事通项目技术经理。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>福建电信号码百事通。</li>
+                  <li>北方 9 省号码百事通。</li>
+                </ul>
+              </td>
+              <td>
+                <div class="tagline">
+                  <span class="tag">Java</span>
+                  <span class="tag">电信业务</span>
+                  <span class="tag">CRM</span>
+                  <span class="tag">ODS</span>
+                  <span class="tag">数据清洗</span>
+                  <span class="tag">搜索同步</span>
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>多来源数据同步、清洗、入库和搜索引擎同步。</li>
+                  <li>CRM、ODS 数据延迟或冲突处理。</li>
+                  <li>大流量测试的问题定位方法。</li>
+                  <li>早期技术经理角色的客户沟通和交付能力。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>多来源数据清洗规则如何设计？</li>
+                  <li>CRM 和 ODS 数据冲突如何处理？</li>
+                  <li>搜索引擎同步如何保证一致性？</li>
+                  <li>大流量测试中如何定位瓶颈？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>ODS 延迟一天，报表和搜索如何避免脏数据？</li>
+                  <li>接口同步失败，如何重试和补偿？</li>
+                  <li>客户现场压测失败，如何组织排查？</li>
+                </ul>
+              </td>
+              <td>
+                <div class="risk-box">
+                  早期经历更多用于观察基础工程习惯和客户交付，不建议占用过多时间。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>5 分：能讲接口、数据一致性、压测定位和客户沟通。</li>
+                  <li>3 分：能讲开发和调测过程。</li>
+                  <li>1-2 分：只记得项目名。</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="project">
+      <div class="section-head">
+        <h2>项目维度宽表</h2>
+        <p class="section-note">按项目逐条整理，适合深挖时直接定位主问题、参考回答、压力测试和评分信号。</p>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="项目维度宽表">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th class="medium">所属公司 / 时间</th>
+              <th class="medium">候选人角色</th>
+              <th class="wide">业务背景</th>
+              <th class="xwide">技术方案 / 关键内容</th>
+              <th class="wide">关键业绩</th>
+              <th class="wide">基础必备知识</th>
+              <th class="xwide">主问题</th>
+              <th class="xwide">参考回答要点</th>
+              <th class="xwide">深挖点</th>
+              <th class="xwide">压力测试</th>
+              <th class="wide">好信号</th>
+              <th class="wide">风险信号</th>
+              <th class="wide">打分建议</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>流量策略 & 推荐算法</td>
+              <td>广东搜款网科技有限公司<br>2021.08-2026.05</td>
+              <td>策略、推荐算法业务负责人</td>
+              <td>基于用户画像精准匹配商品，并对后续转化效果负责。</td>
+              <td>
+                <ul>
+                  <li>推荐架构云端迁移。</li>
+                  <li>用户行为埋点规范和归因准确率治理。</li>
+                  <li>深度模型建模质量保障。</li>
+                  <li>策略中台建设和高可用治理。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>人均分发提升 200%+。</li>
+                  <li>广告 ARPU 提升 50%+。</li>
+                  <li>策略中台 SLA >= 99.99%。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>召回、粗排、精排、重排。</li>
+                  <li>用户画像、实时特征、A/B 实验。</li>
+                  <li>CTR、CVR、GMV、ARPU。</li>
+                  <li>缓存、超时、降级。</li>
+                </ul>
+              </td>
+              <td>人均分发提升 200%+ 和广告 ARPU 提升 50%+ 的指标怎么定义？你们如何证明提升来自推荐系统？</td>
+              <td>
+                <div class="answer-box">
+                  说明分子分母、有效分发定义、ARPU 口径；按用户稳定分桶做 A/B；排除活动、流量、类目、广告库存变化；技术上覆盖召回扩展、实时特征、排序模型、重排策略和降级兜底。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>召回、排序、重排分别怎么做？</li>
+                  <li>实时特征链路如何衔接离线训练和在线推理？</li>
+                  <li>冷启动怎么处理？</li>
+                  <li>P99 延迟预算是多少？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>模型离线好、线上差，怎么排查？</li>
+                  <li>大促模型超时，怎么降级？</li>
+                  <li>产品要求强插高佣商品，如何取舍？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">指标、实验、归因、链路、降级、本人成果边界都清楚。</div></td>
+              <td><div class="risk-box">只说模型升级；没有指标口径、实验设计和线上链路。</div></td>
+              <td>核心主线，建议必问。答深可强加分。</td>
+            </tr>
+            <tr>
+              <td>多模态图文匹配 RAG Agent</td>
+              <td>广东搜款网科技有限公司<br>2021.08-2026.05</td>
+              <td>技术负责人 / 方案建设者</td>
+              <td>用图文语义匹配解决商品理解、素材匹配、相似商品或审核等业务问题。</td>
+              <td>
+                <ul>
+                  <li>图片和文本 embedding。</li>
+                  <li>Faiss 向量索引。</li>
+                  <li>召回后 rerank。</li>
+                  <li>Agent 编排和工具调用边界。</li>
+                  <li>上下文来源和幻觉控制。</li>
+                </ul>
+              </td>
+              <td>简历未给量化结果，重点验证系统是否真实落地和如何评估效果。</td>
+              <td>
+                <ul>
+                  <li>embedding、向量检索、Faiss。</li>
+                  <li>rerank、Precision、Recall、NDCG。</li>
+                  <li>上下文拼接、引用来源、低置信处理。</li>
+                </ul>
+              </td>
+              <td>图片和文本是怎么被检索到一起的？如何评估图文匹配效果？</td>
+              <td>
+                <div class="answer-box">
+                  图片抽视觉特征，文本处理标题、描述、类目、属性；可用同一多模态向量空间或分开召回后融合；Faiss 做索引；召回后 rerank；用人工标注集和线上指标评估；控制上下文来源和低置信输出。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>用什么 embedding 模型？为什么？</li>
+                  <li>索引如何增量更新和删除？</li>
+                  <li>正负样本如何构建？</li>
+                  <li>Dify 承担什么角色？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Top10 全不相关，怎么排查？</li>
+                  <li>100ms 返回但 rerank 很慢，怎么取舍？</li>
+                  <li>模型输出看似合理但无依据，怎么拦截？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">能讲检索、索引、评估、rerank、反馈闭环和幻觉控制。</div></td>
+              <td><div class="risk-box">只说“大模型加知识库”，不懂召回、索引、评估。</div></td>
+              <td>作为 AI 工程化验证线，建议和推荐系统配套问。</td>
+            </tr>
+            <tr>
+              <td>框架工具 / 全链路灰度</td>
+              <td>货拉拉<br>2020.08-2021.07</td>
+              <td>基础架构师</td>
+              <td>集团内部服务化框架设计与实现，支持服务治理、调用治理、实时监控和全链路灰度。</td>
+              <td>
+                <ul>
+                  <li>SOA 框架发布。</li>
+                  <li>泛服务化调用。</li>
+                  <li>熔断、降级、限流、注册中心、高可用。</li>
+                  <li>HTTP/RPC/MQ 灰度上下文透传。</li>
+                </ul>
+              </td>
+              <td>支持集团内部服务化和全链路灰度能力。</td>
+              <td>
+                <ul>
+                  <li>注册发现、服务路由。</li>
+                  <li>熔断、限流、降级。</li>
+                  <li>入口打标、上下文透传、灰度污染。</li>
+                </ul>
+              </td>
+              <td>全链路灰度具体怎么做？灰度请求经过 HTTP、RPC、MQ 时，如何保证后续链路都走灰度环境？</td>
+              <td>
+                <div class="answer-box">
+                  网关按用户、租户、版本、请求头命中规则并写入上下文；RPC 框架自动透传；服务发现或负载均衡按标识选灰度实例；MQ 写 message header；监控灰度污染；支持动态规则、一键回滚、审计和 SDK 兼容。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>框架核心抽象是什么？</li>
+                  <li>灰度规则冲突怎么处理？</li>
+                  <li>服务发现缓存失效怎么办？</li>
+                  <li>限流是单机还是分布式？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>MQ 丢灰度标识怎么办？</li>
+                  <li>灰度流量进入普通实例怎么发现？</li>
+                  <li>核心客户被误限流，5 分钟怎么恢复？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">能讲入口、透传、路由、MQ、污染检测、回滚、SDK 治理。</div></td>
+              <td><div class="risk-box">只讲网关切流量，不讲全链路和异步链路。</div></td>
+              <td>基础架构深度核心题，建议必问。</td>
+            </tr>
+            <tr>
+              <td>飞书 eLearning</td>
+              <td>字节跳动<br>2019.06-2020.05</td>
+              <td>技术 / 项目负责人</td>
+              <td>飞书生态应用，支持企业员工在线学习、培训、考试、证书和管理员后台数据运营。</td>
+              <td>
+                <ul>
+                  <li>本地事务消息可靠性。</li>
+                  <li>内存延时消息和类 RocketMQ 事务消息。</li>
+                  <li>&gt;10G 大文件断点续传、压缩、转码、裁剪。</li>
+                  <li>AES CBC 分段不落地加密。</li>
+                  <li>TOS 对象存储、多 CDN。</li>
+                  <li>流式统计、多端剔重。</li>
+                  <li>Active-Standby 分布式 Timer。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>team size 约 20。</li>
+                  <li>从 0 到 1 搭建平台。</li>
+                  <li>覆盖消息、网盘、流式统计、全球多时区任务。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>outbox、幂等、补偿、死信。</li>
+                  <li>分片上传、对象存储、CDN 鉴权、加密。</li>
+                  <li>锁、租约、fencing token、多时区。</li>
+                  <li>项目拆解和风险控制。</li>
+                </ul>
+              </td>
+              <td>作为项目 owner，如何拆阶段、控风险、做技术选型？消息可靠性、大文件和 Timer 具体怎么设计？</td>
+              <td>
+                <div class="answer-box">
+                  先讲业务目标和 MVP，再讲里程碑、团队分工和风险预案；消息用本地事务表和异步补偿；大文件用 uploadId、分片元数据、hash、对象存储和权限关系；Timer 用租约、续期、防脑裂、幂等和 UTC + 用户时区。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>消息表状态机有哪些？</li>
+                  <li>延时消息服务重启后怎么恢复？</li>
+                  <li>分片大小如何确定？</li>
+                  <li>AES CBC 分段 IV 如何生成？</li>
+                  <li>锁租约时间如何设置？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>MQ 不可用 30 分钟怎么办？</li>
+                  <li>上传到 99% 断网，如何避免重传？</li>
+                  <li>对象存储合并成功但 DB 失败，怎么补偿？</li>
+                  <li>夏令时当天 2 点不存在，任务怎么跑？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">技术细节、项目管理、风险控制、复盘都能讲清。</div></td>
+              <td><div class="risk-box">只讲 owner 和平台概念，讲不清消息、大文件、Timer 的状态和异常。</div></td>
+              <td>复杂项目 owner 真实性核心题，建议必问。</td>
+            </tr>
+            <tr>
+              <td>企业测评</td>
+              <td>字节跳动<br>2018.11-2019.05</td>
+              <td>模块负责人、Scrum Master</td>
+              <td>企业测评系统从 Python 单体内部系统迁移到 Golang SaaS Based 服务化系统。</td>
+              <td>
+                <ul>
+                  <li>服务拆分。</li>
+                  <li>分阶段迁移。</li>
+                  <li>数据双写。</li>
+                  <li>流量切换。</li>
+                  <li>灾备方案。</li>
+                </ul>
+              </td>
+              <td>保证系统平滑、用户无感知、无损迁移。</td>
+              <td>
+                <ul>
+                  <li>单体迁移、服务拆分。</li>
+                  <li>双写一致性。</li>
+                  <li>灰度切流、回滚、灾备。</li>
+                  <li>Scrum 协作。</li>
+                </ul>
+              </td>
+              <td>Python 单体迁移到 Go SaaS 服务化系统，如何做服务拆分、数据双写和流量切换？</td>
+              <td>
+                <div class="answer-box">
+                  先按领域和数据边界拆服务；迁移期保持双写和校验；按用户或租户灰度切流；保留回滚路径；通过监控、对账和灾备保障用户无感知。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>服务拆分边界如何确定？</li>
+                  <li>双写不一致怎么发现和修复？</li>
+                  <li>如何定义无损迁移？</li>
+                  <li>Scrum Master 如何推动协作？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>新老系统结果不一致，流量已切 30%，怎么办？</li>
+                  <li>数据迁移耗时超预期，如何调整计划？</li>
+                  <li>业务方要求一次性全量切换，如何沟通？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">能讲迁移阶段、校验、回滚、灰度和协作机制。</div></td>
+              <td><div class="risk-box">只说重构成微服务，不讲双写、切流、灾备和用户影响。</div></td>
+              <td>适合验证架构迁移和项目推进能力。</td>
+            </tr>
+            <tr>
+              <td>Pipeline Solution</td>
+              <td>OrionHealth<br>2016.11-2018.10</td>
+              <td>高级工程师</td>
+              <td>采集全球服务实时性能和产品用量，通过实时传输到分析平台，提升故障定位和治理能力。</td>
+              <td>
+                <ul>
+                  <li>Metrics API、主机指标、预汇集节点、Logstash 日志采集。</li>
+                  <li>Kafka 消息队列。</li>
+                  <li>Kafka Streaming 准实时分析。</li>
+                  <li>风控、告警系统对接。</li>
+                  <li>多租户 Pipeline 一键构建。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>参与 Metrics OSGI 模块设计研发。</li>
+                  <li>主导数据传输优化。</li>
+                  <li>提出并设计 Pipeline Orchestrator。</li>
+                  <li>修复 DogStatsd、Logstash crash 等问题并回馈社区。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Kafka topic、partition、consumer group、offset、lag。</li>
+                  <li>高基数 tag。</li>
+                  <li>多租户隔离。</li>
+                  <li>可观测性指标模型。</li>
+                </ul>
+              </td>
+              <td>Kafka 消费延迟突然升高，你会怎么排查？Metrics Pipeline 的数据模型怎么设计？</td>
+              <td>
+                <div class="answer-box">
+                  先看 lag 是全局还是局部；局部可能 key 倾斜或慢消息，全局看流量、消费者、下游、rebalance；处理包括扩容、批处理、隔离慢消息、限流生产端；指标模型包含 metric name、tag、timestamp、value，并治理高基数 tag。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>Kafka Connect 适合什么场景？</li>
+                  <li>消费端如何做反压？</li>
+                  <li>高基数 tag 如何限制？</li>
+                  <li>多租户数据如何隔离？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>某个 partition lag 暴涨，怎么处理？</li>
+                  <li>某租户日志量暴涨，如何不影响其他租户？</li>
+                  <li>Grafana 查询很慢，如何优化？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">能结合 Kafka 机制、数据模型、租户隔离和运维自动化。</div></td>
+              <td><div class="risk-box">只说 Kafka 快，消费慢就加机器。</div></td>
+              <td>适合验证 Kafka 和可观测性真实深度。</td>
+            </tr>
+            <tr>
+              <td>财务对账系统</td>
+              <td>ZHE800<br>2015.07-2016.06</td>
+              <td>软件架构师</td>
+              <td>对电商财务系统信息进行收集与核对，作为监察系统保障业务系统最终一致性。</td>
+              <td>
+                <ul>
+                  <li>多维度报表。</li>
+                  <li>数据质量评判。</li>
+                  <li>新业务核对规则灵活部署。</li>
+                  <li>实时数据质量分析。</li>
+                  <li>差异追溯和修复闭环。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>日处理对账超过 2000 万。</li>
+                  <li>数据库写入速度超过 20k/s。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>批量写入、索引成本、redo log、binlog。</li>
+                  <li>分库分表、幂等、延迟窗口。</li>
+                  <li>金额精度：整数分或 BigDecimal。</li>
+                </ul>
+              </td>
+              <td>数据库写入 20k/s 是怎么做到的？对账系统如何识别差异并避免误报？</td>
+              <td>
+                <div class="answer-box">
+                  先说明口径；通过批量写入、减少非必要索引、分表、异步削峰提升吞吐；用业务唯一键保证幂等；金额用整数分或 BigDecimal；设计延迟窗口和多轮复核；差异可追溯并形成修复闭环。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>表结构如何设计？</li>
+                  <li>批大小如何确定？</li>
+                  <li>上游延迟如何避免误报？</li>
+                  <li>重跑历史数据如何幂等？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>索引加速查询但拖慢写入，怎么取舍？</li>
+                  <li>上游补发历史数据，怎么处理？</li>
+                  <li>误报太多，业务不信系统，怎么改？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">吞吐口径、写入策略、业务唯一键、金额精度、延迟窗口、闭环都清楚。</div></td>
+              <td><div class="risk-box">只有数字和 SQL 优化，没有对账业务规则和幂等。</div></td>
+              <td>适合验证数据库和数据一致性基本功。</td>
+            </tr>
+            <tr>
+              <td>ECE</td>
+              <td>叠拓信息技术<br>2013.11-2015.06</td>
+              <td>软件架构师</td>
+              <td>电信系统中受限资源访问控制、业务鉴权、资源分配、Provisioning 和版本迁移。</td>
+              <td>
+                <ul>
+                  <li>Restful Quota 应用。</li>
+                  <li>Redis + Lua。</li>
+                  <li>多 site 冗余容灾和互为备份。</li>
+                  <li>iOS VoiceOverWIFI 支持。</li>
+                  <li>AOG 统一鉴权、资源分配、维护。</li>
+                  <li>Migration Tool 数据备份和导入。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Quota 单机 10k+ TPS。</li>
+                  <li>AOG 系统容量 &gt;5000 万。</li>
+                  <li>多数据中心地理容灾能力。</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Redis Lua 原子性。</li>
+                  <li>限流与 quota。</li>
+                  <li>多 site 容灾。</li>
+                  <li>数据迁移、备份、回滚。</li>
+                </ul>
+              </td>
+              <td>Quota 的一致性和性能如何平衡？多 site 容灾和迁移工具如何设计？</td>
+              <td>
+                <div class="answer-box">
+                  用 Redis Lua 保证单节点操作原子性；按资源维度设计 quota key；多 site 需要明确主备、同步、冲突处理和故障切换；迁移工具需要备份、导入、校验、失败恢复和回滚。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>10k+ TPS 是单机、集群、压测还是线上？</li>
+                  <li>Redis 主从切换时如何避免超发？</li>
+                  <li>多 site 数据冲突如何处理？</li>
+                  <li>迁移校验怎么做？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>某 site 网络隔离，两边都在写，怎么合并？</li>
+                  <li>迁移中途失败，如何恢复用户服务？</li>
+                  <li>大客户请求被 throttling，如何快速解除？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">能讲 Redis Lua、容量口径、容灾边界、迁移回滚。</div></td>
+              <td><div class="risk-box">声称架构师但讲不清容量、容灾和迁移异常。</div></td>
+              <td>早期项目，可作为补充验证，不建议主线占太久。</td>
+            </tr>
+            <tr>
+              <td>PCO</td>
+              <td>叠拓信息技术<br>2010.08-2013.10</td>
+              <td>软件工程师</td>
+              <td>基于 SIP 协议栈的通信产品开发，涉及 SIP/ISUP 信令转换和企业网总机服务。</td>
+              <td>
+                <ul>
+                  <li>TESIP：以 RFC3261 为主要标准的 SIP 协议栈。</li>
+                  <li>TEVAL：SIP 网络与 ISUP 网络信令转换。</li>
+                  <li>RTP 语音通道建立。</li>
+                  <li>SIP UC Gateway B2BUA。</li>
+                  <li>TAS 企业网总机服务端。</li>
+                </ul>
+              </td>
+              <td>参与通信协议栈和客户定制化产品研发。</td>
+              <td>
+                <ul>
+                  <li>SIP 基础。</li>
+                  <li>B2BUA 与 Proxy。</li>
+                  <li>信令转换和兼容性。</li>
+                  <li>RTP 通道建立。</li>
+                </ul>
+              </td>
+              <td>B2BUA 和 Proxy 的区别是什么？信令转换中的异常和兼容性如何处理？</td>
+              <td>
+                <div class="answer-box">
+                  B2BUA 作为两个 UA 背靠背终止并重建会话，能控制呼叫和媒体；Proxy 更偏转发路由。信令转换要处理字段映射、状态机、超时、重传、兼容差异和可配置网关。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>SIP 事务、会话、路由怎么处理？</li>
+                  <li>运行时配置二级网关如何保证稳定？</li>
+                  <li>媒体板交互失败如何处理？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>某运营商信令不规范，如何兼容？</li>
+                  <li>RTP 通道建立失败，如何定位？</li>
+                  <li>运行时配置错误导致呼叫失败，如何回滚？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">能讲协议状态机和异常兼容，说明早期工程基本功扎实。</div></td>
+              <td><div class="risk-box">时间较早，记忆模糊可接受；但若完全无法解释 B2BUA，说明深度有限。</div></td>
+              <td>作为加分项即可，除非岗位需要通信背景。</td>
+            </tr>
+            <tr>
+              <td>福建电信号码百事通</td>
+              <td>福建邮科通信技术有限公司<br>2007.07-2010.07</td>
+              <td>软件工程师 / 技术经理经历</td>
+              <td>整合 114 和号码百事通业务，实现统一界面、统一搜索引擎、统一数据模型。</td>
+              <td>
+                <ul>
+                  <li>Agent、IVR、业务平台、外部数据采编平台、搜索引擎、报表。</li>
+                  <li>CRM、ODS、外部渠道、历史数据清洗整理合并。</li>
+                  <li>关键字购买、竞价排名位置等 CRM 接口。</li>
+                  <li>号线平台装、拆、改数据同步。</li>
+                  <li>数据优先级重排、报表分析。</li>
+                </ul>
+              </td>
+              <td>担任北方 9 省号码百事通项目技术业务问题第一接口人。</td>
+              <td>
+                <ul>
+                  <li>接口同步。</li>
+                  <li>数据清洗。</li>
+                  <li>搜索引擎同步。</li>
+                  <li>大流量压测。</li>
+                  <li>客户交付。</li>
+                </ul>
+              </td>
+              <td>多来源数据清洗和搜索引擎同步如何保证一致性？大流量测试中如何定位瓶颈？</td>
+              <td>
+                <div class="answer-box">
+                  按来源建立清洗、规范化、去重、优先级规则；同步链路要有状态、重试、校验和补偿；搜索引擎同步需要处理延迟和失败；压测时按接口、DB、页面、后台任务分层定位。
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li>CRM 和 ODS 数据冲突怎么办？</li>
+                  <li>搜索索引更新失败怎么办？</li>
+                  <li>数据优先级重排规则谁定义？</li>
+                  <li>客户现场问题如何沟通？</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>ODS 延迟一天，线上搜索如何处理？</li>
+                  <li>接口重试导致重复数据，怎么幂等？</li>
+                  <li>压测失败但上线时间固定，如何决策？</li>
+                </ul>
+              </td>
+              <td><div class="good-box">能讲接口同步、数据一致性、压测定位和客户交付。</div></td>
+              <td><div class="risk-box">只记得参与开发，讲不清同步、清洗、压测。</div></td>
+              <td>早期项目，用于补充判断工程底子和客户接口能力。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="score">
+      <div class="section-head">
+        <h2>评分与结论</h2>
+        <p class="section-note">建议按 5 分制独立评分。强通过要同时满足技术真实性、架构深度和复杂交付能力。</p>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="评分宽表">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th class="wide">1-2 分</th>
+              <th class="wide">3 分</th>
+              <th class="wide">4 分</th>
+              <th class="wide">5 分</th>
+              <th class="wide">建议验证题</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>技术真实性</td>
+              <td>讲不清本人贡献，指标含糊。</td>
+              <td>项目大体真实，但细节不稳。</td>
+              <td>能讲清关键链路、指标和个人贡献。</td>
+              <td>多项目细节扎实，可交叉验证。</td>
+              <td>最近 3 年项目架构图 + 本人负责模块。</td>
+            </tr>
+            <tr>
+              <td>架构能力</td>
+              <td>组件堆砌，无模块边界和取舍。</td>
+              <td>能画大体架构，但边界和异常一般。</td>
+              <td>模块边界、扩展性、可用性清楚。</td>
+              <td>能从业务目标推导架构，并讲成本、风险和替代方案。</td>
+              <td>全链路灰度系统设计 / 商品推荐服务设计。</td>
+            </tr>
+            <tr>
+              <td>工程落地</td>
+              <td>忽略异常和线上风险。</td>
+              <td>有基本监控和重试意识。</td>
+              <td>有降级、幂等、回滚、补偿。</td>
+              <td>故障、数据、性能、可观测性、复盘机制完整。</td>
+              <td>消息一致性、大文件上传、Kafka 积压排查。</td>
+            </tr>
+            <tr>
+              <td>一线编码</td>
+              <td>无法写出基本结构。</td>
+              <td>思路有，但并发或边界弱。</td>
+              <td>能写正确代码并说明并发。</td>
+              <td>代码、边界、分布式扩展、性能取舍都扎实。</td>
+              <td>滑动窗口限流器 + Redis ZSet Lua 扩展。</td>
+            </tr>
+            <tr>
+              <td>数据意识</td>
+              <td>只有结果数字。</td>
+              <td>能解释部分指标。</td>
+              <td>能讲实验和归因。</td>
+              <td>指标口径、显著性、冲突取舍和审计都清楚。</td>
+              <td>推荐系统 200%/50% 指标验证。</td>
+            </tr>
+            <tr>
+              <td>项目管理</td>
+              <td>只讲自己做技术。</td>
+              <td>能描述协作过程。</td>
+              <td>能讲拆解、里程碑、风险控制。</td>
+              <td>能建立机制并带团队稳定交付。</td>
+              <td>飞书 eLearning owner 压力测试。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="score-grid">
+        <div class="score-card">
+          <h3>强通过</h3>
+          <p>能深讲 2 到 3 个核心项目，指标、架构、异常、取舍、个人贡献扎实，仍具备一线判断力，并能带团队交付复杂项目。</p>
+        </div>
+        <div class="score-card">
+          <h3>通过</h3>
+          <p>项目经验真实，部分方向深度略弱，但可胜任架构负责人或技术负责人角色，二面继续验证短板。</p>
+        </div>
+        <div class="score-card">
+          <h3>待定</h3>
+          <p>管理表达较强，但关键技术细节不稳；建议二面指定项目连续深挖，或加现场代码题。</p>
+        </div>
+        <div class="score-card">
+          <h3>不通过</h3>
+          <p>核心指标经不起追问，无法解释关键方案、异常处理和个人贡献，大量回答停留在组件名和宏观描述。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
