@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>邓均面试总指南 - 宽表版</title>
+  <title>邓均面试总指南 - 宽表版（JD 技术向）</title>
   <style>
     :root {
       --bg: #f7f8fb;
@@ -603,6 +603,8 @@
     <div class="side-nav-title">目录</div>
     <p class="side-nav-note">按面试使用顺序快速跳转</p>
     <a href="#quick">快速打法</a>
+    <a href="#jd">JD 对照</a>
+    <a href="#jd-tech">JD 基础技术题</a>
     <a href="#project">公司-项目合并表</a>
     <div class="side-nav-group">
       <p class="side-nav-label">项目定位</p>
@@ -614,35 +616,194 @@
   <main>
     <section id="quick">
       <div class="section-head">
-        <h2>快速打法</h2>
-        <p class="section-note">这位候选人履历跨度很大，面试不要平均铺开。先用最近 3 年项目验证真实性，再用 1 个架构题和 1 个工程落地题压深度。</p>
+        <h2>快速打法（对齐 JD 技术岗）</h2>
+        <p class="section-note">JD 要求 Java 后端、Spring 体系、关系库与 SQL 优化、Maven/Git、Linux/Docker，以及分布式开发与线上排障。候选人履历偏高级技术经理，面试不要按架构岗铺开；用 60 分钟验证「JD 硬技能是否仍扎实」+「是否愿意做实施交付型开发」。</p>
       </div>
       <div class="quick">
         <div class="quick-card">
-          <h3>推荐主线</h3>
+          <h3>JD 对齐主线（按优先级）</h3>
           <ul>
-            <li>推荐系统收益：指标口径、A/B、归因。</li>
-            <li>全链路灰度：HTTP/RPC/MQ 透传和污染检测。</li>
-            <li>消息一致性：outbox、状态机、幂等、补偿。</li>
-            <li>滑动窗口限流：验证一线编码和边界条件。</li>
+            <li><strong>货拉拉全链路灰度</strong>：分布式服务治理、熔断限流、集成与发布。</li>
+            <li><strong>财务对账系统</strong>：MySQL 高吞吐、SQL/索引优化、幂等与一致性。</li>
+            <li><strong>OrionHealth Pipeline</strong>：Docker、Ansible、Kafka、线上问题定位。</li>
+            <li><strong>飞书 eLearning</strong>：消息可靠性、集成测试边界、故障修改闭环。</li>
+            <li>搜款网推荐/RAG：JD 非核心，仅作真实性抽检，不占主时间。</li>
           </ul>
         </div>
         <div class="quick-card">
-          <h3>必问开场</h3>
+          <h3>必问开场（技术向）</h3>
           <ul>
-            <li>选择最近 3 年最熟悉的项目，讲业务目标、团队分工、本人职责、关键指标。</li>
-            <li>画核心架构图，标出自己负责的模块。</li>
-            <li>说一个线上事故，拆成止血、根因、长期修复。</li>
+            <li>最近 2 年是否仍写 Java/Spring 代码？频率、场景、本人负责模块。</li>
+            <li>选一个与 JD 最贴近的项目（分布式 + DB + 排障），画模块图并讲接口与数据流。</li>
+            <li>说一个线上 Bug/故障：如何发现、定位、修复、回归与防复发。</li>
+            <li>功能需求到上线：需求理解、开发自测、联调集成测试的分工与做法。</li>
           </ul>
         </div>
         <div class="quick-card">
           <h3>风险假设</h3>
           <ul>
-            <li>指标非常亮眼，必须验证分子分母和归因。</li>
-            <li>管理角色较多，必须验证是否仍掌握技术细节。</li>
-            <li>项目跨度极大，必须连续追问本人贡献边界。</li>
+            <li><strong>资历超标</strong>：JD 要求 2 年+，需确认动机、薪资预期、是否接受 IC 交付岗。</li>
+            <li><strong>管理脱离编码</strong>：Spring/Hibernate/SQL 细节若答不出，不适合本 JD。</li>
+            <li><strong>技术栈偏移</strong>：近年偏算法/RAG，需验证 Java 后端基本功是否退化。</li>
+            <li>项目跨度大，必须连续追问本人贡献边界，防止「只讲团队成果」。</li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <section id="jd">
+      <div class="section-head">
+        <h2>JD 对照与验证策略</h2>
+        <p class="section-note">左列为 JD 原文要求，右列为针对邓均履历的验证方式与可映射项目。</p>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="JD 对照宽表">
+          <thead>
+            <tr>
+              <th class="medium">JD 要求</th>
+              <th class="wide">面试验证方式</th>
+              <th class="wide">简历映射 / 深挖入口</th>
+              <th class="narrow">建议权重</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>参与软件设计与开发</td>
+              <td>让候选人讲一个完整功能从需求到上线的设计决策：模块划分、接口契约、异常与扩展点。</td>
+              <td>货拉拉 SOA 框架；ZHE800 对账平台；字节 eLearning 模块拆分。</td>
+              <td><span class="tag hot">高</span></td>
+            </tr>
+            <tr>
+              <td>需求书、开发、集成测试、按时按质交付</td>
+              <td>追问需求澄清、用例覆盖、联调环境、缺陷闭环、里程碑与风险汇报。</td>
+              <td>企业测评迁移；福建电信客户交付；飞书 owner 拆里程碑。</td>
+              <td><span class="tag hot">高</span></td>
+            </tr>
+            <tr>
+              <td>系统问题及时修改完善</td>
+              <td>线上故障案例：监控发现 → 日志/SQL 定位 → 热修/回滚 → 复盘。</td>
+              <td>Pipeline DogStatsd/Logstash 修复；对账误报治理；灰度污染止血。</td>
+              <td><span class="tag hot">高</span></td>
+            </tr>
+            <tr>
+              <td>精通 Java 基础，分布式应用开发</td>
+              <td>Java 集合/并发/JVM 快问 + 项目中的分布式场景（注册发现、限流、消息、幂等）。</td>
+              <td>货拉拉服务治理；ECE Redis Lua 限流；eLearning 消息一致性。</td>
+              <td><span class="tag hot">高</span></td>
+            </tr>
+            <tr>
+              <td>MVC/ORM：Spring MVC、Boot、Hibernate</td>
+              <td>IoC/AOP、事务传播、Controller-Service-DAO 分层；Hibernate 懒加载、N+1、Session 生命周期。</td>
+              <td>叠拓/邮科早期 Java 项目；追问近年是否仍用 Spring 栈而非只管团队。</td>
+              <td><span class="tag hot">高</span></td>
+            </tr>
+            <tr>
+              <td>Oracle/MSSQL/MySQL/PostgreSQL，SQL 优化</td>
+              <td>现场给慢 SQL 场景：索引、执行计划、锁、批写、分表；结合 20k/s 写入口径追问。</td>
+              <td>财务对账系统；号码百事通 CRM/ODS 同步。</td>
+              <td><span class="tag hot">高</span></td>
+            </tr>
+            <tr>
+              <td>NoSQL 优先</td>
+              <td>Redis 使用场景：缓存、分布式锁、Lua 原子、热 key；是否了解 Mongo/ES 等加分。</td>
+              <td>ECE Quota；灰度缓存隔离；推荐特征缓存（次要）。</td>
+              <td><span class="tag">中</span></td>
+            </tr>
+            <tr>
+              <td>Maven/Gradle，Git</td>
+              <td>依赖冲突、多模块构建、分支策略、Code Review、发布流水线基本概念。</td>
+              <td>各段 Java 项目工程化；货拉拉 SDK 版本治理。</td>
+              <td><span class="tag">中</span></td>
+            </tr>
+            <tr>
+              <td>Linux 命令，Docker；Ansible 优先</td>
+              <td>常用命令排障；镜像构建与多阶段；Playbook 幂等与回滚。</td>
+              <td>OrionHealth Docker Registry、Portainer、Ansible Playbook。</td>
+              <td><span class="tag hot">高</span></td>
+            </tr>
+            <tr>
+              <td>积极主动、责任心、团队精神</td>
+              <td>跨团队推进案例、客户/业务方沟通、on-call 与缺陷 ownership。</td>
+              <td>北方 9 省技术接口人；成都团队 0-1；字节 Scrum Master。</td>
+              <td><span class="tag">中</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="jd-tech">
+      <div class="section-head">
+        <h2>JD 基础技术面试题</h2>
+        <p class="section-note">面向本 JD 的通用技术快筛，建议 15～20 分钟。答不出 Spring/ORM/SQL 核心点，即使架构故事精彩也应降分。<br>建议 60 分钟分配：开场与岗位动机 5min → 本节基础题 15min → 项目深挖（灰度 + 对账/Pipeline）25min → 编码或排障 10min → 反问 5min。</p>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="JD 基础技术题">
+          <thead>
+            <tr>
+              <th class="medium">方向</th>
+              <th class="xwide">主问题</th>
+              <th class="xwide">满意回答要点</th>
+              <th class="wide">风险信号</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Java 基础</td>
+              <td><code>HashMap</code> 与 <code>ConcurrentHashMap</code> 区别？<code>volatile</code> 能否保证原子性？线程池核心参数如何设？</td>
+              <td>能讲桶结构、扩容、线程安全分段/CAS；volatile 只保证可见性有序性；线程池需结合队列、拒绝策略和业务隔离。</td>
+              <td>只会背八股定义，举不出项目中的并发问题。</td>
+            </tr>
+            <tr>
+              <td>Spring Boot</td>
+              <td><code>@Transactional</code> 失效场景？Bean 生命周期与循环依赖怎么处理？</td>
+              <td>自调用、非 public、异常类型、传播行为；三级缓存、构造器注入避免循环依赖。</td>
+              <td>只说「用注解就行」，讲不清 AOP 代理与事务边界。</td>
+            </tr>
+            <tr>
+              <td>ORM / Hibernate</td>
+              <td>什么是 N+1？懒加载异常怎么避免？JPA 与 MyBatis 你会怎么选？</td>
+              <td>fetch join / batch size；Open Session In View 利弊；按复杂 SQL 与对象模型权衡选型。</td>
+              <td>多年 Java 却说不清 Session 与 SQL 生成关系。</td>
+            </tr>
+            <tr>
+              <td>SQL 优化</td>
+              <td>一条订单查询变慢，排查步骤？联合索引最左前缀？</td>
+              <td>执行计划、索引命中、回表、锁等待、数据量变化；能结合对账/同步项目讲批写与索引取舍。</td>
+              <td>只会「加索引」，没有执行计划与业务口径。</td>
+            </tr>
+            <tr>
+              <td>分布式</td>
+              <td>接口幂等如何实现？服务超时重试要注意什么？</td>
+              <td>业务唯一键、Token、状态机；重试需幂等、隔离、熔断，避免重试风暴。</td>
+              <td>把「再调一次」当幂等方案。</td>
+            </tr>
+            <tr>
+              <td>工程工具</td>
+              <td>Maven 依赖冲突怎么解？Git flow 或 trunk-based 你用过哪种？</td>
+              <td><code>dependencyManagement</code>、排除传递依赖；能讲分支、发布、hotfix 实际流程。</td>
+              <td>从未处理过依赖树或合并冲突。</td>
+            </tr>
+            <tr>
+              <td>Linux / Docker</td>
+              <td>CPU 高如何定位？Docker 镜像瘦身常见手段？</td>
+              <td><code>top</code>/<code>pidstat</code>/<code>jstack</code> 或 async-profiler；多阶段构建、精简基础镜像、分层缓存。</td>
+              <td>只会 <code>docker run</code>，没做过部署或排障。</td>
+            </tr>
+            <tr>
+              <td>Ansible</td>
+              <td>Playbook 如何保证幂等？部署失败如何回滚？</td>
+              <td>模块幂等、idempotent 声明、check mode；版本化配置、上一版本 artifact 回切。</td>
+              <td>简历写 Ansible 但讲不出具体 Playbook 结构。（可对照 OrionHealth 经历深挖）</td>
+            </tr>
+            <tr>
+              <td>编码实操（可选）</td>
+              <td>滑动窗口限流 或 按业务键去重计数（15 分钟）。</td>
+              <td>边界时间窗、并发安全、内存占用；能写可运行代码并讨论分布式扩展。</td>
+              <td>无法写出基本结构或忽略并发。</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -1141,7 +1302,7 @@
     <section id="project">
       <div class="section-head">
         <h2>公司-项目合并宽表</h2>
-        <p class="section-note">按公司归属和项目逐条合并整理。每行同时包含公司背景、项目内容、问题解答、信号和评分，左侧目录可直达每个项目。</p>
+        <p class="section-note">按公司归属和项目逐条合并整理。本 JD 为 Java 实施开发岗，优先深挖<strong>货拉拉、财务对账、OrionHealth、飞书 eLearning</strong>；推荐/RAG 仅作真实性抽检。左侧目录可直达每个项目。</p>
       </div>
       <div class="table-wrap">
         <table aria-label="公司-项目合并宽表">
@@ -1215,7 +1376,7 @@
               </td>
               <td><div class="good-box">指标、实验、归因、链路、降级、本人成果边界都清楚。</div></td>
               <td><div class="risk-box">只说模型升级；没有指标口径、实验设计和线上链路。</div></td>
-              <td>核心主线，建议必问。答深可强加分。</td>
+              <td><span class="tag">JD 低优先</span> 非本 JD 核心；时间紧可跳过，仅抽检真实性。</td>
             </tr>
             <tr>
               <td>多模态图文匹配 RAG Agent</td>
@@ -1262,7 +1423,7 @@
               </td>
               <td><div class="good-box">能讲检索、索引、评估、rerank、反馈闭环和幻觉控制。</div></td>
               <td><div class="risk-box">只说“大模型加知识库”，不懂召回、索引、评估。</div></td>
-              <td>作为 AI 工程化验证线，建议和推荐系统配套问。</td>
+              <td><span class="tag">JD 低优先</span> AI 方向与本 JD 无关；可不问或 1 题带过。</td>
             </tr>
             <tr>
               <td>框架工具 / 全链路灰度</td>
@@ -1315,7 +1476,7 @@
               </td>
               <td><div class="good-box">能讲入口、透传、路由、MQ、污染检测、回滚、SDK 治理。</div></td>
               <td><div class="risk-box">只讲网关切流量，不讲全链路和异步链路。</div></td>
-              <td>基础架构深度核心题，建议必问。</td>
+              <td><span class="tag hot">JD 核心</span> 分布式 + Java 服务治理 + 集成发布，本 JD 第一主线，必问。</td>
             </tr>
             <tr>
               <td>飞书 eLearning</td>
@@ -1373,7 +1534,7 @@
               </td>
               <td><div class="good-box">技术细节、项目管理、风险控制、复盘都能讲清。</div></td>
               <td><div class="risk-box">只讲 owner 和平台概念，讲不清消息、大文件、Timer 的状态和异常。</div></td>
-              <td>复杂项目 owner 真实性核心题，建议必问。</td>
+              <td><span class="tag hot">JD 核心</span> 分布式交付 + 消息可靠性 + 集成测试/排障，第二主线，建议必问。</td>
             </tr>
             <tr>
               <td>企业测评</td>
@@ -1421,7 +1582,7 @@
               </td>
               <td><div class="good-box">能讲迁移阶段、校验、回滚、灰度和协作机制。</div></td>
               <td><div class="risk-box">只说重构成微服务，不讲双写、切流、灾备和用户影响。</div></td>
-              <td>适合验证架构迁移和项目推进能力。</td>
+              <td><span class="tag">JD 中优先</span> 验证需求-开发-迁移-联调交付流程，可作第三补充。</td>
             </tr>
             <tr>
               <td>Pipeline Solution</td>
@@ -1476,7 +1637,7 @@
               </td>
               <td><div class="good-box">能结合 Kafka 机制、数据模型、租户隔离和运维自动化。</div></td>
               <td><div class="risk-box">只说 Kafka 快，消费慢就加机器。</div></td>
-              <td>适合验证 Kafka 和可观测性真实深度。</td>
+              <td><span class="tag hot">JD 核心</span> Docker/Ansible/Kafka + 线上排障，本 JD DevOps 加分项主线，建议必问。</td>
             </tr>
             <tr>
               <td>财务对账系统</td>
@@ -1528,7 +1689,7 @@
               </td>
               <td><div class="good-box">吞吐口径、写入策略、业务唯一键、金额精度、延迟窗口、闭环都清楚。</div></td>
               <td><div class="risk-box">只有数字和 SQL 优化，没有对账业务规则和幂等。</div></td>
-              <td>适合验证数据库和数据一致性基本功。</td>
+              <td><span class="tag hot">JD 核心</span> MySQL/SQL 优化 + 高吞吐写入，本 JD 数据库主线，建议必问。</td>
             </tr>
             <tr>
               <td>ECE</td>
@@ -1583,7 +1744,7 @@
               </td>
               <td><div class="good-box">能讲 Redis Lua、容量口径、容灾边界、迁移回滚。</div></td>
               <td><div class="risk-box">声称架构师但讲不清容量、容灾和迁移异常。</div></td>
-              <td>早期项目，可作为补充验证，不建议主线占太久。</td>
+              <td><span class="tag">JD 中优先</span> Redis/NoSQL + 限流，可作分布式补充。</td>
             </tr>
             <tr>
               <td>PCO</td>
@@ -1630,7 +1791,7 @@
               </td>
               <td><div class="good-box">能讲协议状态机和异常兼容，说明早期工程基本功扎实。</div></td>
               <td><div class="risk-box">时间较早，记忆模糊可接受；但若完全无法解释 B2BUA，说明深度有限。</div></td>
-              <td>作为加分项即可，除非岗位需要通信背景。</td>
+              <td><span class="tag">JD 低优先</span> 通信协议与本 JD 无关，除非时间充裕。</td>
             </tr>
             <tr>
               <td>福建电信号码百事通</td>
@@ -1679,7 +1840,7 @@
               </td>
               <td><div class="good-box">能讲接口同步、数据一致性、压测定位和客户交付。</div></td>
               <td><div class="risk-box">只记得参与开发，讲不清同步、清洗、压测。</div></td>
-              <td>早期项目，用于补充判断工程底子和客户接口能力。</td>
+              <td><span class="tag">JD 中优先</span> 接口同步 + 集成测试 + 客户交付，可验证 JD「团队精神/责任心」。</td>
             </tr>
           </tbody>
         </table>
@@ -1688,8 +1849,8 @@
 
     <section id="score">
       <div class="section-head">
-        <h2>评分与结论</h2>
-        <p class="section-note">建议按 5 分制独立评分。强通过要同时满足技术真实性、架构深度和复杂交付能力。</p>
+        <h2>评分与结论（对齐 JD）</h2>
+        <p class="section-note">本 JD 为 Java 实施开发岗（2 年+）。建议按 5 分制独立评分，权重向 Java/Spring/SQL/分布式/工具链倾斜；架构与管理能力作参考，不作为录用主因。</p>
       </div>
       <div class="table-wrap">
         <table aria-label="评分宽表">
@@ -1705,72 +1866,72 @@
           </thead>
           <tbody>
             <tr>
-              <td>技术真实性</td>
-              <td>讲不清本人贡献，指标含糊。</td>
-              <td>项目大体真实，但细节不稳。</td>
-              <td>能讲清关键链路、指标和个人贡献。</td>
-              <td>多项目细节扎实，可交叉验证。</td>
-              <td>最近 3 年项目架构图 + 本人负责模块。</td>
+              <td>Java / Spring 栈</td>
+              <td>集合、并发、事务、分层讲不清。</td>
+              <td>能答基础八股，项目结合弱。</td>
+              <td>能结合项目讲 IoC、事务、分层与异常。</td>
+              <td>Spring/Hibernate 原理扎实，近年仍有编码实践。</td>
+              <td>JD 基础技术题 + 最近是否写 Java 代码。</td>
             </tr>
             <tr>
-              <td>架构能力</td>
-              <td>组件堆砌，无模块边界和取舍。</td>
-              <td>能画大体架构，但边界和异常一般。</td>
-              <td>模块边界、扩展性、可用性清楚。</td>
-              <td>能从业务目标推导架构，并讲成本、风险和替代方案。</td>
-              <td>全链路灰度系统设计 / 商品推荐服务设计。</td>
+              <td>数据库 / SQL</td>
+              <td>只会 CRUD，无优化意识。</td>
+              <td>知道索引，缺执行计划与业务口径。</td>
+              <td>能讲索引、批写、锁、幂等与对账场景。</td>
+              <td>20k/s 口径可信，能讲 SQL 优化与一致性闭环。</td>
+              <td>财务对账 + 慢 SQL 排查题。</td>
             </tr>
             <tr>
-              <td>工程落地</td>
-              <td>忽略异常和线上风险。</td>
-              <td>有基本监控和重试意识。</td>
-              <td>有降级、幂等、回滚、补偿。</td>
-              <td>故障、数据、性能、可观测性、复盘机制完整。</td>
-              <td>消息一致性、大文件上传、Kafka 积压排查。</td>
+              <td>分布式与排障</td>
+              <td>无幂等、重试、降级概念。</td>
+              <td>知道组件名，异常处理浅。</td>
+              <td>能讲灰度/消息/限流中的真实取舍。</td>
+              <td>全链路灰度或消息一致性讲深，排障路径完整。</td>
+              <td>货拉拉灰度 / eLearning 消息 / 线上故障案例。</td>
             </tr>
             <tr>
-              <td>一线编码</td>
-              <td>无法写出基本结构。</td>
-              <td>思路有，但并发或边界弱。</td>
-              <td>能写正确代码并说明并发。</td>
-              <td>代码、边界、分布式扩展、性能取舍都扎实。</td>
-              <td>滑动窗口限流器 + Redis ZSet Lua 扩展。</td>
+              <td>工具链与运维</td>
+              <td>Git/Maven/Linux 使用生疏。</td>
+              <td>日常会用，无部署排障经验。</td>
+              <td>能讲分支发布、依赖治理、容器基础。</td>
+              <td>Docker/Ansible 有实战，能讲 Playbook 与回滚。</td>
+              <td>OrionHealth Ansible + Linux 定位 CPU 高。</td>
             </tr>
             <tr>
-              <td>数据意识</td>
-              <td>只有结果数字。</td>
-              <td>能解释部分指标。</td>
-              <td>能讲实验和归因。</td>
-              <td>指标口径、显著性、冲突取舍和审计都清楚。</td>
-              <td>推荐系统 200%/50% 指标验证。</td>
+              <td>交付与协作</td>
+              <td>只讲个人开发，无联调测试意识。</td>
+              <td>能描述协作，缺集成测试细节。</td>
+              <td>能讲需求澄清、联调、缺陷闭环。</td>
+              <td>需求-开发-集成测试-上线-复盘链路完整。</td>
+              <td>企业测评迁移 / 客户现场交付经历。</td>
             </tr>
             <tr>
-              <td>项目管理</td>
-              <td>只讲自己做技术。</td>
-              <td>能描述协作过程。</td>
-              <td>能讲拆解、里程碑、风险控制。</td>
-              <td>能建立机制并带团队稳定交付。</td>
-              <td>飞书 eLearning owner 压力测试。</td>
+              <td>岗位匹配度</td>
+              <td>明确不愿做 IC 或薪资/职级严重超标。</td>
+              <td>动机存疑，需二面确认。</td>
+              <td>接受实施交付，能稳定产出。</td>
+              <td>愿意亲手开发排障，与 JD 高度匹配。</td>
+              <td>为何投本岗、期望职责、是否接受 2 年+ 级别工作。</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="score-grid">
         <div class="score-card">
-          <h3>强通过</h3>
-          <p>能深讲 2 到 3 个核心项目，指标、架构、异常、取舍、个人贡献扎实，仍具备一线判断力，并能带团队交付复杂项目。</p>
+          <h3>强通过（JD）</h3>
+          <p>Java/Spring/SQL/分布式四项均 ≥4 分，能深讲 2 个 JD 映射项目（货拉拉 + 对账或 OrionHealth），仍愿亲手开发与排障，岗位动机合理。</p>
         </div>
         <div class="score-card">
           <h3>通过</h3>
-          <p>项目经验真实，部分方向深度略弱，但可胜任架构负责人或技术负责人角色，二面继续验证短板。</p>
+          <p>JD 硬技能基本达标，个别方向（如 Hibernate 或 Ansible）略弱可培养；需确认职级预期与团队接受度。</p>
         </div>
         <div class="score-card">
           <h3>待定</h3>
-          <p>管理表达较强，但关键技术细节不稳；建议二面指定项目连续深挖，或加现场代码题。</p>
+          <p>架构故事强但 Spring/SQL 细节不稳，或资历明显超标动机不清；建议加现场代码题 + HR 谈薪职级。</p>
         </div>
         <div class="score-card">
           <h3>不通过</h3>
-          <p>核心指标经不起追问，无法解释关键方案、异常处理和个人贡献，大量回答停留在组件名和宏观描述。</p>
+          <p>JD 核心技能（Java、Spring、SQL、分布式排障）多项 &lt;3 分；或明确不匹配实施开发岗。</p>
         </div>
       </div>
     </section>
