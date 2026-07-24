@@ -338,6 +338,33 @@ sudo pmset -a sleep 0  # 跑完后恢复: sudo pmset -a sleep 10
 └─────────────────────────────────────────────────┘
 ```
 
+### 更新日志
+
+#### 2026-07-24 v1.1 — 修复自动切集失效 bug
+
+**问题**：第一集播完后不会自动切换到第二集，视频停在结尾不动。
+
+**根因**：TCPlayer 的事件触发顺序是 `pause` → `ended`（不是 `ended` → `pause`）。
+`onPause` 先执行把 `playStatus` 设为 `"pause"`，然后 `onEnd` 才执行。
+脚本原本通过 `playStatus !== 'pause'` 来区分"自然结束"和"手动暂停"，
+导致永远检测不到视频真正结束。
+
+```javascript
+// ❌ 旧代码（有 bug）
+if (dur > 0 && paused && ct >= dur - 1) {
+  if (comp.playStatus !== 'pause') {  // ← 这里永远为 false！
+    return true;
+  }
+}
+
+// ✅ 修复后
+if (dur > 0 && paused && video.ended) {  // ← 用 video.ended 原生属性
+  return true;
+}
+```
+
+`video.ended` 是浏览器原生属性，只有视频自然播放到结尾才为 `true`，手动暂停始终为 `false`。
+
 ### 文件结构
 
 ```

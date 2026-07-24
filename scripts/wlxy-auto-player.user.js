@@ -268,6 +268,58 @@
     }
   }
 
+  // 确保视频在播放：处理弹窗 + Chrome 自动播放限制
+  function ensureVideoPlaying(retries = 5) {
+    const tryPlay = () => {
+      const video = getVideoEl();
+      const player = getTCPlayer();
+      const comp = getPlayerComponent();
+
+      // 1. 先处理"继续上次播放"弹窗
+      const cancelBtn = document.querySelector('.cancel_zx_class');
+      if (cancelBtn) {
+        log('自动关闭"继续播放"弹窗');
+        cancelBtn.click();
+      }
+
+      if (!video || !player) return false;
+
+      // 2. 如果视频在播放，什么都不用做
+      if (!video.paused && video.currentTime > 0) {
+        return true;
+      }
+
+      // 3. 尝试播放
+      const playPromise = player.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.catch(() => {
+          // Chrome 自动播放策略拦截：先静音再播
+          log('播放被拦截，尝试静音播放...');
+          player.muted(true);
+          player.play()?.then(() => {
+            player.muted(false);
+            log('静音播放成功，已恢复音量');
+          }).catch(() => {});
+        });
+      }
+
+      return !video.paused;
+    };
+
+    // 立即尝试
+    if (tryPlay()) return;
+
+    // 延迟重试（等待弹窗出现、视频加载等）
+    let attempts = 0;
+    const retryInterval = setInterval(() => {
+      attempts++;
+      if (tryPlay() || attempts >= retries) {
+        clearInterval(retryInterval);
+        if (attempts >= retries) log('⚠️ 多次重试后仍无法播放，请手动点击播放按钮');
+      }
+    }, 2000);
+  }
+
   function updateStats(comp) {
     const stats = countCompleted(comp);
     completedCount = stats.completed;
@@ -355,6 +407,24 @@
         dismissContinueDialog();
       }
 
+      // 意外暂停自动恢复（非正常结束的暂停）
+      const video = getVideoEl();
+      if (video && video.paused && !video.ended && comp.playStatus === 'pause' && comp.intervalTime === null) {
+        const dur = player.duration();
+        const ct = player.currentTime();
+        // 不是结尾的暂停 = 意外暂停，自动恢复
+        if (dur > 0 && ct < dur - 5) {
+          log('检测到意外暂停，自动恢复播放');
+          comp.playStatus = 'play';
+          comp.startLearningSocket('play');
+          comp.intervalTime = setInterval(() => { comp.startLearningSocket(); }, 20000);
+          player.play()?.catch(() => {
+            player.muted(true);
+            player.play()?.then(() => player.muted(false)).catch(() => {});
+          });
+        }
+      }
+
       // 更新进度显示
       updateStats(comp);
       showProgressOverlay(comp);
@@ -410,23 +480,25 @@
           lastChapterId = next.chapter.courseChapterId;
           switchCooldown = 10; // 30秒冷却 (10 × 3秒检测间隔)
 
-          // 等待新视频加载后设置倍速
+          // 等新视频加载后确保播放 + 设置倍速
           setTimeout(() => {
             const newVideo = getVideoEl();
             const newPlayer = getTCPlayer();
             if (newVideo) {
               setupPlaybackRate(newVideo, newPlayer);
             }
-            dismissContinueDialog();
+            // 主动确保视频在播放（关闭弹窗+处理 autoplay 限制）
+            ensureVideoPlaying();
           }, 3000);
 
-          // 再次尝试设置倍速
+          // 二次确保（兜底）
           setTimeout(() => {
             const newVideo = getVideoEl();
             const newPlayer = getTCPlayer();
             if (newVideo) {
               setupPlaybackRate(newVideo, newPlayer);
             }
+            ensureVideoPlaying();
           }, 8000);
         }
       }
