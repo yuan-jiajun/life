@@ -268,54 +268,56 @@
     }
   }
 
-  // 确保视频在播放：处理弹窗 + Chrome 自动播放限制
+  // 确保视频在播放：关闭弹窗 + 绕过 TCPlayer 直接用原生 API 突破 autoplay 限制
+  // 注意：不能用 TCPlayer 的 muted()/play()，因为 TCPlayer 内部状态管理可能导致
+  // 静音状态不同步、play() 失败后不重试。直接操作原生 <video> 元素最可靠。
   function ensureVideoPlaying(retries = 5) {
     const tryPlay = () => {
       const video = getVideoEl();
-      const player = getTCPlayer();
-      const comp = getPlayerComponent();
+      if (!video) return false;
 
       // 1. 先处理"继续上次播放"弹窗
       const cancelBtn = document.querySelector('.cancel_zx_class');
       if (cancelBtn) {
         log('自动关闭"继续播放"弹窗');
         cancelBtn.click();
+        // 弹窗关闭后 onCanplay 的 catch 回调会执行 player.play()，
+        // 但可能被 autoplay 拦截，所以下面继续兜底
       }
 
-      if (!video || !player) return false;
-
-      // 2. 如果视频在播放，什么都不用做
+      // 2. 已经在播放了就什么都不用做
       if (!video.paused && video.currentTime > 0) {
         return true;
       }
 
-      // 3. 尝试播放
-      const playPromise = player.play();
-      if (playPromise && playPromise.catch) {
-        playPromise.catch(() => {
-          // Chrome 自动播放策略拦截：先静音再播
-          log('播放被拦截，尝试静音播放...');
-          player.muted(true);
-          player.play()?.then(() => {
-            player.muted(false);
-            log('静音播放成功，已恢复音量');
-          }).catch(() => {});
-        });
+      // 3. 直接静音播放 — 挂机不需要声音，静音不受 Chrome autoplay 限制
+      video.muted = true;
+      video.play()?.catch((e) => {
+        log('播放失败:', e.message);
+      });
+
+      // 同时通过 TCPlayer 启动心跳（让服务器知道在播放）
+      const comp = getPlayerComponent();
+      if (comp && comp.playStatus !== 'play') {
+        comp.playStatus = 'play';
+        if (!comp.intervalTime) {
+          comp.intervalTime = setInterval(() => { comp.startLearningSocket(); }, 20000);
+        }
+        comp.startLearningSocket('play');
       }
 
       return !video.paused;
     };
 
-    // 立即尝试
+    // 立即尝试 + 延迟重试
     if (tryPlay()) return;
 
-    // 延迟重试（等待弹窗出现、视频加载等）
     let attempts = 0;
     const retryInterval = setInterval(() => {
       attempts++;
       if (tryPlay() || attempts >= retries) {
         clearInterval(retryInterval);
-        if (attempts >= retries) log('⚠️ 多次重试后仍无法播放，请手动点击播放按钮');
+        if (attempts >= retries) log('⚠️ 多次重试后仍无法播放，请手动点击播放');
       }
     }, 2000);
   }
@@ -418,10 +420,9 @@
           comp.playStatus = 'play';
           comp.startLearningSocket('play');
           comp.intervalTime = setInterval(() => { comp.startLearningSocket(); }, 20000);
-          player.play()?.catch(() => {
-            player.muted(true);
-            player.play()?.then(() => player.muted(false)).catch(() => {});
-          });
+          // 静音播放恢复（不受 autoplay 限制）
+          video.muted = true;
+          video.play()?.catch(() => {});
         }
       }
 
