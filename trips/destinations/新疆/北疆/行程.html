@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>新疆 · 北疆 行程（12 天 · 伊犁深度版）</title>
+<title>新疆 · 北疆 行程（11 晚 · 北疆大环线版）</title>
 <style>
   :root { --line:#e2e2e2; --ink:#222; --muted:#666; --accent:#1a7f5a; --warn:#c0392b; --bg-soft:#f7f9f8; }
   * { box-sizing:border-box; }
@@ -40,22 +40,14 @@
     padding:10px 14px; background:var(--bg-soft); border:1px solid var(--line); border-radius:8px; }
   .map-legend b { color:var(--accent); margin-right:.2em; }
   #realmap { width:100%; height:560px; border:1px solid var(--line); border-radius:8px; }
-  /* 地点标签：白底 + 彩色边框（绿=当前过夜点，黄=原方案点），带指向箭头 */
-  .lf-stay, .lf-old { font-size:11px; font-weight:600; background:#fff; border-radius:4px;
+  /* 地点标签：白底 + 彩色边框（绿=过夜点，黄=原方案点），带指向箭头 */
+  .lf-stay { font-size:11px; font-weight:600; background:#fff; border-radius:4px;
     padding:0 4px; white-space:nowrap; box-shadow:0 1px 2px rgba(0,0,0,.18); }
   .lf-stay { color:#0a7d52; border:1px solid #1a7f5a; }
-  .lf-old  { color:#b97c00; border:1px solid #e8a200; }
-  .leaflet-tooltip-top.lf-stay::before, .leaflet-tooltip-top.lf-old::before { border-top-color:#fff; }
-  .leaflet-tooltip-bottom.lf-stay::before, .leaflet-tooltip-bottom.lf-old::before { border-bottom-color:#fff; }
-  .leaflet-tooltip-left.lf-stay::before, .leaflet-tooltip-left.lf-old::before { border-left-color:#fff; }
-  .leaflet-tooltip-right.lf-stay::before, .leaflet-tooltip-right.lf-old::before { border-right-color:#fff; }
+  .leaflet-tooltip-top.lf-stay::before, .leaflet-tooltip-bottom.lf-stay::before { border-top-color:#fff; }
   /* 途经景点标签：白底细绿框（比过夜点轻），带指向箭头 */
   .lf-via { font-size:10.5px; font-weight:500; background:#fff; color:#1a7f5a;
     border:1px solid #8fc4b0; border-radius:4px; padding:0 3px; white-space:nowrap; box-shadow:0 1px 2px rgba(0,0,0,.12); }
-  .leaflet-tooltip-top.lf-via::before { border-top-color:#fff; }
-  .leaflet-tooltip-bottom.lf-via::before { border-bottom-color:#fff; }
-  .leaflet-tooltip-left.lf-via::before { border-left-color:#fff; }
-  .leaflet-tooltip-right.lf-via::before { border-right-color:#fff; }
   /* 公路标签：蓝灰底，与地点明显区分；贴在路段上不带箭头 */
   .lf-road { font-size:11px; font-style:italic; font-weight:700; color:#16508f;
     background:#cfe1f7; border:1px solid #5a92d6; border-radius:4px; padding:0 4px; white-space:nowrap; }
@@ -64,7 +56,6 @@
   .lf-dist { font-size:10.5px; font-weight:700; color:#fff; background:#0a7d52;
     border:1px solid #0a7d52; border-radius:10px; padding:0 6px; white-space:nowrap; box-shadow:0 1px 2px rgba(0,0,0,.25); }
   .leaflet-tooltip.lf-dist::before { display:none; }
-  .lf-distold { background:#e8a200; border-color:#cf9000; }
   /* 按天分段标签 */
   .lf-day { background:transparent; border:0; box-shadow:none; padding:0; }
   .lf-day span { color:#fff; font-size:10px; font-weight:700; padding:1px 5px; border-radius:8px;
@@ -85,7 +76,7 @@
 <body>
 <div class="wrap">
 
-<h1>新疆 · 北疆 行程（12 天 · 伊犁深度版）</h1>
+<h1>新疆 · 北疆 行程（11 晚 · 北疆大环线版）</h1>
 
 <blockquote>
 本文是这趟旅行的<strong>主文件</strong>，攻略、行程、预约、花费、打包全部整合在内，一份即可带走。<br>
@@ -93,23 +84,23 @@
 </blockquote>
 
 <ul class="meta">
-  <li><b>出行时间</b>：2026-08-15（周六）至 2026-08-26（周三），共 12 天</li>
+  <li><b>出行时间</b>：2026-08-15（周六）至 2026-08-26（周三），共 12 天 11 晚</li>
   <li><b>出发地</b>：成都（飞乌鲁木齐落地租车）</li>
   <li><b>同行人</b>：（4 人轮换驾驶最佳）</li>
-  <li><b>车型</b>：普通 SUV / 轿车即可（铺装路为主），不建议坦克 300</li>
-  <li><b>预算</b>：人均 5000–12000+，明细见「五、花费预算」</li>
+  <li><b>车型</b>：普通 SUV / 轿车即可（铺装路为主，独库仅 7 座及以下通行），不建议坦克 300</li>
+  <li><b>预算</b>：人均 8800–9100+，明细见「五、花费预算」</li>
 </ul>
 
 <h2>一、为什么这样安排（结论）</h2>
 <ul>
-  <li><b>8 月首选北疆</b>：草原、湖泊、森林、雪山全部在线，第一次来震撼感最强；南疆（人文/沙漠）留到二刷。</li>
-  <li><b>一句话核心</b>：北疆真正的体验不是「景点多」，而是「<strong>节奏对</strong>」——少景点、长停留、有一天完全不赶路。</li>
-  <li><b>本版取舍</b>：已砍掉喀纳斯/禾木及北边的魔鬼城、五彩滩（无喀纳斯则北上不顺路），省出的天数全加给伊犁草原带和赛里木湖。即「伊犁 70% + 阿勒泰 0%」的纯伊犁环线深度版。</li>
+  <li><b>8 月首选北疆大环线</b>：草原、湖泊、森林、雅丹、雪山、独库公路全在线，第一次来震撼感最强；南疆（人文/沙漠）留到二刷。</li>
+  <li><b>一句话核心</b>：北疆真正的体验不是「景点多」，而是「<strong>节奏对</strong>」——本版把 11 晚拆成「喀纳斯 2 夜 + 伊犁草原带 3 处 + 两大日落（五彩滩 / 魔鬼城）+ 独库收尾」，两头各有一个"住在景区里"的慢日。</li>
+  <li><b>本版取舍</b>：与上一版「伊犁深度版（12 天，纯伊犁、砍北线）」相比，把阿勒泰/喀纳斯北线加回来组成完整大环线；同时砍掉夏塔/昭苏/那拉提（<strong>草原别超 3 个</strong>，避开那拉提商业化）。禾木 8 月正值鸡肋季，一并砍掉。</li>
   <li><b>景点分级</b>（风景强度/折腾程度/值得停留）：
     <ul>
-      <li>🟢 <b>必去</b>：赛里木湖（1.5–2 天，不可压缩）、伊犁草原带（夏塔/库尔德宁/恰西/唐布拉，3–4 天整段体验）、独库北段（1 天，移动景区）。</li>
-      <li>🟡 <b>控时</b>：五彩滩/魔鬼城（半天调味，本版已砍）；喀纳斯/禾木（上限高但旺季换乘累、住宿贵，本版不去）。</li>
-      <li>🔴 <b>可删</b>：霍尔果斯口岸、薰衣草（看季节）、各种重复小峡谷。</li>
+      <li>🟢 <b>必去</b>：喀纳斯（2 夜，三湾+观鱼台，不可压缩；晨雾视住宿取舍）、赛里木湖（约 1 天）、喀拉峻（1.5 天，人体草原傍晚封神）、五彩滩+魔鬼城（两大日落，各半天）、独库北段（1 天，移动景区）。</li>
+      <li>🟡 <b>控时</b>：库尔德宁/唐布拉百里画廊（各半天，草原调味）、八卦城（2 小时足矣）。</li>
+      <li>🔴 <b>可删</b>：禾木（8 月鸡肋+门票贵）、那拉提（商业化人多票贵）、霍尔果斯口岸、薰衣草（8 月已过花期）、可可托海（评价虚高）。</li>
     </ul>
   </li>
 </ul>
@@ -117,8 +108,8 @@
 <h2>二、路线总览</h2>
 
 <figure class="routemap">
-<svg viewBox="0 20 1170 460" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="北疆伊犁环线路线示意图"
+<svg viewBox="0 8 1170 482" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="北疆大环线路线示意图"
      style="font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif">
   <defs>
     <marker id="arr" markerWidth="9" markerHeight="9" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
@@ -127,7 +118,6 @@
     <style>
       .rt-main { fill:none; stroke:#1a7f5a; stroke-width:3.4; stroke-linejoin:round; stroke-linecap:round; }
       .rt-spur { fill:none; stroke:#1a7f5a; stroke-width:1.8; stroke-dasharray:6 5; opacity:.65; }
-      .rt-tick { fill:none; stroke:#9ab; stroke-width:1.2; }
       .pt-stay { fill:#1a7f5a; stroke:#fff; stroke-width:1.6; }
       .pt-via  { fill:#fff; stroke:#1a7f5a; stroke-width:2; }
       .lbl     { font-size:16px; font-weight:600; fill:#222; }
@@ -145,98 +135,95 @@
     <text x="0" y="30" text-anchor="middle" class="lbl-cap">N</text>
   </g>
 
-  <!-- 主环线（顺时针，箭头示方向） -->
+  <!-- 主环线（逆时针，箭头示方向） -->
   <path class="rt-main" marker-mid="url(#arr)"
-        d="M1108,260 L688,140 L180,100 L195,240 L166,390 L130,420 L275,380 L478,330 L528,276 L620,265 L717,160 L1108,260"/>
+        d="M983,436 L888,104 L908,25 L888,104 L736,230 L626,370 L148,350 L167,404 L234,459 L372,459 L424,428 L567,423 L626,370 L983,436"/>
 
-  <!-- 支线 / 可选绕行（虚线） -->
-  <path class="rt-spur" d="M275,380 L325,408"/>
-  <path class="rt-spur" d="M478,330 L586,360"/>
+  <!-- 可选绕行（虚线）：布尔津→五彩滩 / 独山子→大峡谷 / 特克斯→喀拉峻 -->
+  <path class="rt-spur" d="M888,104 L847,90"/>
+  <path class="rt-spur" d="M626,370 L626,400"/>
+  <path class="rt-spur" d="M234,459 L268,430"/>
 
-  <!-- 途经景点连接短线 -->
-  <line class="rt-tick" x1="818" y1="178" x2="818" y2="214"/>
-  <line class="rt-tick" x1="180" y1="150" x2="150" y2="150"/>
-  <line class="rt-tick" x1="435" y1="341" x2="435" y2="373"/>
-
-  <!-- 路段名 -->
-  <text x="900" y="192" text-anchor="middle" class="lbl-seg">S101 国防公路</text>
-  <text x="150" y="320" text-anchor="middle" class="lbl-seg" transform="rotate(-78 150 320)">伊昭公路</text>
-  <text x="676" y="206" text-anchor="middle" class="lbl-seg" transform="rotate(-34 676 206)">独库北段</text>
-
-  <!-- 途经 / 支线点（空心） -->
-  <circle class="pt-via" cx="818" cy="220" r="5"/>
-  <text x="818" y="240" text-anchor="middle" class="lbl-via">安集海大峡谷</text>
-  <circle class="pt-via" cx="144" cy="150" r="5"/>
-  <text x="134" y="154" text-anchor="end" class="lbl-via">果子沟大桥</text>
-  <circle class="pt-via" cx="435" cy="378" r="5"/>
-  <text x="435" y="398" text-anchor="middle" class="lbl-via">库尔德宁 / 恰西</text>
-  <circle class="pt-via" cx="528" cy="276" r="5"/>
-  <text x="528" y="262" text-anchor="middle" class="lbl-via">唐布拉百里画廊</text>
-  <circle class="pt-via" cx="620" cy="265" r="5"/>
-  <text x="632" y="263" text-anchor="start" class="lbl-via">乔尔玛</text>
-  <circle class="pt-via" cx="325" cy="408" r="5"/>
-  <text x="325" y="426" text-anchor="middle" class="lbl-via">喀拉峻（支）</text>
-  <circle class="pt-via" cx="586" cy="360" r="5"/>
-  <text x="586" y="378" text-anchor="middle" class="lbl-via">那拉提（支）</text>
+  <!-- 途经景点（空心） -->
+  <circle class="pt-via" cx="847" cy="90" r="5"/>
+  <text x="847" y="112" text-anchor="middle" class="lbl-via">五彩滩</text>
+  <circle class="pt-via" cx="626" cy="400" r="5"/>
+  <text x="626" y="420" text-anchor="middle" class="lbl-via">独山子大峡谷</text>
+  <circle class="pt-via" cx="107" cy="340" r="5"/>
+  <text x="92" y="344" text-anchor="end" class="lbl-via">果子沟大桥</text>
+  <circle class="pt-via" cx="268" cy="430" r="5"/>
+  <text x="286" y="427" text-anchor="start" class="lbl-via">喀拉峻</text>
+  <circle class="pt-via" cx="567" cy="423" r="5"/>
+  <text x="585" y="420" text-anchor="start" class="lbl-via">乔尔玛</text>
+  <circle class="pt-via" cx="632" cy="271" r="5"/>
+  <text x="650" y="269" text-anchor="start" class="lbl-via">克拉玛依</text>
 
   <!-- 过夜 / 核心点（实心） -->
-  <circle class="pt-stay" cx="1108" cy="260" r="6.5"/>
-  <text x="1098" y="256" text-anchor="end" class="lbl">乌鲁木齐</text>
-  <text x="1098" y="273" text-anchor="end" class="lbl-day">Day 1 / 11 / 12 · 起终点</text>
+  <circle class="pt-stay" cx="983" cy="436" r="6.5"/>
+  <text x="968" y="432" text-anchor="end" class="lbl">乌鲁木齐</text>
+  <text x="968" y="450" text-anchor="end" class="lbl-day">Day 1/11/12 · 起终点</text>
 
-  <circle class="pt-stay" cx="688" cy="140" r="6.5"/>
-  <text x="688" y="118" text-anchor="middle" class="lbl">乌苏 / 奎屯</text>
-  <text x="688" y="103" text-anchor="middle" class="lbl-day">Day 2 宿</text>
+  <circle class="pt-stay" cx="888" cy="104" r="6.5"/>
+  <text x="888" y="86" text-anchor="middle" class="lbl">布尔津</text>
+  <text x="888" y="70" text-anchor="middle" class="lbl-day">Day 2 宿 · 五彩滩日落</text>
 
-  <circle class="pt-stay" cx="180" cy="100" r="6.5"/>
-  <text x="180" y="82" text-anchor="middle" class="lbl">赛里木湖</text>
-  <text x="180" y="67" text-anchor="middle" class="lbl-day">Day 3–4 宿 · ★核心</text>
+  <circle class="pt-stay" cx="908" cy="25" r="6.5"/>
+  <text x="924" y="21" text-anchor="start" class="lbl">喀纳斯</text>
+  <text x="924" y="38" text-anchor="start" class="lbl-day">Day 3–4 宿 · ★核心</text>
 
-  <circle class="pt-stay" cx="195" cy="240" r="6.5"/>
-  <text x="207" y="238" text-anchor="start" class="lbl">伊宁</text>
-  <text x="207" y="254" text-anchor="start" class="lbl-day">Day 5 宿</text>
+  <circle class="pt-stay" cx="736" cy="230" r="6.5"/>
+  <text x="736" y="212" text-anchor="middle" class="lbl">乌尔禾</text>
+  <text x="736" y="196" text-anchor="middle" class="lbl-day">Day 5 宿 · 魔鬼城日落</text>
 
-  <circle class="pt-stay" cx="166" cy="390" r="6.5"/>
-  <text x="156" y="388" text-anchor="end" class="lbl">昭苏</text>
-  <text x="156" y="404" text-anchor="end" class="lbl-day">Day 6 宿</text>
+  <circle class="pt-stay" cx="148" cy="350" r="6.5"/>
+  <text x="148" y="332" text-anchor="middle" class="lbl">赛里木湖</text>
+  <text x="148" y="316" text-anchor="middle" class="lbl-day">Day 6 宿 · ★</text>
 
-  <circle class="pt-stay" cx="130" cy="420" r="6.5"/>
-  <text x="120" y="424" text-anchor="end" class="lbl">夏塔 ★</text>
+  <circle class="pt-stay" cx="167" cy="404" r="6.5"/>
+  <text x="184" y="401" text-anchor="start" class="lbl">伊宁</text>
+  <text x="184" y="418" text-anchor="start" class="lbl-day">Day 7 宿</text>
 
-  <circle class="pt-stay" cx="275" cy="380" r="6.5"/>
-  <text x="275" y="362" text-anchor="middle" class="lbl">特克斯八卦城</text>
-  <text x="275" y="347" text-anchor="middle" class="lbl-day">Day 7 宿</text>
+  <circle class="pt-stay" cx="234" cy="459" r="6.5"/>
+  <text x="234" y="440" text-anchor="middle" class="lbl">特克斯八卦城</text>
+  <text x="234" y="424" text-anchor="middle" class="lbl-day">Day 8 宿</text>
 
-  <circle class="pt-stay" cx="478" cy="330" r="6.5"/>
-  <text x="478" y="312" text-anchor="middle" class="lbl">新源</text>
-  <text x="478" y="297" text-anchor="middle" class="lbl-day">Day 8–9 宿</text>
+  <circle class="pt-stay" cx="372" cy="459" r="6.5"/>
+  <text x="372" y="440" text-anchor="middle" class="lbl">库尔德宁</text>
+  <text x="372" y="424" text-anchor="middle" class="lbl-day">Day 9 宿</text>
 
-  <circle class="pt-stay" cx="717" cy="160" r="6.5"/>
-  <text x="717" y="142" text-anchor="middle" class="lbl">独山子 / 奎屯</text>
-  <text x="717" y="127" text-anchor="middle" class="lbl-day">Day 10 宿</text>
+  <circle class="pt-stay" cx="424" cy="428" r="6.5"/>
+  <text x="424" y="410" text-anchor="middle" class="lbl">唐布拉蜜蜂小镇</text>
+  <text x="424" y="394" text-anchor="middle" class="lbl-day">Day 10 宿 · 星空夜</text>
+
+  <!-- 路段名 -->
+  <text x="930" y="190" text-anchor="middle" class="lbl-seg" transform="rotate(-18 930 190)">S21 阿乌高速</text>
+  <text x="600" y="400" text-anchor="middle" class="lbl-seg" transform="rotate(-80 600 400)">独库北段 G217</text>
+  <text x="500" y="408" text-anchor="middle" class="lbl-seg" transform="rotate(-6 500 408)">S315 百里画廊</text>
+  <text x="130" y="330" text-anchor="middle" class="lbl-seg" transform="rotate(-70 130 330)">G30 · 果子沟</text>
+  <text x="196" y="470" text-anchor="middle" class="lbl-seg" transform="rotate(-50 196 470)">G218 伊特段</text>
 
   <!-- 图例 -->
-  <g transform="translate(40,452)">
+  <g transform="translate(40,440)">
     <circle class="pt-stay" cx="6" cy="-4" r="6"/>
     <text x="18" y="0" class="lbl-cap">过夜 / 核心点</text>
     <circle class="pt-via" cx="150" cy="-4" r="5"/>
     <text x="162" y="0" class="lbl-cap">途经景点</text>
     <line class="rt-spur" x1="270" y1="-4" x2="300" y2="-4"/>
     <text x="306" y="0" class="lbl-cap">可选绕行（支）</text>
-    <text x="470" y="0" class="lbl-cap">　示意图 · 非按比例 · 顺时针环线</text>
+    <text x="470" y="0" class="lbl-cap">　示意图 · 非按比例 · 逆时针大环线</text>
   </g>
 </svg>
-<figcaption class="map-cap">伊犁环线示意图（按城市真实相对方位绘制，非精确比例）；详细里程车程见下方「三、每日行程」。</figcaption>
+<figcaption class="map-cap">北疆大环线示意图（按城市真实相对方位绘制，非精确比例）；详细里程车程见下方「三、每日行程」。</figcaption>
 </figure>
 
 <figure class="routemap">
 <div id="realmap"></div>
 <figcaption class="map-cap map-legend">
   <b>真实经纬度地图</b>　可缩放/拖动，OpenStreetMap 底图（需联网加载）。<br>
-  <b>线条</b>：绿实线＝当前主环线；绿虚线＝可选绕行（喀拉峻/那拉提）；黄实线＝原方案路线（含阿勒泰/禾木/喀纳斯北线，作对比）；彩色分段＝当前主环线按天（见 Day 标签）。<br>
-  <b>圆点</b>：绿实心＝过夜/核心点；绿空心＝当前途经景点；黄空心＝原方案途径点（阿勒泰、禾木、喀纳斯、克拉玛依）。<br>
-  <b>路名</b>：绿色斜体＝主要公路（S101 国防公路、果子沟 G30、伊昭公路、唐布拉 S315、独库北段 G217）。<br>
-  <b>里程</b>：绿胶囊＝当前各段里程/车程（取自行程表，以实际导航为准）；黄胶囊＝原方案各段（行程表无，按真实道路估算，“约”示估值）。<br>
+  <b>线条</b>：绿实线＝当前主环线；绿虚线＝可选绕行（五彩滩 / 独山子大峡谷 / 喀拉峻）；彩色分段＝主环线按天（见 Day 标签）。<br>
+  <b>圆点</b>：绿实心＝过夜/核心点；绿空心＝途经景点。<br>
+  <b>路名</b>：绿色斜体＝主要公路（S21 阿乌高速、G30 果子沟、G218 伊特段、S315 百里画廊、独库北段 G217）。<br>
+  <b>里程</b>：绿胶囊＝各段里程/车程（取自行程表，以实际导航为准）。<br>
   <b>操作</b>：右上角按钮可分别隐藏「地名 / 里程 / 分天」。<br>
   <b>说明</b>：坐标为景区/城镇近似位置，连线为示意走向（非道路实测里程），仅供判断相对方位与距离。
 </figcaption>
@@ -247,110 +234,78 @@
   if (typeof L === 'undefined') { return; }
   // 过夜/核心点：[纬度, 经度]
   var stays = [
-    { n:'乌鲁木齐',     d:'Day 1/11/12 · 起终点', c:[43.825, 87.616], dir:'right'  },
-    { n:'乌苏 / 奎屯',  d:'Day 2 宿',            c:[44.434, 84.677], dir:'top'    },
-    { n:'赛里木湖',     d:'Day 3–4 宿 · ★核心',  c:[44.583, 81.183], dir:'top'    },
-    { n:'伊宁',         d:'Day 5 宿',            c:[43.913, 81.320], dir:'left'   },
-    { n:'昭苏',         d:'Day 6 宿',            c:[43.151, 81.130], dir:'left'   },
-    { n:'夏塔 ★',       d:'核心日',              c:[42.950, 80.830], dir:'bottom' },
-    { n:'特克斯八卦城', d:'Day 7 宿',            c:[43.214, 81.840], dir:'bottom' },
-    { n:'新源',         d:'Day 8–9 宿',          c:[43.430, 83.260], dir:'bottom' },
-    { n:'独山子 / 奎屯',d:'Day 10 宿',           c:[44.327, 84.851], dir:'top'    }
+    { n:'乌鲁木齐',        d:'Day 1/11/12 · 起终点', c:[43.825, 87.616], dir:'right'  },
+    { n:'布尔津',          d:'Day 2 宿',             c:[47.700, 86.870], dir:'bottom' },
+    { n:'喀纳斯',          d:'Day 3–4 宿 · ★核心',   c:[48.720, 87.020], dir:'top'    },
+    { n:'乌尔禾',          d:'Day 5 宿',             c:[46.080, 85.700], dir:'bottom' },
+    { n:'赛里木湖',        d:'Day 6 宿',             c:[44.580, 81.180], dir:'left'   },
+    { n:'伊宁',            d:'Day 7 宿',             c:[43.910, 81.320], dir:'left'   },
+    { n:'特克斯八卦城',    d:'Day 8 宿',             c:[43.210, 81.840], dir:'bottom' },
+    { n:'库尔德宁',        d:'Day 9 宿',             c:[43.180, 82.900], dir:'bottom' },
+    { n:'唐布拉蜜蜂小镇',  d:'Day 10 宿',            c:[43.620, 83.300], dir:'top'    }
   ];
-  // 途经 / 支线景点
+  // 途经景点
   var vias = [
-    { n:'安集海大峡谷',     c:[44.040, 85.620], dir:'bottom' },
-    { n:'果子沟大桥',       c:[44.450, 80.860], dir:'left'   },
-    { n:'库尔德宁 / 恰西',  c:[43.180, 82.900], dir:'bottom' },
-    { n:'唐布拉百里画廊',   c:[43.580, 84.250], dir:'top'    },
-    { n:'乔尔玛',           c:[43.660, 84.400], dir:'right'  },
-    { n:'喀拉峻（支）',     c:[43.180, 82.100], dir:'right'  },
-    { n:'那拉提（支）',     c:[43.300, 84.020], dir:'bottom' }
+    { n:'五彩滩',         c:[47.620, 86.550], dir:'right'  },
+    { n:'独山子大峡谷',   c:[44.200, 84.950], dir:'bottom' },
+    { n:'果子沟大桥',     c:[44.450, 80.860], dir:'left'   },
+    { n:'喀拉峻',         c:[43.180, 82.100], dir:'right'  },
+    { n:'乔尔玛',         c:[43.660, 84.400], dir:'right'  },
+    { n:'克拉玛依',       c:[45.580, 84.890], dir:'left'   }
   ];
   // 主环线（自驾顺序，含按主要公路走向补的途经城镇，使连线贴着实际道路）
   var route = [
     [43.825,87.616],  // 乌鲁木齐
-    [44.010,87.300],  // 昌吉
-    [44.300,86.080],  // 石河子
-    [44.040,85.620],  // 安集海大峡谷
-    [44.434,84.677],  // 乌苏
+    [44.170,87.540],  // 五家渠
+    [46.200,87.300],  // 福海（S21 沙漠公路）
+    [47.350,87.820],  // 北屯
+    [47.700,86.870],  // 布尔津
+    [48.720,87.020],  // 喀纳斯
+    [47.700,86.870],  // 布尔津（返程）
+    [46.080,85.700],  // 乌尔禾
+    [45.580,84.890],  // 克拉玛依
+    [44.420,84.900],  // 奎屯
+    [44.330,84.850],  // 独山子
     [44.610,82.890],  // 精河（G30）
-    [44.583,81.183],  // 赛里木湖
+    [44.580,81.180],  // 赛里木湖
     [44.450,80.860],  // 果子沟大桥
-    [43.913,81.320],  // 伊宁
-    [43.151,81.130],  // 昭苏（伊昭公路）
-    [42.950,80.830],  // 夏塔
-    [43.214,81.840],  // 特克斯
+    [43.910,81.320],  // 伊宁
+    [43.210,81.840],  // 特克斯
     [43.180,82.900],  // 库尔德宁
-    [43.430,83.260],  // 新源
-    [43.580,84.250],  // 唐布拉（S315）
+    [43.620,83.300],  // 唐布拉蜜蜂小镇
     [43.660,84.400],  // 乔尔玛
-    [44.327,84.851],  // 独山子（独库北段）
+    [44.330,84.850],  // 独山子（独库北段）
     [44.420,84.900],  // 奎屯
     [44.300,86.080],  // 石河子
     [43.825,87.616]   // 乌鲁木齐（回程 G30）
   ];
-  // 可选绕行（二选一、抢不到则不去），绿虚线
+  // 可选绕行（去-回 / 支线），绿虚线
   var spurs = [
-    [[43.214,81.840],[43.180,82.100]],   // 特克斯 → 喀拉峻
-    [[43.430,83.260],[43.300,84.020]]    // 新源 → 那拉提
-  ];
-  // 原方案路线（含阿勒泰 / 禾木 / 喀纳斯 北线，后调整为深度伊犁版），黄色标记作对比
-  var oldRoute = [
-    [43.825,87.616],  // 乌鲁木齐（起）
-    [44.900,88.500],  // 北上 G216
-    [46.990,89.520],  // 富蕴
-    [47.850,88.130],  // 阿勒泰
-    [48.580,87.500],  // 禾木
-    [48.720,87.020],  // 喀纳斯
-    [47.700,86.870],  // 布尔津
-    [46.320,85.700],  // 乌尔禾
-    [45.580,84.890],  // 克拉玛依
-    [44.610,82.890],  // 精河
-    [44.583,81.183],  // 赛里木湖
-    [43.913,81.320],  // 伊宁
-    [43.320,84.020],  // 那拉提
-    [43.300,86.000],  // 东返 G218/G216
-    [43.825,87.616]   // 乌鲁木齐（终）
-  ];
-  // 原方案途径点（独有的，黄色标记；赛里木湖/伊宁/那拉提与当前路线重合已有绿点）
-  var oldPts = [
-    { n:'阿勒泰',   c:[47.850,88.130], dir:'right'  },
-    { n:'禾木',     c:[48.580,87.500], dir:'top'    },
-    { n:'喀纳斯',   c:[48.720,87.020], dir:'left'   },
-    { n:'克拉玛依', c:[45.580,84.890], dir:'left'   }
+    [[47.700,86.870],[47.620,86.550]],   // 布尔津 → 五彩滩（D2 晚）
+    [[44.330,84.850],[44.200,84.950]],   // 独山子 → 独山子大峡谷（D6）
+    [[43.210,81.840],[43.180,82.100]]    // 特克斯 → 喀拉峻（D8–9）
   ];
 
   // 相邻过夜点之间的行程里程/车程（取自「三、每日行程」表，以实际导航为准）
   var segs = [
-    { t:'550km · 7h',   c:[44.150, 85.950] },  // 乌鲁木齐–乌苏
-    { t:'350km · 3h',   c:[44.560, 82.900] },  // 乌苏–赛里木湖
-    { t:'200km · 4h',   c:[44.230, 81.200] },  // 赛里木湖–伊宁
-    { t:'280km · 4.5h', c:[43.560, 81.360] },  // 伊宁–昭苏/夏塔（伊昭公路）
-    { t:'160km · 3h',   c:[43.080, 81.360] },  // 夏塔–特克斯
-    { t:'250km · 4h',   c:[43.320, 82.560] },  // 特克斯–库尔德宁–新源
-    { t:'350km · 7h',   c:[43.960, 84.220] },  // 新源–唐布拉–独库–独山子
-    { t:'250km · 3h',   c:[44.060, 86.350] }   // 独山子–乌鲁木齐
-  ];
-  // 原方案分段里程/车程（行程表无，按真实道路距离估算，黄色胶囊，"约"示估值）
-  var segsOld = [
-    { t:'约650km · 8h',   c:[46.000, 88.950] },  // 乌鲁木齐–阿勒泰
-    { t:'约180km · 4h',   c:[48.220, 87.800] },  // 阿勒泰–禾木
-    { t:'约70km · 2h',    c:[48.660, 87.260] },  // 禾木–喀纳斯
-    { t:'约470km · 6h',   c:[46.950, 86.200] },  // 喀纳斯–布尔津–克拉玛依
-    { t:'约430km · 5h',   c:[45.020, 83.250] },  // 克拉玛依–精河–赛里木湖
-    { t:'约130km · 2.5h', c:[44.400, 81.520] },  // 赛里木湖–伊宁
-    { t:'约280km · 4.5h', c:[43.620, 82.670] },  // 伊宁–那拉提
-    { t:'约600km · 8h',   c:[43.450, 85.600] }   // 那拉提–乌鲁木齐
+    { t:'约600km · 7h',   c:[46.000, 87.200] },  // 乌鲁木齐–布尔津
+    { t:'约130km · 3h',   c:[48.200, 86.950] },  // 布尔津–喀纳斯
+    { t:'约370km · 5h',   c:[46.900, 86.200] },  // 喀纳斯–乌尔禾
+    { t:'约500km · 6.5h', c:[45.200, 83.800] },  // 乌尔禾–赛里木湖
+    { t:'约200km · 3h',   c:[44.250, 81.000] },  // 赛里木湖–伊宁
+    { t:'约110km · 2h',   c:[43.550, 81.550] },  // 伊宁–特克斯
+    { t:'约120km · 2.5h', c:[43.200, 82.350] },  // 特克斯–库尔德宁
+    { t:'约220km · 4h',   c:[43.400, 83.100] },  // 库尔德宁–唐布拉
+    { t:'约440km · 7.5h', c:[44.000, 85.500] }   // 唐布拉–乌鲁木齐（含独库北段）
   ];
 
   // 主要公路名（贴在对应路段上）
   var roads = [
-    { n:'S101 国防公路', c:[44.150,85.900] },
-    { n:'G30 · 果子沟',  c:[44.520,80.980] },
-    { n:'伊昭公路 S237', c:[43.560,81.030] },
-    { n:'唐布拉 S315',   c:[43.500,83.800] },
-    { n:'独库北段 G217', c:[44.060,84.640] }
+    { n:'S21 阿乌高速',  c:[45.800,87.200] },
+    { n:'G30 · 果子沟',  c:[44.500,80.950] },
+    { n:'G218 · 伊特段', c:[43.550,81.600] },
+    { n:'S315 · 百里画廊', c:[43.630,83.600] },
+    { n:'独库北段 G217', c:[44.000,84.700] }
   ];
 
   var map = L.map('realmap', { scrollWheelZoom:false });
@@ -358,10 +313,6 @@
     maxZoom: 17,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
-
-  // 原方案路线（黄色，画在底层作对比）
-  L.polyline(oldRoute, { color:'#ffffff', weight:6, opacity:.7 }).addTo(map);
-  L.polyline(oldRoute, { color:'#e8a200', weight:3.5, opacity:.95 }).addTo(map);
 
   // 当前主环线：白色描边打底 + 绿线在上，保证在底图上清晰可见
   L.polyline(route, { color:'#ffffff', weight:5, opacity:.9 }).addTo(map);
@@ -373,14 +324,15 @@
 
   // 按天分段着色（route 下标区间；覆盖在主环线上，可隐藏）
   var dayLegs = [
-    { day:'Day 2',  color:'#e6194B', a:0,  b:4  },   // 乌鲁木齐→乌苏
-    { day:'Day 3',  color:'#f58231', a:4,  b:6  },   // 乌苏→赛里木湖
-    { day:'Day 5',  color:'#911eb4', a:6,  b:8  },   // 赛里木湖→伊宁
-    { day:'Day 6',  color:'#42d4f4', a:8,  b:10 },   // 伊宁→昭苏→夏塔
-    { day:'Day 7',  color:'#f032e6', a:10, b:11 },   // 夏塔→特克斯
-    { day:'Day 8',  color:'#9A6324', a:11, b:13 },   // 特克斯→库尔德宁→新源
-    { day:'Day 10', color:'#000075', a:13, b:16 },   // 新源→唐布拉→独库→独山子
-    { day:'Day 11', color:'#808000', a:16, b:19 }    // 独山子→乌鲁木齐
+    { day:'Day 2',  color:'#e6194B', a:0,  b:4  },   // 乌鲁木齐→布尔津
+    { day:'Day 3',  color:'#f58231', a:4,  b:5  },   // 布尔津→喀纳斯
+    { day:'Day 5',  color:'#911eb4', a:6,  b:7  },   // 布尔津→乌尔禾
+    { day:'Day 6',  color:'#42d4f4', a:7,  b:12 },   // 乌尔禾→赛里木湖
+    { day:'Day 7',  color:'#f032e6', a:12, b:14 },   // 赛里木湖→伊宁
+    { day:'Day 8',  color:'#9A6324', a:14, b:15 },   // 伊宁→特克斯
+    { day:'Day 9',  color:'#469990', a:15, b:16 },   // 特克斯→库尔德宁
+    { day:'Day 10', color:'#000075', a:16, b:17 },   // 库尔德宁→唐布拉
+    { day:'Day 11', color:'#808000', a:17, b:22 }    // 唐布拉→独库→乌鲁木齐
   ];
   var dayLayer = L.layerGroup();
   dayLegs.forEach(function (leg) {
@@ -420,17 +372,8 @@
       .setLatLng(s.c).setContent(s.t).addTo(map);
   });
 
-  segsOld.forEach(function (s) {
-    L.tooltip({ permanent:true, direction:'center', className:'lf-dist lf-distold', interactive:false })
-      .setLatLng(s.c).setContent(s.t).addTo(map);
-  });
-
-  oldPts.forEach(function (p) {
-    L.circleMarker(p.c, { radius:5, color:'#e8a200', weight:2, fillColor:'#fff', fillOpacity:1 })
-      .addTo(map)
-      .bindTooltip(p.n, { permanent:true, direction:p.dir, className:'lf-old' });
-  });
-  oldRoute.forEach(function (c) { bounds.push(c); });
+  route.forEach(function (c) { bounds.push(c); });
+  vias.forEach(function (p) { bounds.push(p.c); });
 
   // 图例
   var legend = L.control({ position:'bottomright' });
@@ -438,9 +381,8 @@
     var d = L.DomUtil.create('div');
     d.style.cssText = 'background:rgba(255,255,255,.92);padding:6px 9px;border:1px solid #ccc;border-radius:5px;font-size:12px;line-height:1.7;color:#333';
     d.innerHTML =
-      '<span style="display:inline-block;width:20px;border-top:3px solid #0a7d52;vertical-align:middle"></span> 当前主环线<br>' +
-      '<span style="display:inline-block;width:20px;border-top:2px dashed #0a7d52;vertical-align:middle"></span> 可选绕行（喀拉峻/那拉提）<br>' +
-      '<span style="display:inline-block;width:20px;border-top:3px solid #e8a200;vertical-align:middle"></span> 原方案路线 / 途径点<br>' +
+      '<span style="display:inline-block;width:20px;border-top:3px solid #0a7d52;vertical-align:middle"></span> 主环线<br>' +
+      '<span style="display:inline-block;width:20px;border-top:2px dashed #0a7d52;vertical-align:middle"></span> 可选绕行（五彩滩/大峡谷/喀拉峻）<br>' +
       '<span style="display:inline-block;width:20px;border-top:3px solid #e6194B;vertical-align:middle"></span> 主环线按天分段（见 Day 标签）';
     L.DomEvent.disableClickPropagation(d);
     return d;
@@ -484,11 +426,13 @@
 })();
 </script>
 
-<pre>乌鲁木齐 → S101/安集海 → 乌苏 → 赛里木湖（核心，住 2 晚）
-        → 伊宁（补给）→ 伊昭公路 → 昭苏 / 夏塔
-        → 特克斯八卦城 → 库尔德宁 / 恰西 → 新源（草原慢玩）
-        → 唐布拉 + 独库北段 → 独山子 / 奎屯 → 乌鲁木齐返程</pre>
-<p>判断行程是否合理只看一句话：<strong>有没有连续 2 天「不赶路、只玩一个地方」</strong>——本版赛里木湖住 2 晚、草原慢玩 1 天，达标。</p>
+<pre>乌鲁木齐 → S21 沙漠公路 → 布尔津（五彩滩日落）
+        → 喀纳斯（2 夜：三湾 / 观鱼台 · 晨雾视住宿取舍）
+        → 乌尔禾（魔鬼城日落）→ 独山子 → 赛里木湖（黄昏 + 日出）
+        → 伊宁（六星街 / 喀赞其）→ 特克斯八卦城 + 喀拉峻
+        → 库尔德宁 → 唐布拉百里画廊
+        → 乔尔玛 + 独库北段 → 乌鲁木齐返程</pre>
+<p>判断行程是否合理只看一句话：<strong>有没有连续 2 天「不赶路、只玩一个地方」</strong>——本版喀纳斯住 2 夜（D3+D4）、五彩滩/魔鬼城两大日落各半天慢玩，达标。代价是 D2 / D6 / D11 三个长途日（6.5–7.5h），且 D11 独库收尾当天无缓冲，预案见当日。</p>
 
 <h2>三、每日行程</h2>
 <div class="tablewrap">
@@ -499,81 +443,81 @@
 <tbody>
 <tr>
 <td class="day">Day 1<br>8/15 周六</td>
-<td>成都 → 乌鲁木齐<br>市内约 45km / 1.5h<br><b>宿</b>：乌鲁木齐</td>
-<td>• 落地取车（<strong>一嗨等已免押金、异地还车免费</strong>，验车拍照）<br>• 大巴扎 citywalk（<strong>半天足矣</strong>）<br>• 领馆巷·和田二街晚餐<br>• 傍晚红光山大佛寺<br>• <strong>伴手礼别在大巴扎买，留到返程华凌</strong></td>
+<td>成都 → 乌鲁木齐<br>市内约 45km / 1.5h<br><b>宿</b>：乌鲁木齐 如家云上四季</td>
+<td>• 落地取车（<strong>一嗨等已免押金、异地还车免费</strong>，验车拍照）<br>• 大巴扎 citywalk（<strong>半天足矣</strong>）<br>• 领馆巷·和田二街晚餐<br>• 傍晚红光山大佛寺（可选）<br>• <strong>伴手礼别在大巴扎买，留到返程华凌</strong></td>
 <td>• 大巴扎/二道桥：馕博物馆、买特产<br>• 领馆巷·和田二街：大漠红嘴雁<br>• 红光山傍晚长焦拍日照金山</td>
-<td class="general" rowspan="12">• <strong>别贪多</strong>：一天开车超 6h + 大量徒步＝纯打卡无体验，喜欢的地方多待 1–2 天<br>• <strong>草原别超 3 个</strong>，否则审美疲劳<br>• <strong>风景在路上</strong>：S101、伊昭本身就是景点，留足停车拍照时间<br>• <strong>暑假人多</strong>：8 月学生多、排队、物价高，错峰早起（核心景区 10–16 点最挤）<br>• <strong>那拉提争议大</strong>：商业化、人多票贵，可用夏塔/喀拉峻/库尔德宁替代<br>• <strong>作息</strong>：全疆统一北京时间但日落晚 21–22 点，行程可往后排<br>• <strong>天气</strong>：温差 15–20℃、紫外线 8 级，速干+软壳+轻羽绒、SPF50+；天山区基本无高反</td>
+<td class="general" rowspan="12">• <strong>别贪多</strong>：一天开车超 6h + 大量徒步＝纯打卡无体验，喜欢的地方多待 1–2 天<br>• <strong>草原别超 3 个</strong>：本线喀拉峻+库尔德宁+唐布拉已是上限，别再叠那拉提/琼库什台<br>• <strong>风景在路上</strong>：S21 沙漠公路、百里画廊、独库北段本身就是景区，留足停车拍照时间<br>• <strong>暑假人多</strong>：8 月学生多、排队、物价高；喀纳斯/观鱼台 8 点前入园，魔鬼城/五彩滩/喀拉峻人体草原都赶日落，主动错峰<br>• <strong>作息</strong>：全疆统一北京时间但日落晚 21–22 点，行程可往后排<br>• <strong>天气</strong>：温差 15–20℃、山区清晨仅 8–10℃、紫外线 8 级；速干短袖+防风软壳+薄羽绒内胆、SPF50+；天山区基本无高反<br>• <strong>防蚊</strong>：五彩滩（世界四大蚊区之一）、赛湖、草原蚊子多，强效驱蚊液+长袖长裤<br>• <strong>无人机</strong>：喀纳斯全域禁飞（罚 5000 起）、魔鬼城需报备、五彩滩限飞；草原飞需入口登记<br>• <strong>伴手礼</strong>：去乌市华凌干果市场（可还价），别在大巴扎/路边买"和田玉/黑枸杞/雪莲"</td>
 </tr>
 <tr>
 <td class="day">Day 2<br>8/16 周日</td>
-<td>乌鲁木齐 → S101 → 乌苏<br>约 550km / 7h<br><b>宿</b>：乌苏（或奎屯，住宿更好）</td>
-<td>• 9 点出发走 S101 国防公路<br>• 途经齐古大桥、肯斯瓦特水库、安集海大峡谷<br>• 抓重点别全停，嫌累可走连霍高速<br>• <strong>长途日，出发前加满油</strong></td>
-<td>• 路即风景，沿途水库/峡谷随手拍<br>• 不想颠就连霍高速直奔重点</td>
+<td>乌鲁木齐 → 布尔津<br>约 600km / 7h（S21 高速为主）<br><b>宿</b>：布尔津</td>
+<td>• 9 点出发走 <strong>S21 阿乌沙漠公路</strong>（路即风景，观景台随停）<br>• <strong>出发前加满油（S21 中段补给点少，北屯有加油站）</strong><br>• 傍晚 20:00 后进五彩滩，<strong>赶日落 20:30–22:30</strong><br>• 布尔津河堤夜市：烤狗鱼、卡瓦斯<br>• <strong>宿布尔津＝距喀纳斯仅 130km，D3 可中午前进园</strong></td>
+<td>• 五彩滩：门票 45 元，雅丹彩丘+额尔齐斯河"一河两岸"，木栈道 2km 步行 1–2h，<strong>日场票即可待到日落后清场</strong>；世界四大蚊区，防蚊液必带<br>• 正午去五彩滩＝白去，颜色发白</td>
 </tr>
 <tr>
 <td class="day">Day 3<br>8/17 周一</td>
-<td>乌苏 → 赛里木湖<br>约 350km / 3h（高速为主）<br><b>宿</b>：赛里木湖边（房车/星空营地）</td>
-<td>• <strong>提前 1 天公众号预约车牌</strong><br>• 9 点直奔东门<br>• <strong>务必顺时针环湖</strong>，下午先玩一半<br>• <strong>晚 8 点停售但黄昏最美</strong><br>• 自驾最佳（景交每站停 20 分钟禁换车）</td>
-<td>• 24h 自驾票可进出<br>• 环湖 90km、限速 40、绕一圈约 2h<br>• 湖边房车/星空营地，推门看日出星空（旺季贵早订）</td>
+<td>布尔津 → 喀纳斯<br>约 130km / 3h<br><b>宿</b>：喀纳斯星空苑（2 晚）</td>
+<td>• 上午出发，中午到贾登峪星空苑入住放行李<br>• <strong>星空苑在贾登峪（景区外）</strong>，进园须换乘区间车，<strong>提前官方渠道预约，8 月满员进不去</strong><br>• 下午进园：湖畔木栈道 + 图瓦老村漫步（约 3h）<br>• <strong>住贾登峪赶不上清晨首班晨雾，取舍见 Day4</strong></td>
+<td>• <strong>住贾登峪选二进票 270（两次进出）</strong>；一进票 230 只适合住景区内<br>• 观鱼台区间车另付 20 元，<strong>提前买，当天买来不及</strong><br>• 贾登峪到游客中心有免费区间大巴；景区内餐饮贵（拌面 45），自带干粮</td>
 </tr>
 <tr>
 <td class="day">Day 4<br>8/18 周二</td>
-<td>赛里木湖（完整环湖 + 松树头）<br>环湖约 90km，慢游一整天<br><b>宿</b>：赛里木湖边（第 2 晚）</td>
-<td>• 补齐另一半环湖<br>• 松树头徒步看全景<br>• 亲水滩看天鹅花海<br>• 等日出/日落</td>
-<td>• 松树头：南门高处徒步往返 3km，赛湖全景+远眺果子沟，日出日落绝佳，<strong>较费体力</strong><br>• 亲水滩：天鹅、花海<br>• 克勒涌珠、西海草原、S 弯公路<br>• 无人机入口登记</td>
+<td>喀纳斯（核心日）<br>全天慢游<br><b>宿</b>：喀纳斯星空苑（第 2 晚）</td>
+<td>• <strong>7:30–8:00 入园（住贾登峪赶不上首班晨雾，接受晨光版三湾）</strong><br>• 先登<strong>观鱼台</strong>（8:30–10:30 光线最佳、人少；1068 级台阶约 40 分钟）<br>• 中午三湾徒步：神仙湾→月亮湾→卧龙湾，沿栈道向下游走（卧龙湾午后倒影最清晰）<br>• 下午出园回贾登峪<br>• <strong>区间车末班 20:00、观鱼台下山末班 19:30，别错过</strong><br>• <strong>想赌晨雾：升级景区内老村/新村住 1 晚（+800–1500），次日 6 点坐首班车</strong></td>
+<td>• <strong>动线原则：登高在前、徒步在后</strong>——观鱼台只适合上午（下午逆光起雾），三湾午后光线更佳<br>• 三湾全程木栈道 4.6–7km、平缓约 2.5h；<strong>去程区间车直达标不停、返程才逐站停</strong>，回程坐区间车<br>• 观鱼台限流约 8000 人/日；景区信号弱、三湾栈道基本无信号，约好碰头点<br>• 老村/新村木屋 1 晚 800–1500，首班区间车约 6:00–7:00 发车</td>
 </tr>
 <tr>
 <td class="day">Day 5<br>8/19 周三</td>
-<td>赛里木湖 → 伊宁<br>约 200km / 4h<br><b>宿</b>：伊宁（六星街附近）</td>
-<td>• 看日出（视天气）<br>• <strong>离湖前加满油（出门 60km 才有油站）</strong><br>• 果子沟大桥<br>• 薰衣草（<strong>8 月多已过花期</strong>）<br>• 六星街·喀赞其 citywalk</td>
-<td>• 果子沟大桥很震撼<br>• 喀赞其：蓝色童话镇<br>• 六星街：俄式文艺，吃喝逛都满足<br>• 美食：大盘鸡、抓饭、纳仁、熏马肠、奶啤、奶茶</td>
+<td>喀纳斯 → 乌尔禾<br>约 370km / 5h<br><b>宿</b>：乌尔禾 美高酒店</td>
+<td>• 早上视天气直接出发（二进票已用完，不再进园）<br>• 布尔津休整午餐<br>• 下午抵乌尔禾，先休整<br>• <strong>17:30 后入园世界魔鬼城</strong>，等日落黄金时段 19:00–21:00<br>• <strong>乌尔禾加满油（次日长途）</strong></td>
+<td>• 魔鬼城：门票+区间车约 62–88 元（口径不一，以官方为准），观光小火车 9.8km 环线约 1h、15 分钟一班随上随下<br>• <strong>反向坐（从终点站玩起）人少</strong>；日落前 1h 逆光剪影最出片；正午暴晒别入园<br>• <strong>禁飞无人机（需报备）</strong>；防风沙三件套，日落降温快带外套</td>
 </tr>
 <tr>
 <td class="day">Day 6<br>8/20 周四</td>
-<td>伊宁 → 伊昭公路 → 昭苏/夏塔<br>约 280km / 4.5h（山路）<br><b>宿</b>：夏塔/昭苏</td>
-<td>• 走伊昭（<strong>伊宁先加满油，全程无油站</strong>）<br>• <strong>海拔 3200m 降温，带防风外套、下离线地图</strong><br>• 白石峰观景台<br>• 昭苏天马浴河表演<br>• <strong>当晚 0 点抢夏塔次日票</strong></td>
-<td>• 伊昭 S237 约 120km，通行约早 9 晚 9<br>• 白石峰观景台有餐饮/厕所<br>• 实走评价：更适合航拍</td>
+<td>乌尔禾 → 赛里木湖<br>约 500km / 6.5h<br><b>宿</b>：赛里木湖 观疆也民宿</td>
+<td>• <strong>8 点出发（全程最长转场日）</strong><br>• 中午独山子下高速，独山子大峡谷停 1h（可选）<br>• 精河补油<br>• <strong>提前 1 天公众号预约赛湖车牌</strong><br>• 傍晚进赛湖，西岸等日落（<strong>黄昏最美，晚 8 点后停售</strong>）</td>
+<td>• 独山子大峡谷：G30 下来约 20km，1h 足够，破转场疲乏<br>• <strong>观疆也民宿在赛湖东门游客中心旁（博乐市，可接送）</strong>，位置理想：D6 傍晚进东门看黄昏、D7 早晨再进东门看日出，24h 自驾票两次进出刚好<br>• 环湖约 90km、限速 40、一圈约 2h；日落时西岸光线最佳<br>• 进园前在精河/东门一带加满油（出湖西侧约 60km 才再遇油站）</td>
 </tr>
 <tr>
 <td class="day">Day 7<br>8/21 周五</td>
-<td>夏塔（核心日，需早起）→ 特克斯<br>约 160km / 3h<br><b>宿</b>：特克斯（八卦城夜景航拍）</td>
-<td>• <strong>早起错峰（午后 90% 下雨、区间车排长队）</strong><br>• 区间车→温泉酒店→电瓶车到转运桥→徒步将军桥<br>• 边境线路段不停车<br>• 下午转场</td>
-<td>• 夏塔集草原+森林+冰川+花海，将军桥多层次<br>• 自驾票每天仅几十张，靠区间车更稳<br>• 边境线可能收出境短信<br>• 特克斯八卦城：街路如迷宫、太极眼摩天轮，<strong>夜景航拍最好、过 12 点熄灯</strong>，拍人少等 11 点后</td>
+<td>赛里木湖 → 伊宁<br>约 200km / 3h<br><b>宿</b>：伊宁 汉庭</td>
+<td>• 早晨松树头日出/徒步看全景（往返 3km）<br>• 或东岸亲水滩看天鹅花海<br>• <strong>出湖前加满油（出湖 60km 才有油站）</strong><br>• 果子沟大桥打卡<br>• 下午伊宁：六星街·喀赞其 citywalk</td>
+<td>• 松树头：南门高处，赛湖全景+远眺果子沟，日出日落绝佳、较费体力<br>• 喀赞其：蓝色童话镇；六星街：俄式文艺，吃喝逛集中<br>• 美食：大盘鸡、抓饭、纳仁、熏马肠、奶啤、奶茶</td>
 </tr>
 <tr>
 <td class="day">Day 8<br>8/22 周六</td>
-<td>特克斯 → 库尔德宁/恰西 → 新源<br>约 250km / 4h（特→库 120km/2h + →新源 100km/2h）<br><b>宿</b>：新源</td>
-<td>• 库尔德宁中沟进东沟出（<strong>导航"游客中心"别导保护区</strong>）<br>• 或恰西画卷观景台，二选一<br>• <strong>山上无餐厅商店，自带食物水</strong></td>
-<td>• 库尔德宁：齐梦德（《海蒂和爷爷》小木屋）、阿尤赛（俯瞰盘山公路）、十里画廊云杉林<br>• 恰西：画卷观景台、恰塔环线（修路时不通）、瀑布、云杉<br>• <strong>二选一别贪多</strong></td>
+<td>伊宁 → 特克斯 → 喀拉峻<br>约 120km / 2h<br><b>宿</b>：特克斯 温州国际酒店</td>
+<td>• 9 点出发→特克斯 11:00<br>• 八卦城 1–2h（太极眼摩天轮 / 中心广场）<br>• 午餐后 13:00 进喀拉峻布拉克北门<br>• 下午<strong>阔克苏峡谷线</strong>：索道→鳄鱼湾→九曲十八弯<br>• <strong>人体草原傍晚 18:30–20:00 才有光影</strong><br>• 20:30 出园回特克斯<br>• <strong>需「游新疆」小程序预约，全域联票 275（48h）</strong></td>
+<td>• 喀拉峻两片区分开购票/区间车不互通：草原线（东西喀拉峻，鲜花台/猎鹰台）+ 峡谷线（阔克苏，人体草原/鳄鱼湾/九曲十八弯）<br>• <strong>人体草原正午无光影看不出"人体"曲线</strong>，务必傍晚到<br>• 信号弱下载离线地图；自备水干粮；区间车有末班别错过</td>
 </tr>
 <tr>
 <td class="day">Day 9<br>8/23 周日</td>
-<td>草原深度体验（放慢节奏）<br>机动，半天以内<br><b>宿</b>：新源</td>
-<td>• 刻意慢下来，补玩昨日草原<br>• 或加喀拉峻（<strong>19km/6–8h，需小程序预约限流</strong>）<br>• 或那拉提（<strong>300 元自驾票 48h、3 年驾龄+传行驶证，抢不到不去</strong>）<br>• 旺季 10–16 点最挤，清晨错峰</td>
-<td>• 喀拉峻：最高垭口 2900m、最美段→塔林营地<br>• 琼库什台：乌孙古道顶级徒步 6 天/轻徒步 3h、可骑马，更折腾<br>• 三者按体力二选一，别都安排</td>
+<td>喀拉峻 → 库尔德宁<br>约 140km / 2.5h<br><b>宿</b>：库尔德宁 梵净牧舍酒店</td>
+<td>• 上午 9:00 进喀拉峻<strong>草原线</strong>：鲜花台（1–1.5h）→ 猎鹰台（2–3h，可骑马）<br>• 中午出园午餐<br>• 14:00 出发→库尔德宁 16:30 抵<br>• 傍晚溪谷 / 木屋休整</td>
+<td>• 鲜花台看花海草原、猎鹰台远眺雪峰，上午光线好<br>• 库尔德宁：中沟进东沟出（<strong>导航"游客中心"别导保护区</strong>）；山上无餐厅商店，自带食物水<br>• 齐梦德（《海蒂和爷爷》小木屋）、阿尤赛（俯瞰盘山公路）、十里画廊云杉</td>
 </tr>
 <tr>
 <td class="day">Day 10<br>8/24 周一</td>
-<td>新源 → 唐布拉 → 独库北段 → 独山子<br>约 350km / 7h（山路慢）<br><b>宿</b>：独山子/奎屯</td>
-<td>• S315 唐布拉百里画廊（走停，可选狗熊沟）<br>• 乔尔玛烈士陵园<br>• <strong>独库仅 7 座及以下、上山前加满油</strong><br>• <strong>留足时间（堵牛羊/堵车），雨雪可能封路 1–3 天</strong></td>
-<td>• 唐布拉：黑蜂庄园→乔尔玛沿 S315 一百多公里，喀什河贯穿<br>• 可选布隆温泉、孟克特古道<br>• 独库打卡导航"独库公路零起点"<br>• 奎屯有火车站（独山子没有）</td>
+<td>库尔德宁 → 唐布拉蜜蜂小镇<br>约 220km / 4h<br><b>宿</b>：尼勒克繁星小筑民宿（蜜蜂小镇店）</td>
+<td>• 上午库尔德宁 3–4h：齐梦德 / 阿尤赛 / 十里画廊<br>• 午餐后 13:00 出发（库尔德宁→新源→尼勒克→蜜蜂小镇）<br>• 傍晚进 S315 百里画廊西段<br>• 繁星小筑星空夜（唐布拉光污染少）</td>
+<td>• 百里画廊：S315 喀什河+雪山草原，<strong>免费开放式、非景区</strong>，沿途观景台随停<br>• 天山黑蜂庄园一带即进入画廊；仙女湖可免费观景<br>• 傍晚光线斜、云杉/河流层次最好</td>
 </tr>
 <tr>
 <td class="day">Day 11<br>8/25 周二</td>
-<td>独山子 → 乌鲁木齐<br>约 250km / 3h（返程高速）<br><b>宿</b>：乌鲁木齐</td>
-<td>• 独山子大峡谷（可选）<br>• 返回乌鲁木齐<br>• <strong>机动缓冲日：独库若超时/封路顺延至此</strong></td>
-<td>• 缓冲日，主要兜底独库超时<br>• 时间富裕可逛独山子大峡谷</td>
+<td>蜜蜂小镇 → 乔尔玛 → 独库北段 → 乌鲁木齐<br>约 440km / 7.5h（含山路）<br><b>宿</b>：乌鲁木齐 如家云上四季</td>
+<td>• <strong>7:30 出发（长途日，独库禁夜间行车）</strong><br>• 沿百里画廊东段→乔尔玛（边走边停）<br>• 乔尔玛烈士陵园<br>• <strong>乔尔玛加满油（独库北段无加油站）</strong><br>• 独库北段：哈希勒根达坂→天瀑→防雪长廊→独山子<br>• <strong>独库仅 7 座及以下、8:00–19:00 通行；出发前看「平安乌苏」封路通知</strong><br>• 独山子→G30→乌鲁木齐，20:00 前到</td>
+<td>• 独库北段弯道多临崖、限速 40–60，<strong>大部分无手机信号，提前下离线地图</strong><br>• 山下暴晒山顶冷，温差 20℃+，带薄羽绒<br>• <strong>若封路：折返蜜蜂小镇/尼勒克民宿，次日清晨 7 点再走</strong>；独山子有火车站可应急<br>• 乔尔玛/独山子均有餐饮补给</td>
 </tr>
 <tr>
 <td class="day">Day 12<br>8/26 周三</td>
 <td>乌鲁木齐 → 成都<br>市内<br><b>宿</b>：—（返程）</td>
 <td>• 半天自由活动<br>• <strong>伴手礼去华凌干果市场（可还价），别买路边"和田玉/黑枸杞/雪莲"</strong><br>• 还车，返程</td>
-<td>• 华凌/红山干果市场、金泉商城 2 楼可还价<br>• 备选：红山公园日落、新疆博物馆（公众号预约，周一闭馆）</td>
+<td>• 华凌/红山干果市场、金泉商城 2 楼可还价<br>• 备选：红山公园、新疆博物馆（公众号预约，周一闭馆，8/26 周三可去）</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><strong>全程里程小结</strong>：约 2400–2500km（不含市内），平均每天 200–350km、车程多在 3–4.5h，仅 Day 2、Day 10 为 7h 长途日。里程/车程为导航预估、按路型逐段估，<strong>不含拍照/堵车/排队，实际偏长</strong>。</p>
+<p><strong>全程里程小结</strong>：约 2500–2600km（含北线，不含市内），日均 200–450km；<strong>长途日 3 个</strong>——D2（约 7h）、D6（约 6.5h）、D11（约 7.5h，含独库山路）。里程/车程为导航预估、按路型逐段估，<strong>不含拍照/堵车/排队，实际偏长</strong>。</p>
 
 <h2>四、行前速查（预约 / 加油 / 租车 / 防坑）</h2>
 
@@ -582,65 +526,68 @@
 <table class="small-table">
 <thead><tr><th>项目</th><th>怎么办</th><th>对应</th></tr></thead>
 <tbody>
-<tr><td>赛里木湖车牌</td><td>公众号提前 1 天预约</td><td>Day3</td></tr>
-<tr><td>夏塔次日票</td><td>0 点抢，每日限量</td><td>Day6 晚</td></tr>
-<tr><td>那拉提（若去）</td><td>3 年驾龄 + 提前传行驶证，300 元自驾票 48h 有效</td><td>Day9</td></tr>
-<tr><td>喀拉峻（若去）</td><td>「游新疆」小程序预约，5/15 起限流</td><td>Day9</td></tr>
-<tr><td>旺季住宿</td><td>提前 30–45 天订</td><td>全程</td></tr>
+<tr><td>喀纳斯门票</td><td>官方公众号/小程序预约，8 月限流<strong>满员进不去</strong>；<strong>住贾登峪选二进票 270</strong>（一进 230 只适合住景区内）</td><td>Day3</td></tr>
+<tr><td>观鱼台区间车</td><td>20 元另付，提前买</td><td>Day4</td></tr>
+<tr><td>五彩滩</td><td>公众号提前 1 天购票，45 元</td><td>Day2</td></tr>
+<tr><td>赛里木湖车牌</td><td>公众号提前 1 天预约</td><td>Day6</td></tr>
+<tr><td>喀拉峻</td><td>「游新疆」小程序预约（5/15 起限流）；全域联票 275 元/48h</td><td>Day8</td></tr>
+<tr><td>旺季住宿</td><td>提前 30–45 天订（喀纳斯景区内木屋最紧俏）</td><td>全程</td></tr>
 </tbody>
 </table>
 </div>
 
 <ul>
-  <li><b>加油点</b>（无人区/山路前务必满油）：Day2 长途前、Day5 离赛湖前（出门 60km 无油站）、Day6 伊昭前（全程无油站）、Day10 独库上山前。</li>
-  <li><b>租车</b>：一嗨等已免押金、异地还车免服务费（环线省钱）；其他平台异地费约 1000–2000，下单前问清。普通 SUV 即可，越野（霸道/酷路泽 500–1400/天）又贵又颠不必。</li>
+  <li><b>加油点</b>（无人区/山路前务必满油）：<strong>Day2 出发前 + S21 北屯</strong>（中段补给点少，仅北屯一家油站）；<strong>Day5 乌尔禾</strong>（次日长途）；<strong>Day6 精河 + 赛湖环湖前</strong>（出湖 60km 无油站）；<strong>Day11 乔尔玛</strong>（独库北段无加油站）。</li>
+  <li><b>租车</b>：一嗨等已免押金、异地还车免服务费（环线省钱）；其他平台异地费约 1000–2000，下单前问清。普通 SUV 即可（<strong>独库仅 7 座及以下</strong>），越野（霸道/酷路泽 500–1400/天）又贵又颠不必。</li>
+  <li><b>边防证</b>：本线不去白哈巴/边境村，<strong>无需办理</strong>；若临时加白哈巴需提前在老家派出所免费办。</li>
   <li><b>伴手礼防坑</b>：路边「和田玉」多是义乌玻璃、「黑枸杞」是染色萝卜、「雪莲」是干花；去乌市华凌市场（可还价），别在大巴扎乱买。</li>
-  <li><b>天气穿衣</b>：8 月白天 20–28℃、夜间降到 10℃上下，温差 15–20℃；紫外线 8 级。穿速干短袖 + 防风软壳 + 轻薄羽绒内胆，SPF50+。天山区海拔 1000–2000m，基本无高反。</li>
+  <li><b>天气穿衣</b>：8 月白天 20–28℃、山区清晨 8–10℃、夜间更低，温差 15–20℃；紫外线 8 级。穿速干短袖 + 防风软壳 + 轻薄羽绒内胆，SPF50+。天山区海拔 1000–2000m，基本无高反。</li>
 </ul>
 
 <h2>五、花费预算</h2>
 <ul>
   <li><b>构成</b>：2 对情侣共 4 人——<b>成都</b>（我们）从成都飞、<b>重庆</b>（朋友）从重庆飞，乌鲁木齐会合同游。</li>
   <li><b>分摊规则</b>：车费（租车+油+过路）<b>均摊</b>、餐饮 <b>AA</b>、门票各付各（每人份相同）；机票按出发地、住宿<b>分开各订各付</b>。</li>
-  <li>预估（中档舒适、2026 旺季量级）：<b>成都 ≈ ¥17300（人均 ~8650）</b>，<b>重庆 ≈ ¥17700（人均 ~8850）</b>，4 人合计 ≈ ¥35000。「实际」出行后据实填。</li>
+  <li>预估（中档舒适、2026 旺季量级）：<b>成都 ≈ ¥17700（人均 ~8850）</b>，<b>重庆 ≈ ¥18100（人均 ~9050）</b>，4 人合计 ≈ ¥35800。「实际」出行后据实填。</li>
 </ul>
 <div class="tablewrap">
 <table class="small-table">
 <thead><tr><th>类别</th><th>算法 / 明细</th><th>成都（2 人）</th><th>重庆（2 人）</th><th>备注</th></tr></thead>
 <tbody>
 <tr><td>机票</td><td>成都↔乌市 往返 2 人共 ~2800（~1400/人）<br>重庆↔乌市 往返 2 人共 ~3200（~1600/人，估）</td><td>≈ 2800</td><td>≈ 3200</td><td>各自付；成都按 2800 实估，重庆待实际票价</td></tr>
-<tr><td>住宿</td><td>11 晚/对（1 间，各订各）：<br>· 赛里木湖星空营地 2 晚 × ~900 ≈ 1800<br>· 城镇酒店 9 晚 × ~400 ≈ 3600<br>（乌市/乌苏/伊宁/特克斯/新源×2/独山子…）</td><td>≈ 5400</td><td>≈ 5400</td><td>分开住；档次可各自调，营地旺季更贵</td></tr>
+<tr><td>住宿</td><td>11 晚/对（1 间，各订各）：<br>· 喀纳斯贾登峪 2 晚 ≈ 1300（升级景区内木屋再加 +1600–3000）<br>· 布尔津 350 / 乌尔禾 400 / 赛湖民宿 700<br>· 伊宁 350 / 特克斯 400 / 库尔德宁 600<br>· 唐布拉民宿 500 / 乌市 2 晚 600</td><td>≈ 5200</td><td>≈ 5200</td><td>分开住；档次可各自调，升级景区内木屋浮动最大</td></tr>
 <tr><td>餐饮（AA）</td><td>4 人 × 12 天：正餐 ~80 + 路餐零食 ~40 ＝ ~120/人/天<br>总 ≈ 5760，AA 两对各半 ≈ 2880</td><td>≈ 2900</td><td>≈ 2900</td><td>AA 均摊；大盘鸡/抓饭/烧烤等</td></tr>
-<tr><td>车费（均摊）</td><td>· 租车 SUV 12 天 × ~460 ≈ 5500<br>· 油费 ~2500km（9L/100km·8 元/L）≈ 2000<br>· 过路 ≈ 500<br>小计 8000，两对各半 ＝ 4000</td><td>≈ 4000</td><td>≈ 4000</td><td>共用一车，免押金/异地还车免费</td></tr>
-<tr><td>门票</td><td>赛里木湖 70 ＋ 夏塔(门票+区间车) ~145 ＋ 库尔德宁/恰西 ~60<br>＋ 喀拉峻或那拉提(二选一,含区间) ~170 ＋ 博物馆/红山等 ~50<br>≈ 600/人 × 4 ≈ 2400，两对各半 ＝ 1200</td><td>≈ 1200</td><td>≈ 1200</td><td>含区间车/电瓶车；那拉提自驾票 300/车另议</td></tr>
+<tr><td>车费（均摊）</td><td>· 租车 SUV 12 天 × ~460 ≈ 5500<br>· 油费 ~2600km（9L/100km·8 元/L）≈ 2100<br>· 过路 ≈ 600<br>小计 ≈ 8200，两对各半 ＝ 4100</td><td>≈ 4100</td><td>≈ 4100</td><td>共用一车；北线比纯伊犁环线多 200km</td></tr>
+<tr><td>门票</td><td>喀纳斯二进 270 ＋ 观鱼台 20 ＋ 五彩滩 45 ＋ 魔鬼城 ~70<br>＋ 赛里木湖 ~70 ＋ 喀拉峻联票 275 ＋ 库尔德宁 ~60 ＋ 博物馆 ~50<br>≈ 860/人 × 4 ≈ 3440，两对各半 ＝ 1720</td><td>≈ 1700</td><td>≈ 1700</td><td>含区间车/索道/游船；独库免费</td></tr>
 <tr><td>其他</td><td>· 伴手礼(华凌干果/特产) ~600/对<br>· 零食饮料/停车洗车 ~200<br>· 现金应急留存 ~200</td><td>≈ 1000</td><td>≈ 1000</td><td>各自</td></tr>
-<tr><td><b>合计</b></td><td><b>人均约 ¥8650 / ¥8850</b></td><td><b>≈ 17300</b></td><td><b>≈ 17700</b></td><td>两对相加 ≈ 35000</td></tr>
+<tr><td><b>合计</b></td><td><b>人均约 ¥8850 / ¥9050</b></td><td><b>≈ 17700</b></td><td><b>≈ 18100</b></td><td>两对相加 ≈ 35800</td></tr>
 </tbody>
 </table>
 </div>
 
 <h2>六、打包清单</h2>
-<blockquote>北疆昼夜温差大、紫外线强、海拔点多，一年四季衣服都带一点，可叠穿。</blockquote>
+<blockquote>北疆昼夜温差大、紫外线强、海拔点多，一年四季衣服都带一点，可叠穿；独库/赛湖/喀纳斯山区清晨都冷。</blockquote>
 <div class="pkg">
 <p><b>证件 &amp; 钱</b>：身份证·驾驶证 / 银行卡 / 现金应急 500–1000 / 机票·租车单·酒店预订单</p>
 <p><b>衣物</b></p>
 <ul>
   <li>防晒：墨镜、防晒衣/面罩、遮阳帽、防晒霜（喷雾当地可买）</li>
-  <li>防寒（海拔 3000m+ 降温）：秋裤/抓绒裤、冲锋衣/抓绒或羽绒内胆、针织帽、轻薄手套、短袖长裤</li>
-  <li>其他：拖鞋、睡衣、耳塞、拍照衣裙（白裙配薰衣草/草原出片）</li>
+  <li>防寒（清晨/高海拔 8–10℃）：秋裤/抓绒裤、冲锋衣/抓绒或羽绒内胆、针织帽、轻薄手套、短袖长裤</li>
+  <li>其他：拖鞋、睡衣、耳塞、拍照衣裙（红/白/砖红裙配魔鬼城、草原出片）</li>
 </ul>
-<p><b>生活用品</b>：洗漱护手霜唇膏 / 充电器·充电宝·数据线 / 雨衣雨伞鞋套 / 防蚊（草原毡房虫多）/ 牙线·湿巾·湿厕纸·纸巾·垃圾袋·指甲刀</p>
+<p><b>生活用品</b>：洗漱护手霜唇膏 / 充电器·充电宝·数据线 / 雨衣雨伞鞋套 / <strong>强效驱蚊液（五彩滩/草原蚊子多）</strong> / 牙线·湿巾·湿厕纸·纸巾·垃圾袋·指甲刀</p>
 <p><b>药品</b>：晕车贴/药、感冒药、肠胃药、维生素、创可贴</p>
-<p><b>拍摄（按需）</b>：长焦镜头、无人机（景区飞行需入口登记）、Pocket/运动相机、移动硬盘·读卡器·扩展坞</p>
+<p><b>拍摄（按需）</b>：长焦镜头、无人机（<strong>喀纳斯禁飞、魔鬼城需报备</strong>）、Pocket/运动相机、移动硬盘·读卡器·扩展坞；<strong>提前下离线地图（独库/喀拉峻/喀纳斯景区信号弱）</strong></p>
 </div>
 
 <h2>七、备注</h2>
 <ul>
-  <li><b>结合情报的结论（2026-06）</b>：路线/天数不变（节奏达标、纯伊犁环线不碰边境村，无需边防证）；本次主要是把硬约束落到对应天 + 几个提前预订。</li>
-  <li>早起错峰点：夏塔、赛里木湖松树头、独库北段。</li>
-  <li>Day 9、Day 11 是缓冲/机动日，独库或草原超时都能往后顺延。</li>
+  <li><b>结合情报的结论（2026-08）</b>：由「伊犁深度版」改为「北疆大环线版」——D2 阿勒泰改布尔津（顺路+五彩滩日落+D3 省 130km 车程）、特克斯段插入喀拉峻（八卦城之外的真正重头）、喀纳斯 2 夜动线按「观鱼台→三湾」排（住贾登峪，晨雾视住宿取舍）。</li>
+  <li><b>禾木 8 月鸡肋</b>：出村要坐 32km 区间车约 1 小时，来回极耗时，且门票+区间车贵（168+236）；本版砍掉。实在想去可用全域通票 375（喀纳斯+禾木+白哈巴 3 天），但会搅乱 D4–D5 结构。</li>
+  <li><b>住宿位置已核实（2026-08）</b>：喀纳斯星空苑在<strong>贾登峪（景区外）</strong>，故改买二进票 270、D4 晨雾取舍见当天（想赌晨雾可升级景区内 1 晚）；观疆也民宿在<strong>赛湖东门游客中心旁（博乐市，可接送）</strong>，D6 黄昏 + D7 日出两次进出刚好。</li>
+  <li><b>早起错峰点</b>：喀纳斯观鱼台（早）、魔鬼城&五彩滩&喀拉峻人体草原（日落）、独库北段。</li>
+  <li><b>无缓冲日提醒</b>：D12 即返程，独库若临时封路见 D11 预案（折返唐布拉次日清晨再走 / 独山子火车站应急）。</li>
   <li>8/22–8/23 周末叠加暑期，草原/独库人多，住宿尽早订。</li>
-  <li>想再加阿勒泰：可在 Day 9 之后插入喀纳斯+禾木 2 天，但全程拉长到 14 天且北上绕路；若到白哈巴需提前在老家派出所免费办边防证。</li>
 </ul>
 
 </div>
